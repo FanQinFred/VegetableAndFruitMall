@@ -49,7 +49,14 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table schema="" tableName="ADMINT"></table>
+        <table schema="" tableName="blog"></table>
+        <table schema="" tableName="goods_category"></table>
+        <table schema="" tableName="review"></table>
+        <table schema="" tableName="user_goods"></table>
+        <table schema="" tableName="category"></table>
+        <table schema="" tableName="goods"></table>
+        <table schema="" tableName="user"></table>
+
  <!--       <table schema="" tableName="orders"></table>
         <table schema="" tableName="ordersdetail"></table>
         <table schema="" tableName="items"></table>

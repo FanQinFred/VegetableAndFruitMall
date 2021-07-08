@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mybatis.mapper.AdmintMapper" >
-  <resultMap id="BaseResultMap" type="com.mybatis.po.Admint" >
-    <result column="AID" property="aid" jdbcType="INTEGER" />
-    <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-    <result column="LAST_LOGIN" property="lastLogin" jdbcType="DATE" />
-    <result column="JURISDICTION" property="jurisdiction" jdbcType="VARCHAR" />
+<mapper namespace="com.mybatis.mapper.ReviewMapper" >
+  <resultMap id="BaseResultMap" type="com.mybatis.po.Review" >
+    <result column="REVIEW_ID" property="reviewId" jdbcType="VARCHAR" />
+    <result column="BLOG_ID" property="blogId" jdbcType="VARCHAR" />
+    <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="REVIEW_RATE" property="reviewRate" jdbcType="VARCHAR" />
+    <result column="REVIEW_HOT" property="reviewHot" jdbcType="VARCHAR" />
+    <result column="REVIEW_DATE" property="reviewDate" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    AID, NAME, PASSWORD, LAST_LOGIN, JURISDICTION
+    REVIEW_ID, BLOG_ID, GOODS_ID, USER_ID, REVIEW_RATE, REVIEW_HOT, REVIEW_DATE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mybatis.po.AdmintExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mybatis.po.ReviewExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ADMINT
+    from REVIEW
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,78 +85,98 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.mybatis.po.AdmintExample" >
-    delete from ADMINT
+  <delete id="deleteByExample" parameterType="com.mybatis.po.ReviewExample" >
+    delete from REVIEW
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mybatis.po.Admint" >
-    insert into ADMINT (AID, NAME, PASSWORD, 
-      LAST_LOGIN, JURISDICTION)
-    values (#{aid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{lastLogin,jdbcType=DATE}, #{jurisdiction,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.mybatis.po.Review" >
+    insert into REVIEW (REVIEW_ID, BLOG_ID, GOODS_ID, 
+      USER_ID, REVIEW_RATE, REVIEW_HOT, 
+      REVIEW_DATE)
+    values (#{reviewId,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{reviewRate,jdbcType=VARCHAR}, #{reviewHot,jdbcType=VARCHAR}, 
+      #{reviewDate,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.mybatis.po.Admint" >
-    insert into ADMINT
+  <insert id="insertSelective" parameterType="com.mybatis.po.Review" >
+    insert into REVIEW
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        AID,
+      <if test="reviewId != null" >
+        REVIEW_ID,
       </if>
-      <if test="name != null" >
-        NAME,
+      <if test="blogId != null" >
+        BLOG_ID,
       </if>
-      <if test="password != null" >
-        PASSWORD,
+      <if test="goodsId != null" >
+        GOODS_ID,
       </if>
-      <if test="lastLogin != null" >
-        LAST_LOGIN,
+      <if test="userId != null" >
+        USER_ID,
       </if>
-      <if test="jurisdiction != null" >
-        JURISDICTION,
+      <if test="reviewRate != null" >
+        REVIEW_RATE,
+      </if>
+      <if test="reviewHot != null" >
+        REVIEW_HOT,
+      </if>
+      <if test="reviewDate != null" >
+        REVIEW_DATE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        #{aid,jdbcType=INTEGER},
+      <if test="reviewId != null" >
+        #{reviewId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="blogId != null" >
+        #{blogId,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
       </if>
-      <if test="lastLogin != null" >
-        #{lastLogin,jdbcType=DATE},
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="jurisdiction != null" >
-        #{jurisdiction,jdbcType=VARCHAR},
+      <if test="reviewRate != null" >
+        #{reviewRate,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewHot != null" >
+        #{reviewHot,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDate != null" >
+        #{reviewDate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mybatis.po.AdmintExample" resultType="java.lang.Integer" >
-    select count(*) from ADMINT
+  <select id="countByExample" parameterType="com.mybatis.po.ReviewExample" resultType="java.lang.Integer" >
+    select count(*) from REVIEW
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ADMINT
+    update REVIEW
     <set >
-      <if test="record.aid != null" >
-        AID = #{record.aid,jdbcType=INTEGER},
+      <if test="record.reviewId != null" >
+        REVIEW_ID = #{record.reviewId,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        NAME = #{record.name,jdbcType=VARCHAR},
+      <if test="record.blogId != null" >
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null" >
-        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      <if test="record.goodsId != null" >
+        GOODS_ID = #{record.goodsId,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastLogin != null" >
-        LAST_LOGIN = #{record.lastLogin,jdbcType=DATE},
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
       </if>
-      <if test="record.jurisdiction != null" >
-        JURISDICTION = #{record.jurisdiction,jdbcType=VARCHAR},
+      <if test="record.reviewRate != null" >
+        REVIEW_RATE = #{record.reviewRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewHot != null" >
+        REVIEW_HOT = #{record.reviewHot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewDate != null" >
+        REVIEW_DATE = #{record.reviewDate,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,12 +184,14 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ADMINT
-    set AID = #{record.aid,jdbcType=INTEGER},
-      NAME = #{record.name,jdbcType=VARCHAR},
-      PASSWORD = #{record.password,jdbcType=VARCHAR},
-      LAST_LOGIN = #{record.lastLogin,jdbcType=DATE},
-      JURISDICTION = #{record.jurisdiction,jdbcType=VARCHAR}
+    update REVIEW
+    set REVIEW_ID = #{record.reviewId,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      GOODS_ID = #{record.goodsId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      REVIEW_RATE = #{record.reviewRate,jdbcType=VARCHAR},
+      REVIEW_HOT = #{record.reviewHot,jdbcType=VARCHAR},
+      REVIEW_DATE = #{record.reviewDate,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
