@@ -88,4 +88,36 @@ public class UserController {
         }
 
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public String logout(@Param("email") String email, @Param("pwd") String pwd) {
+        try {
+            System.out.println("email: " + email);
+            UserExample example = new UserExample();
+            UserExample.Criteria criteria = example.createCriteria();
+            criteria.andEmailEqualTo(email);
+            example.setOrderByClause("email ASC");
+            example.setDistinct(true);
+            List<User> list = userMapper.selectByExample(example);
+            if (list.isEmpty()) {
+                System.out.println("未查询到用户");
+            } else
+                System.out.println(list.get(0).toString());
+            User user = list.get(0);
+            if (user.getEmail().equals(email) && user.getPwd().equals(pwd)) {
+                user.setTokenValid((byte) 0);
+                UserExample example2 = new UserExample();
+                UserExample.Criteria criteria2 = example2.createCriteria();
+                criteria2.andEmailEqualTo(email);
+                criteria2.andPwdEqualTo(pwd);
+                userMapper.updateByExampleSelective(user, example2);
+                return "{'status':'200','token':" + null + "'}";
+
+            }
+            return "'status':'200'";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "'status':'500'";
+        }
+    }
 }
