@@ -31,8 +31,11 @@ public class UserController {
             user.setToken("hesbja");
             user.setTokenValid((byte)1);
             user.setRole("1");
-            System.out.println(userMapper.insert(user));
-            return "'status':'200'";
+            if(userMapper.insert(user)>0){
+                System.out.println("插入成功");
+                return "'status':'200'";
+            }
+            return "'status':'500'";
         }catch(Exception e){
             e.printStackTrace();
             return "'status':'500'";
@@ -45,9 +48,9 @@ public class UserController {
             UserExample example = new UserExample();
             UserExample.Criteria criteria = example.createCriteria();
             criteria.andEmailEqualTo(email);
-            example.setOrderByClause("email ASC");
-            example.setDistinct(false);
             criteria.andEmailIsNull();
+            example.setOrderByClause("email ASC");
+            example.setDistinct(true);
             List<User> list = userMapper.selectByExample(example);
             if(list.isEmpty()){
                 System.out.println("未查询到用户");
