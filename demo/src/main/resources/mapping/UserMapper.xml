@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="TOKEN" jdbcType="VARCHAR" property="token" />
+    <result column="TOKEN_VALID" jdbcType="TINYINT" property="tokenValid" />
+    <result column="IMG_URL" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="ROLE" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.entity.User">
+    insert into USER (USER_ID, EMAIL, PWD, 
+      TOKEN, TOKEN_VALID, IMG_URL, 
+      ROLE)
+    values (#{userId,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{tokenValid,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.User">
+    insert into USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+      <if test="token != null">
+        TOKEN,
+      </if>
+      <if test="tokenValid != null">
+        TOKEN_VALID,
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL,
+      </if>
+      <if test="role != null">
+        ROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenValid != null">
+        #{tokenValid,jdbcType=TINYINT},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="TOKEN" jdbcType="VARCHAR" property="token" />
+    <result column="TOKEN_VALID" jdbcType="TINYINT" property="tokenValid" />
+    <result column="IMG_URL" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="ROLE" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.entity.User">
+    insert into USER (USER_ID, EMAIL, PWD, 
+      TOKEN, TOKEN_VALID, IMG_URL, 
+      ROLE)
+    values (#{userId,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{tokenValid,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.User">
+    insert into USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+      <if test="token != null">
+        TOKEN,
+      </if>
+      <if test="tokenValid != null">
+        TOKEN_VALID,
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL,
+      </if>
+      <if test="role != null">
+        ROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenValid != null">
+        #{tokenValid,jdbcType=TINYINT},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
