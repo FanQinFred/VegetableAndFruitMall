@@ -27,21 +27,22 @@ public class UserController {
         try {
             User user = new User();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+
             user.setUserId(df.format(new Date()));
             user.setEmail(email);
             user.setPwd(pwd);
             user.setImgUrl("baidu.com");
-            user.setToken("hesbja");
-            user.setTokenValid((byte) 1);
-            user.setRole("1");
+            user.setToken("");
+            user.setTokenValid((byte)0);
+            user.setRole("0");
+
             if (userMapper.insert(user) > 0) {
-                System.out.println("插入成功");
-                return "'status':'200'";
+                return "{'status':'200','code':'100'}";
             }
-            return "'status':'500'";
+            return "{'status':'500','code':'200'}";
         } catch (Exception e) {
             e.printStackTrace();
-            return "'status':'500'";
+            return "{'status':'500','code':'200'}";
         }
 
     }
@@ -49,23 +50,24 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@Param("email") String email, @Param("pwd") String pwd) {
         try {
-            System.out.println("email: " + email);
             UserExample example = new UserExample();
             UserExample.Criteria criteria = example.createCriteria();
             criteria.andEmailEqualTo(email);
             example.setOrderByClause("email ASC");
             example.setDistinct(true);
             List<User> list = userMapper.selectByExample(example);
+
             if (list.isEmpty()) {
                 System.out.println("未查询到用户");
-            } else
+            } else{
                 System.out.println(list.get(0).toString());
+            }
+
             User user = list.get(0);
             if (user.getEmail().equals(email) && user.getPwd().equals(pwd)) {
                 //生成token
                 //构建新用户update
                 String token = TokenUtils.token(email, pwd);
-                System.out.println(token);
 
                 user.setTokenValid((byte) 1);
                 user.setToken(token);
@@ -76,15 +78,12 @@ public class UserController {
                 criteria2.andTokenEqualTo(token);
                 criteria2.andPwdEqualTo(pwd);
                 userMapper.updateByExampleSelective(user, example2);
-                return "{'status':'200','token':" + token + "'}";
-
-//                    boolean b = TokenUtils.verify(token);
-//                    System.out.println(b);
+                return "{'status':'200','code':'100','token':'" + token + "'}";
             }
-            return "'status':'200'";
+            return "{'status':'200','code':'200','token':'" + null + "'}";
         } catch (Exception e) {
             e.printStackTrace();
-            return "'status':'500'";
+            return "{'status':'500','code':'200','token':'" + null + "'}";
         }
 
     }
@@ -92,7 +91,6 @@ public class UserController {
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logout(@Param("email") String email, @Param("pwd") String pwd) {
         try {
-            System.out.println("email: " + email);
             UserExample example = new UserExample();
             UserExample.Criteria criteria = example.createCriteria();
             criteria.andEmailEqualTo(email);
@@ -111,13 +109,13 @@ public class UserController {
                 criteria2.andEmailEqualTo(email);
                 criteria2.andPwdEqualTo(pwd);
                 userMapper.updateByExampleSelective(user, example2);
-                return "{'status':'200','token':" + null + "'}";
+                return "{'status':'200','code':'100'}";
 
             }
-            return "'status':'200'";
+            return "'status':'200','code':'200'";
         } catch (Exception e) {
             e.printStackTrace();
-            return "'status':'500'";
+            return "'status':'500','code':'200'";
         }
     }
 }
