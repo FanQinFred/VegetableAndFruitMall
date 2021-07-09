@@ -2,33 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.BlogMapper">
   <resultMap id="BaseResultMap" type="com.example.demo.entity.Blog">
-    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
+    <result column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
     <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
     <result column="BLOG_IMG_URL" jdbcType="VARCHAR" property="blogImgUrl" />
     <result column="BLOG_DATE" jdbcType="VARCHAR" property="blogDate" />
     <result column="BLOG_CONTENT" jdbcType="VARCHAR" property="blogContent" />
   </resultMap>
-  <sql id="Base_Column_List">
-    BLOG_ID, USER_ID, BLOG_IMG_URL, BLOG_DATE, BLOG_CONTENT
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from BLOG
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from BLOG
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </delete>
   <insert id="insert" parameterType="com.example.demo.entity.Blog">
-    insert into BLOG (BLOG_ID, USER_ID, BLOG_IMG_URL, 
+    insert into "SHOPPING"."BLOG" (BLOG_ID, USER_ID, BLOG_IMG_URL,
       BLOG_DATE, BLOG_CONTENT)
     values (#{blogId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{blogImgUrl,jdbcType=VARCHAR}, 
       #{blogDate,jdbcType=VARCHAR}, #{blogContent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Blog">
-    insert into BLOG
+    insert into "SHOPPING"."BLOG"
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="blogId != null">
         BLOG_ID,
@@ -64,119 +51,4 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Blog">
-    update BLOG
-    <set>
-      <if test="userId != null">
-        USER_ID = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="blogImgUrl != null">
-        BLOG_IMG_URL = #{blogImgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="blogDate != null">
-        BLOG_DATE = #{blogDate,jdbcType=VARCHAR},
-      </if>
-      <if test="blogContent != null">
-        BLOG_CONTENT = #{blogContent,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Blog">
-    update BLOG
-    set USER_ID = #{userId,jdbcType=VARCHAR},
-      BLOG_IMG_URL = #{blogImgUrl,jdbcType=VARCHAR},
-      BLOG_DATE = #{blogDate,jdbcType=VARCHAR},
-      BLOG_CONTENT = #{blogContent,jdbcType=VARCHAR}
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </update>
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.Blog">
-    <id column="BLOG_ID" jdbcType="VARCHAR" property="blogId" />
-    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
-    <result column="BLOG_IMG_URL" jdbcType="VARCHAR" property="blogImgUrl" />
-    <result column="BLOG_DATE" jdbcType="VARCHAR" property="blogDate" />
-    <result column="BLOG_CONTENT" jdbcType="VARCHAR" property="blogContent" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    BLOG_ID, USER_ID, BLOG_IMG_URL, BLOG_DATE, BLOG_CONTENT
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from BLOG
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from BLOG
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.example.demo.entity.Blog">
-    insert into BLOG (BLOG_ID, USER_ID, BLOG_IMG_URL, 
-      BLOG_DATE, BLOG_CONTENT)
-    values (#{blogId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{blogImgUrl,jdbcType=VARCHAR}, 
-      #{blogDate,jdbcType=VARCHAR}, #{blogContent,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.Blog">
-    insert into BLOG
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="blogId != null">
-        BLOG_ID,
-      </if>
-      <if test="userId != null">
-        USER_ID,
-      </if>
-      <if test="blogImgUrl != null">
-        BLOG_IMG_URL,
-      </if>
-      <if test="blogDate != null">
-        BLOG_DATE,
-      </if>
-      <if test="blogContent != null">
-        BLOG_CONTENT,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="blogId != null">
-        #{blogId,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="blogImgUrl != null">
-        #{blogImgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="blogDate != null">
-        #{blogDate,jdbcType=VARCHAR},
-      </if>
-      <if test="blogContent != null">
-        #{blogContent,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Blog">
-    update BLOG
-    <set>
-      <if test="userId != null">
-        USER_ID = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="blogImgUrl != null">
-        BLOG_IMG_URL = #{blogImgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="blogDate != null">
-        BLOG_DATE = #{blogDate,jdbcType=VARCHAR},
-      </if>
-      <if test="blogContent != null">
-        BLOG_CONTENT = #{blogContent,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Blog">
-    update BLOG
-    set USER_ID = #{userId,jdbcType=VARCHAR},
-      BLOG_IMG_URL = #{blogImgUrl,jdbcType=VARCHAR},
-      BLOG_DATE = #{blogDate,jdbcType=VARCHAR},
-      BLOG_CONTENT = #{blogContent,jdbcType=VARCHAR}
-    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
-  </update>
 </mapper>

@@ -6,11 +6,11 @@
     <result column="CATEGORY_ID" jdbcType="VARCHAR" property="categoryId" />
   </resultMap>
   <insert id="insert" parameterType="com.example.demo.entity.GoodsCategory">
-    insert into GOODS_CATEGORY (GOODS_ID, CATEGORY_ID)
+    insert into "SHOPPING"."GOODS_CATEGORY" (GOODS_ID, CATEGORY_ID)
     values (#{goodsId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.GoodsCategory">
-    insert into GOODS_CATEGORY
+    insert into "SHOPPING"."GOODS_CATEGORY"
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
         GOODS_ID,

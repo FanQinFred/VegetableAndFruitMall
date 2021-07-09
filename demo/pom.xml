@@ -22,11 +22,19 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--        <dependency>-->
+        <!--            <groupId>cqu</groupId>-->
+        <!--            <artifactId>dm</artifactId>-->
+        <!--            <version>1.0.0</version>-->
+        <!--        </dependency>-->
+
+        <!--         https://mvnrepository.com/artifact/com.dameng/Dm8JdbcDriver18-->
         <dependency>
-            <groupId>hjl</groupId>
-            <artifactId>hjl</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.dameng</groupId>
+            <artifactId>Dm8JdbcDriver18</artifactId>
+            <version>8.1.1.49</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -60,6 +68,22 @@
                 </configuration>
             </plugin>
         </plugins>
+
+
+<!--        &lt;!&ndash; 添加资源 &ndash;&gt;-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                &lt;!&ndash; src/main/resources下的指定资源放行 &ndash;&gt;-->
+<!--                <includes>-->
+<!--                    <include>**/*.properties</include>-->
+<!--                    <include>**/*.yml</include>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                </includes>-->
+<!--                <filtering>false</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
+
     </build>
 
 </project>

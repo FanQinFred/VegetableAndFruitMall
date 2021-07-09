@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Goods">
+    <result column="GOODS_ID" jdbcType="VARCHAR" property="goodsId" />
+    <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
+    <result column="GOODS_RATE" jdbcType="VARCHAR" property="goodsRate" />
+    <result column="GOODS_IMG_URL" jdbcType="VARCHAR" property="goodsImgUrl" />
+    <result column="GOODS_ORIGINAL_PRICE" jdbcType="VARCHAR" property="goodsOriginalPrice" />
+    <result column="GOODS_CURRENT_PRICE" jdbcType="VARCHAR" property="goodsCurrentPrice" />
+    <result column="GOODS_SEASON" jdbcType="VARCHAR" property="goodsSeason" />
+    <result column="GOODS_DESCRIPTION" jdbcType="VARCHAR" property="goodsDescription" />
+    <result column="GOODS_AMOUNT" jdbcType="VARCHAR" property="goodsAmount" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.entity.Goods">
+    insert into "SHOPPING"."GOODS" (GOODS_ID, GOODS_NAME, GOODS_RATE,
+      GOODS_IMG_URL, GOODS_ORIGINAL_PRICE, GOODS_CURRENT_PRICE, 
+      GOODS_SEASON, GOODS_DESCRIPTION, GOODS_AMOUNT
+      )
+    values (#{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{goodsRate,jdbcType=VARCHAR}, 
+      #{goodsImgUrl,jdbcType=VARCHAR}, #{goodsOriginalPrice,jdbcType=VARCHAR}, #{goodsCurrentPrice,jdbcType=VARCHAR}, 
+      #{goodsSeason,jdbcType=VARCHAR}, #{goodsDescription,jdbcType=VARCHAR}, #{goodsAmount,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Goods">
+    insert into "SHOPPING"."GOODS"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        GOODS_ID,
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME,
+      </if>
+      <if test="goodsRate != null">
+        GOODS_RATE,
+      </if>
+      <if test="goodsImgUrl != null">
+        GOODS_IMG_URL,
+      </if>
+      <if test="goodsOriginalPrice != null">
+        GOODS_ORIGINAL_PRICE,
+      </if>
+      <if test="goodsCurrentPrice != null">
+        GOODS_CURRENT_PRICE,
+      </if>
+      <if test="goodsSeason != null">
+        GOODS_SEASON,
+      </if>
+      <if test="goodsDescription != null">
+        GOODS_DESCRIPTION,
+      </if>
+      <if test="goodsAmount != null">
+        GOODS_AMOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsRate != null">
+        #{goodsRate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImgUrl != null">
+        #{goodsImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsOriginalPrice != null">
+        #{goodsOriginalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCurrentPrice != null">
+        #{goodsCurrentPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSeason != null">
+        #{goodsSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDescription != null">
+        #{goodsDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsAmount != null">
+        #{goodsAmount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
