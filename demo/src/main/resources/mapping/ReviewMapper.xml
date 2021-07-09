@@ -10,8 +10,89 @@
     <result column="REVIEW_HOT" jdbcType="VARCHAR" property="reviewHot" />
     <result column="REVIEW_DATE" jdbcType="VARCHAR" property="reviewDate" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    REVIEW_ID, BLOG_ID, GOODS_ID, USER_ID, REVIEW_RATE, REVIEW_HOT, REVIEW_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.example.demo.entity.ReviewExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from REVIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.demo.entity.ReviewExample">
+    delete from REVIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <insert id="insert" parameterType="com.example.demo.entity.Review">
-    insert into "SHOPPING"."REVIEW" (REVIEW_ID, BLOG_ID, GOODS_ID,
+    insert into REVIEW (REVIEW_ID, BLOG_ID, GOODS_ID, 
       USER_ID, REVIEW_RATE, REVIEW_HOT, 
       REVIEW_DATE)
     values (#{reviewId,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
@@ -19,7 +100,7 @@
       #{reviewDate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Review">
-    insert into "SHOPPING"."REVIEW"
+    insert into REVIEW
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="reviewId != null">
         REVIEW_ID,
@@ -67,4 +148,52 @@
       </if>
     </trim>
   </insert>
+  <select id="countByExample" parameterType="com.example.demo.entity.ReviewExample" resultType="java.lang.Long">
+    select count(*) from REVIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update REVIEW
+    <set>
+      <if test="record.reviewId != null">
+        REVIEW_ID = #{record.reviewId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null">
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null">
+        GOODS_ID = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewRate != null">
+        REVIEW_RATE = #{record.reviewRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewHot != null">
+        REVIEW_HOT = #{record.reviewHot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewDate != null">
+        REVIEW_DATE = #{record.reviewDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update REVIEW
+    set REVIEW_ID = #{record.reviewId,jdbcType=VARCHAR},
+      BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      GOODS_ID = #{record.goodsId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      REVIEW_RATE = #{record.reviewRate,jdbcType=VARCHAR},
+      REVIEW_HOT = #{record.reviewHot,jdbcType=VARCHAR},
+      REVIEW_DATE = #{record.reviewDate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 </mapper>

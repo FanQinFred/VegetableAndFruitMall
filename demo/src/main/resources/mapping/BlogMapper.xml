@@ -8,14 +8,95 @@
     <result column="BLOG_DATE" jdbcType="VARCHAR" property="blogDate" />
     <result column="BLOG_CONTENT" jdbcType="VARCHAR" property="blogContent" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BLOG_ID, USER_ID, BLOG_IMG_URL, BLOG_DATE, BLOG_CONTENT
+  </sql>
+  <select id="selectByExample" parameterType="com.example.demo.entity.BlogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.demo.entity.BlogExample">
+    delete from BLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <insert id="insert" parameterType="com.example.demo.entity.Blog">
-    insert into "SHOPPING"."BLOG" (BLOG_ID, USER_ID, BLOG_IMG_URL,
+    insert into BLOG (BLOG_ID, USER_ID, BLOG_IMG_URL, 
       BLOG_DATE, BLOG_CONTENT)
     values (#{blogId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{blogImgUrl,jdbcType=VARCHAR}, 
       #{blogDate,jdbcType=VARCHAR}, #{blogContent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Blog">
-    insert into "SHOPPING"."BLOG"
+    insert into BLOG
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="blogId != null">
         BLOG_ID,
@@ -51,4 +132,44 @@
       </if>
     </trim>
   </insert>
+  <select id="countByExample" parameterType="com.example.demo.entity.BlogExample" resultType="java.lang.Long">
+    select count(*) from BLOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BLOG
+    <set>
+      <if test="record.blogId != null">
+        BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogImgUrl != null">
+        BLOG_IMG_URL = #{record.blogImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogDate != null">
+        BLOG_DATE = #{record.blogDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogContent != null">
+        BLOG_CONTENT = #{record.blogContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BLOG
+    set BLOG_ID = #{record.blogId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      BLOG_IMG_URL = #{record.blogImgUrl,jdbcType=VARCHAR},
+      BLOG_DATE = #{record.blogDate,jdbcType=VARCHAR},
+      BLOG_CONTENT = #{record.blogContent,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 </mapper>
