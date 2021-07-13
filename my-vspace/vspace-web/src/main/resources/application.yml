@@ -1,0 +1,33 @@
+server:
+  address: 127.0.0.1
+  port: 8001
+  servlet:
+    context-path: /
+dubbo:
+  application:
+    name: vspace-user-web-consumer
+  registry:
+    #address: zookeeper://192.168.2.55:2181
+    address: zookeeper://121.36.95.101:2181?backup=124.70.105.182:2181,124.71.230.86:2181
+    timeout: 5000
+  consumer:
+    timeout: 50000
+#配置springboot热部署
+spring:
+  devtools:
+    restart:
+      enabled: true
+#设置重启目录
+      additional-paths: src/main/java
+      exclude: WEB-INF/**
+  freemarker:
+    cache: false #页面不加载缓存,修改及时生效
+#配置静态资源的访问路径(注意区分存放路径)
+  mvc:
+    static-path-pattern: //**
+#配置静态资源的存放路径
+  resources:
+    static-locations: classpath:/vspace
+#配置springboot的日志配置文件
+#logging:
+  #config: classpath:logback-spring.xml

@@ -1,0 +1,44 @@
+#配置服务项目的ip地址 端口号
+server:
+  address: 127.0.0.1
+  port: 9001
+#配置dubbo信息
+dubbo:
+  application:
+    name: user-service-provider
+  registry:
+#注册中心地址
+#指定超时时间,单位毫秒
+    timeout: 5000
+    #address: zookeeper://192.168.2.55:2181 #单机
+    address: zookeeper://121.36.95.101:2181?backup=124.70.105.182:2181,124.71.230.86:2181
+  #zookeeper集群
+  #配置元数据中心 --> 用于存储服务的元数据,消费者在消费服务的时
+#  候只需要注册中心提供某个服务的关键数据即可,
+  #将服务本身必须要但是消费者不需要的数据存放到元数据中心,这样可
+#  以提供性能和服务调度的效率
+    simplified: true #注册到注册中心的URL是否采用精简模式的
+#  （与低版本兼容）
+  metadata-report:
+    address: zookeeper://121.36.95.101:2181?backup=124.70.105.182:2181,124.71.230.86:2181
+#协议
+  protocol:
+    name: dubbo
+    port: 20880
+#指定定扫描的基础包
+  scan:
+    base-packages: cn.cqu.vspace.service.impl
+#配置springboot热部署
+spring:
+  devtools:
+    restart:
+      enabled: true
+#设置重启目录
+      additional-paths: src/main/java
+      exclude: WEB-INF/**
+  freemarker:
+    cache: false #页面不加载缓存,修改及时生效
+#配置spring boot的日志: 默认使用slf4j(接口) + logback(实现)
+#  作为日志框架
+#logging:
+  #config: classpath:logback-spring.xml
