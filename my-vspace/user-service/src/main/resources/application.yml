@@ -40,5 +40,5 @@ spring:
     cache: false #页面不加载缓存,修改及时生效
 #配置spring boot的日志: 默认使用slf4j(接口) + logback(实现)
 #  作为日志框架
-#logging:
-  #config: classpath:logback-spring.xml
+logging:
+  config: classpath:logback-spring.xml

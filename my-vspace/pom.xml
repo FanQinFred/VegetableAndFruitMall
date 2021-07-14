@@ -17,6 +17,8 @@
         <module>detail-mapper</module>
         <module>detail-service</module>
         <module>detail-api2</module>
+        <module>picture-api</module>
+        <module>picture-service</module>
     </modules>
 
     <parent>
