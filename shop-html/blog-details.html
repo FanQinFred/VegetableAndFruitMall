@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>Selena - Organic eCommerce Bootstrap 4 Template</title>
+
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"/>
+
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- Start Header Area -->
+<header class="header-area">
+    <!-- header top start -->
+    <div class="header-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/img/logo/logo.png" alt="Brand Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="header-settings-area">
+                        <div class="header-top-left">
+                            <nav>
+                                <ul class="d-flex justify-content-center">
+                                    <li>
+                                        <div class="dropdown header-top-dropdown">
+                                            <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                my account
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="myaccount">
+                                                <a class="dropdown-item" href="my-account.html">my account</a>
+                                                <a class="dropdown-item" href="login-register.html"> login</a>
+                                                <a class="dropdown-item" href="login-register.html">register</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown header-top-dropdown">
+                                            <span>Language:</span>
+                                            <a class="dropdown-toggle" id="language" data-toggle="dropdown"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                English
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="language">
+                                                <a class="dropdown-item" href="#">English</a>
+                                                <a class="dropdown-item" href="#">Français</a>
+                                                <a class="dropdown-item" href="#">Germany</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="header-top-right">
+                            <div class="header-search-box">
+                                <form>
+                                    <input type="text" placeholder="Search Here">
+                                    <button><i class="ion-ios-search-strong"></i></button>
+                                </form>
+                            </div>
+                            <div class="mini-cart-wrap">
+                                <button><i class="ion-bag"></i>
+                                    <span class="notification">2</span>
+                                </button>
+                                <ul class="cart-list">
+                                    <li>
+                                        <div class="cart-img">
+                                            <a href="product-details.html"><img src="assets/img/cart/cart-1.jpg"
+                                                                                alt=""></a>
+                                        </div>
+                                        <div class="cart-info">
+                                            <h4><a href="product-details.html">simple product</a></h4>
+                                            <span class="cart-qty">Qty: 1</span>
+                                            <span>$60.00</span>
+                                        </div>
+                                        <div class="del-icon">
+                                            <i class="fa fa-times"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="cart-img">
+                                            <a href="product-details.html"><img src="assets/img/cart/cart-2.jpg"
+                                                                                alt=""></a>
+                                        </div>
+                                        <div class="cart-info">
+                                            <h4><a href="product-details.html">virtual product</a></h4>
+                                            <span class="cart-qty">Qty: 2</span>
+                                            <span>$100.00</span>
+                                        </div>
+                                        <div class="del-icon">
+                                            <i class="fa fa-times"></i>
+                                        </div>
+                                    </li>
+                                    <li class="mini-cart-price">
+                                        <span class="subtotal">subtotal : </span>
+                                        <span class="subtotal-price ml-auto">$110.00</span>
+                                    </li>
+                                    <li class="checkout-btn">
+                                        <a href="#">View Cart</a>
+                                    </li>
+                                    <li class="checkout-btn">
+                                        <a href="#">checkout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header top end -->
+
+    <!-- main menu start -->
+    <div class="main-menu-area sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="main-menu">
+                        <div class="sticky-logo">
+                            <a href="index.html">
+                                <img src="assets/img/logo/logo_sticky.png" alt="brand logo">
+                            </a>
+                        </div>
+                        <!-- main menu navbar start -->
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li class="active"><a href="#">Home <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown">
+                                        <li><a href="index.html">Home version 01</a></li>
+                                        <li><a href="index-2.html">Home version 02</a></li>
+                                        <li><a href="index-3.html">Home version 03</a></li>
+                                        <li><a href="index-4.html">Home version 04</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
+                                    <ul class="megamenu dropdown">
+                                        <li class="mega-title"><a href="#">column 01</a>
+                                            <ul>
+                                                <li><a href="shop.html">shop grid left
+                                                    sidebar</a></li>
+                                                <li><a href="shop-grid-right-sidebar.html">shop grid right
+                                                    sidebar</a></li>
+                                                <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a>
+                                                </li>
+                                                <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="mega-title"><a href="#">column 02</a>
+                                            <ul>
+                                                <li><a href="product-details.html">product details</a></li>
+                                                <li><a href="product-details-affiliate.html">product
+                                                    details
+                                                    affiliate</a></li>
+                                                <li><a href="product-details-variable.html">product details
+                                                    variable</a></li>
+                                                <li><a href="product-details-group.html">product details
+                                                    group</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="mega-title"><a href="#">column 03</a>
+                                            <ul>
+                                                <li><a href="cart.html">cart</a></li>
+                                                <li><a href="checkout.html">checkout</a></li>
+                                                <li><a href="compare.html">compare</a></li>
+                                                <li><a href="wishlist.html">wishlist</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="mega-title"><a href="#">column 04</a>
+                                            <ul>
+                                                <li><a href="my-account.html">my-account</a></li>
+                                                <li><a href="login-register.html">login-register</a></li>
+                                                <li><a href="about-us.html">about us</a></li>
+                                                <li><a href="contact-us.html">contact us</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">shop <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="shop.html">shop grid left
+                                                    sidebar</a></li>
+                                                <li><a href="shop-grid-right-sidebar.html">shop grid right
+                                                    sidebar</a></li>
+                                                <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
+                                                <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="shop-list-left-sidebar.html">shop list left
+                                                    sidebar</a></li>
+                                                <li><a href="shop-list-right-sidebar.html">shop list right
+                                                    sidebar</a></li>
+                                                <li><a href="shop-list-full-width.html">shop list full width</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="product-details.html">product details</a></li>
+                                                <li><a href="product-details-affiliate.html">product
+                                                    details
+                                                    affiliate</a></li>
+                                                <li><a href="product-details-variable.html">product details
+                                                    variable</a></li>
+                                                <li><a href="product-details-group.html">product details
+                                                    group</a></li>
+                                                <li><a href="product-details-box.html">product details box
+                                                    slider</a></li>
+                                                <li><a href="product-details-sticky-left.html">product details
+                                                    sticky left</a></li>
+                                                <li><a href="product-details-sticky-right.html">product details
+                                                    sticky right</a></li>
+                                                <li><a href="product-details-vertical.html">product details vertical
+                                                    slider</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Blog <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown">
+                                        <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
+                                        <li><a href="blog-left-sidebar-2-col.html">blog left sidebar 2 col</a></li>
+                                        <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
+                                        <li><a href="blog-right-sidebar-2-col.html">blog right sidebar 2 col</a></li>
+                                        <li><a href="blog-grid-full-width.html">blog grid full width</a></li>
+                                        <li><a href="blog-list-full-width.html">blog list full width</a></li>
+                                        <li><a href="blog-details.html">blog details</a></li>
+                                        <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
+                                        <li><a href="blog-details-audio.html">blog details audio</a></li>
+                                        <li><a href="blog-details-video.html">blog details video</a></li>
+                                        <li><a href="blog-details-image.html">blog details image</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about-us.html">about us</a></li>
+                                <li><a href="contact-us.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <!-- main menu navbar end -->
+                    </div>
+                </div>
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main menu end -->
+
+</header>
+<!-- end Header Area -->
+
+<!-- main wrapper start -->
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h2>blog</h2>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">blog details</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- blog main wrapper start -->
+    <div class="blog-main-wrapper pt-60 pb-60 pb-md-54 pb-sm-54">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-2">
+                    <div class="blog-sidebar-wrapper pt-md-60 pt-sm-60">
+                        <div class="blog-sidebar">
+                            <h4 class="title">search</h4>
+                            <div class="sidebar-serch-form">
+                                <form action="#">
+                                    <input type="text" class="search-field" placeholder="search here">
+                                    <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div> <!-- single sidebar end -->
+                        <div class="blog-sidebar">
+                            <h4 class="title">categories</h4>
+                            <ul class="blog-archive blog-category">
+                                <li><a href="#">Health & beauty (10)</a></li>
+                                <li><a href="#">Makeup (08)</a></li>
+                                <li><a href="#">Skincare (07)</a></li>
+                                <li><a href="#">Jewelry (14)</a></li>
+                                <li><a href="#">fashion (10)</a></li>
+                            </ul>
+                        </div> <!-- single sidebar end -->
+                        <div class="blog-sidebar">
+                            <h4 class="title">Blog Archives</h4>
+                            <ul class="blog-archive">
+                                <li><a href="#">January (10)</a></li>
+                                <li><a href="#">February (08)</a></li>
+                                <li><a href="#">March (07)</a></li>
+                                <li><a href="#">April (14)</a></li>
+                                <li><a href="#">May (10)</a></li>
+                            </ul>
+                        </div> <!-- single sidebar end -->
+                        <div class="blog-sidebar">
+                            <h4 class="title">recent post</h4>
+                            <div class="recent-post">
+                                <div class="recent-post-item">
+                                    <div class="product-thumb">
+                                        <a href="blog-details.html">
+                                            <img src="assets/img/product/product-12.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="recent-post-description">
+                                        <div class="product-name">
+                                            <h4><a href="product-details.html">natural fresh berries</a></h4>
+                                            <p>march 10 2019</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recent-post-item">
+                                    <div class="product-thumb">
+                                        <a href="blog-details.html">
+                                            <img src="assets/img/product/product-13.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="recent-post-description">
+                                        <div class="product-name">
+                                            <h4><a href="product-details.html">organic fresh juice</a></h4>
+                                            <p>march 18 2019</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recent-post-item">
+                                    <div class="product-thumb">
+                                        <a href="blog-details.html">
+                                            <img src="assets/img/product/product-14.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="recent-post-description">
+                                        <div class="product-name">
+                                            <h4><a href="product-details.html">100% organic food</a></h4>
+                                            <p>march 14 2019</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- single sidebar end -->
+                        <div class="blog-sidebar">
+                            <h4 class="title">Tags</h4>
+                            <ul class="blog-tags">
+                                <li><a href="#">camera</a></li>
+                                <li><a href="#">computer</a></li>
+                                <li><a href="#">bag</a></li>
+                                <li><a href="#">watch</a></li>
+                                <li><a href="#">smartphone</a></li>
+                                <li><a href="#">shoes</a></li>
+                            </ul>
+                        </div> <!-- single sidebar end -->
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1">
+                    <div class="blog-item-wrapper blog-item-wrapper__blog-grid blog-item-wrapper__blog-details">
+                        <div class="blog-img">
+                            <div class="blog-gallery-slider slider-arrow-style slider-arrow-style__style-2">
+                                <div class="blog-single-slide">
+                                    <img src="assets/img/blog/blog1.jpg" alt="">
+                                </div>
+                                <div class="blog-single-slide">
+                                    <img src="assets/img/blog/blog2.jpg" alt="">
+                                </div>
+                                <div class="blog-single-slide">
+                                    <img src="assets/img/blog/blog3.jpg" alt="">
+                                </div>
+                                <div class="blog-single-slide">
+                                    <img src="assets/img/blog/blog4.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-inner-content">
+                            <h5 class="cat-name"><a href="#">fruits</a></h5>
+                            <h3>natural fresh berries</h3>
+                            <ul class="blog-meta">
+                                <li>Post by: <span>Admin</span></li>
+                                <li>March 10 2019</li>
+                            </ul>
+                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate perferendis
+                                consequuntur illo aliquid nihil ad neque, debitis praesentium libero ullam asperiores
+                                exercitationem deserunt inventore facilis, officiis,</p>
+                            <blockquote><p>Quisque semper nunc vitae erat pellentesque, ac placerat arcu consectetur. In
+                                venenatis elit ac ultrices convallis. Duis est nisi, tincidunt ac urna sed, cursus
+                                blandit lectus. In ullamcorper sit amet ligula ut eleifend. Proin dictum tempor ligula,
+                                ac feugiat metus. Sed finibus tortor eu scelerisque scelerisque.</p></blockquote>
+                            <p>aliquam maiores asperiores recusandae commodi blanditiis ipsum tempora culpa possimus
+                                assumenda ab quidem a voluptatum quia natus? Ex neque, saepe reiciendis quasi velit
+                                perspiciatis error vel quas quibusdam autem nesciunt voluptas odit quis dignissimos eos
+                                aspernatur voluptatum est repellat. Pariatur praesentium, corrupti deserunt ducimus quo
+                                doloremque nostrum aspernatur saepe cupiditate sit autem exercitationem debitis, maiores
+                                vitae perferendis nemo? Voluptas illo, animi temporibus quod earum molestias eaque, iure
+                                rem amet autem dignissimos officia dolores numquam distinctio esse voluptates optio
+                                pariatur aspernatur omnis? Ipsam qui commodi velit natus reiciendis quod quibusdam nemo
+                                eveniet similique animi!</p>
+                            <div class="tag-line">
+                                <h5>tag:</h5>
+                                <a href="#">dry food</a>,
+                                <a href="#">wet food</a>,
+                                <a href="#">reach food</a>,
+                            </div>
+                            <div class="blog-share-link">
+                                <h5>share this post</h5>
+                                <div class="blog-social-icon">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- comment area start -->
+                    <div class="comment-section pt-56">
+                        <h3>03 comment</h3>
+                        <ul>
+                            <li>
+                                <div class="author-avatar">
+                                    <img src="assets/img/blog/comment-icon.png" alt="">
+                                </div>
+                                <div class="comment-body">
+                                    <span class="reply-btn"><a href="#">reply</a></span>
+                                    <h5 class="comment-author">admin</h5>
+                                    <div class="comment-post-date">
+                                        20 nov, 2018 at 9:30pm
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci
+                                        optio ex, laboriosam facilis non pariatur itaque illo sunt?</p>
+                                </div>
+                            </li>
+                            <li class="comment-children">
+                                <div class="author-avatar">
+                                    <img src="assets/img/blog/comment-icon.png" alt="">
+                                </div>
+                                <div class="comment-body">
+                                    <span class="reply-btn"><a href="#">reply</a></span>
+                                    <h5 class="comment-author">admin</h5>
+                                    <div class="comment-post-date">
+                                        20 nov, 2018 at 9:30pm
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci
+                                        optio ex, laboriosam facilis non pariatur itaque illo sunt?</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="author-avatar">
+                                    <img src="assets/img/blog/comment-icon.png" alt="">
+                                </div>
+                                <div class="comment-body">
+                                    <span class="reply-btn"><a href="#">reply</a></span>
+                                    <h5 class="comment-author">admin</h5>
+                                    <div class="comment-post-date">
+                                        20 nov, 2018 at 9:30pm
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci
+                                        optio ex, laboriosam facilis non pariatur itaque illo sunt?</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- comment area end -->
+                    <!-- start blog comment box -->
+                    <div class="blog-comment-wrapper pt-52">
+                        <h3>leave a reply</h3>
+                        <p>Your email address will not be published. Required fields are marked *</p>
+                        <form action="#">
+                            <div class="comment-post-box">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>comment</label>
+                                        <textarea name="commnet" placeholder="Write a comment"></textarea>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 mb-sm-20">
+                                        <label>Name</label>
+                                        <input type="text" class="coment-field" placeholder="Name">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 mb-sm-20">
+                                        <label>Email</label>
+                                        <input type="text" class="coment-field" placeholder="Email">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 mb-sm-20">
+                                        <label>Website</label>
+                                        <input type="text" class="coment-field" placeholder="Website">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="coment-btn mt-20">
+                                            <input class="btn btn__bg btn__sqr" type="submit" name="submit"
+                                                   value="post comment">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- start blog comment box -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- blog main wrapper end -->
+</main>
+<!-- main wrapper end -->
+
+<!--== Start Footer Area Wrapper ==-->
+<footer class="footer-wrapper">
+
+    <!-- footer main area start -->
+    <div class="footer-main-area">
+        <div class="container">
+            <div class="footer-main-inner bdr-top pt-56 pb-60 pb-md-20 pb-sm-20">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <div class="footer-widget-title">
+                                <h4>contact info</h4>
+                            </div>
+                            <div class="footer-widget-body">
+                                <ul class="location-wrap">
+                                    <li>
+                                        <h6 class="title">location:</h6>
+                                        <p>110-114 W George St, City Centre,<br>Glasgow G2 1NF, USA</p>
+                                    </li>
+                                    <li>
+                                        <h6 class="title">call us now:</h6>
+                                        <p>+01-23456789<br>+01-23456789</p>
+                                    </li>
+                                    <li>
+                                        <h6 class="title">email:</h6>
+                                        <p><a href="#">info@yourdomain.com</a><br><a href="#">support@yourdomain.com</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <div class="footer-widget-title">
+                                <h4>new arrivals</h4>
+                            </div>
+                            <div class="footer-widget-body">
+                                <ul class="category-list">
+                                    <li>
+                                        <div class="single-item single-item__footer-category">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/product/product-2.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-name">
+                                                    <h4 class="h5">
+                                                        <a href="product-details.html">natural berrie</a>
+                                                    </h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price">$99.00</span>
+                                                    <span class="old-price"><del></del></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-item single-item__footer-category">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/product/product-3.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-name">
+                                                    <h4 class="h5">
+                                                        <a href="product-details.html">organic juice</a>
+                                                    </h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price">$99.00</span>
+                                                    <span class="old-price"><del></del></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-item single-item__footer-category">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/product/product-4.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-name">
+                                                    <h4 class="h5">
+                                                        <a href="product-details.html">organic food</a>
+                                                    </h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price">$99.00</span>
+                                                    <span class="old-price"><del></del></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <div class="footer-widget-title">
+                                <h4>top rated product</h4>
+                            </div>
+                            <div class="footer-widget-body">
+                                <ul class="category-list">
+                                    <li>
+                                        <div class="single-item single-item__footer-category">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/product/product-12.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-name">
+                                                    <h4 class="h5">
+                                                        <a href="product-details.html">natural berrie</a>
+                                                    </h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price">$99.00</span>
+                                                    <span class="old-price"><del></del></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-item single-item__footer-category">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/product/product-13.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-name">
+                                                    <h4 class="h5">
+                                                        <a href="product-details.html">organic juice</a>
+                                                    </h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price">$99.00</span>
+                                                    <span class="old-price"><del></del></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="single-item single-item__footer-category">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="assets/img/product/product-14.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-description">
+                                                <div class="product-name">
+                                                    <h4 class="h5">
+                                                        <a href="product-details.html">organic food</a>
+                                                    </h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price">$99.00</span>
+                                                    <span class="old-price"><del></del></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <div class="footer-widget-title">
+                                <h4>newsletter</h4>
+                            </div>
+                            <div class="footer-widget-body">
+                                <div class="newsletter-desc">
+                                    <p>Subscribe to the Kavir mailing list to receive updates on new arrivals, special
+                                        offers and other discount information.</p>
+                                    <form id="mc-form">
+                                        <input type="email" id="mc-email" autocomplete="off"
+                                               placeholder="Your email address">
+                                        <button id="mc-submit"><i class="ion-paper-airplane"></i>subscribe</button>
+                                    </form>
+                                    <!-- mailchimp-alerts Start -->
+                                    <div class="mailchimp-alerts">
+                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                                    </div>
+                                    <!-- mailchimp-alerts end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer main area end -->
+
+    <!-- footer bottom area start -->
+    <div class="footer-bootom bg-gray pt-20 pb-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="copyright-text text-center text-md-left">
+                        <p>Copyright 2019 <a href="http://www.17sucai.com/">Selena</a>. All Rights Reserved</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="payment-method text-md-right text-center">
+                        <img src="assets/img/payment.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer bottom area end -->
+
+</footer>
+<!--== End Footer Area Wrapper ==-->
+
+<!-- Scroll to top start -->
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+<!-- Scroll to Top End -->
+
+<!--=======================Javascript============================-->
+<!--=== All Vendor Js ===-->
+<script src="assets/js/vendor.js"></script>
+<!--=== All Plugins Js ===-->
+<script src="assets/js/plugins.js"></script>
+<!--=== Active Js ===-->
+<script src="assets/js/active.js"></script>
+</body>
+</html>
