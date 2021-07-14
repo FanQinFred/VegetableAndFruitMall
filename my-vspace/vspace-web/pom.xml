@@ -167,7 +167,11 @@
         </dependency>
         <dependency>
             <groupId>cn.cqu</groupId>
+<<<<<<< Updated upstream
             <artifactId>picture-api</artifactId>
+=======
+            <artifactId>index-api</artifactId>
+>>>>>>> Stashed changes
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

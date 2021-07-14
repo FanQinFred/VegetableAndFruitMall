@@ -14,11 +14,17 @@
         <module>user-api</module>
         <module>user-service</module>
         <module>vspace-web</module>
+<<<<<<< Updated upstream
         <module>detail-mapper</module>
         <module>detail-service</module>
         <module>detail-api2</module>
         <module>picture-api</module>
         <module>picture-service</module>
+=======
+        <module>index-api</module>
+        <module>index-service</module>
+        <module>index-mapper</module>
+>>>>>>> Stashed changes
     </modules>
 
     <parent>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/login")
 public class UserController {
-    //使用dubbo注解远程调用user-service
+
     @Reference
     private UserSerivce userService;
 
