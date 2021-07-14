@@ -1,11 +1,11 @@
 #配置服务项目的ip地址 端口号
 server:
   address: localhost
-  port: 9001
+  port: 9002
 #配置dubbo信息
 dubbo:
   application:
-    name: user-service-provider
+    name: detail-service-provider
   registry:
 #注册中心地址
 #指定超时时间,单位毫秒
@@ -24,7 +24,7 @@ dubbo:
 #协议
   protocol:
     name: dubbo
-    port: 20901
+    port: 20902
 #指定定扫描的基础包
   scan:
     base-packages: cn.cqu.vspace.service.impl

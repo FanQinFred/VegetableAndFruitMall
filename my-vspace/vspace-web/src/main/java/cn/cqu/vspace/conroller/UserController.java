@@ -1,6 +1,5 @@
 package cn.cqu.vspace.conroller;
 
-import cn.cqu.vspace.pojo.User;
 import cn.cqu.vspace.service.UserSerivce;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;

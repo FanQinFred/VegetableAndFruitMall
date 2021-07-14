@@ -1,5 +1,5 @@
 server:
-  address: 127.0.0.1
+  address: localhost
   port: 8001
   servlet:
     context-path: /
@@ -12,6 +12,7 @@ dubbo:
     timeout: 5000
   consumer:
     timeout: 50000
+
 #配置springboot热部署
 spring:
   devtools:

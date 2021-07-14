@@ -12,8 +12,11 @@
         <module>my-pojo</module>
         <module>user-mapper</module>
         <module>user-api</module>
-        <module>user-cn.cqu.vspace.impl.service</module>
+        <module>user-service</module>
         <module>vspace-web</module>
+        <module>detail-mapper</module>
+        <module>detail-service</module>
+        <module>detail-api2</module>
     </modules>
 
     <parent>

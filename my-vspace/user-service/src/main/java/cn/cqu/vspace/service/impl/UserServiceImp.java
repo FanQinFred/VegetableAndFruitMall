@@ -6,20 +6,14 @@ import cn.cqu.vspace.pojo.UserExample;
 import cn.cqu.vspace.service.UserSerivce;
 import cn.cqu.vspace.utils.TokenUtils;
 import org.apache.dubbo.config.annotation.Service;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.text.SimpleDateFormat;
 
 @Service
 public class UserServiceImp implements UserSerivce {
     @Autowired
-    UserMapper userMapper;
+    static UserMapper userMapper;
 
     @Override
     public String login(String email, String pwd) {
@@ -33,7 +27,9 @@ public class UserServiceImp implements UserSerivce {
 
             if (list.isEmpty()) {
                 System.out.println("未查询到用户");
+                return "{'status':'500','code':'200','token':'" + null + "'}";
             } else {
+                System.out.println("查询到用户");
                 System.out.println(list.get(0).toString());
             }
 
@@ -44,12 +40,11 @@ public class UserServiceImp implements UserSerivce {
                 String token = TokenUtils.token(email, pwd);
 
                 user.setTokenValid((byte) 1);
-                user.setToken(token);
+                user.setToken("55555");
 
                 UserExample example2 = new UserExample();
                 UserExample.Criteria criteria2 = example2.createCriteria();
                 criteria2.andEmailEqualTo(email);
-                criteria2.andTokenEqualTo(token);
                 criteria2.andPwdEqualTo(pwd);
                 userMapper.updateByExampleSelective(user, example2);
                 return "{'status':'200','code':'100','token':'" + token + "'}";
@@ -113,6 +108,15 @@ public class UserServiceImp implements UserSerivce {
             return "{'status':'500','code':'200'}";
         }
 //        return "{'status':'500','code':'200'}";
+    }
+
+    public static void main(String[] args) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andEmailEqualTo("111");
+        example.setOrderByClause("email ASC");
+        example.setDistinct(true);
+        List<User> list = userMapper.selectByExample(example);
     }
 }
 
