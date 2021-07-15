@@ -1,7 +1,7 @@
 #配置服务项目的ip地址 端口号
 server:
   address: localhost
-  port: 9005
+  port: 9102
 #配置dubbo信息
 dubbo:
   application:

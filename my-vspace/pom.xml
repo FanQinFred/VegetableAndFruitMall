@@ -19,6 +19,8 @@
         <module>detail-api2</module>
         <module>picture-api</module>
         <module>picture-service</module>
+        <module>pay-api</module>
+        <module>pay-service1</module>
     </modules>
 
     <parent>

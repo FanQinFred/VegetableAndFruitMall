@@ -168,7 +168,19 @@
         <dependency>
             <groupId>cn.cqu</groupId>
             <artifactId>picture-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.cqu</groupId>
             <artifactId>index-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.cqu</groupId>
+            <artifactId>pay-service1</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
