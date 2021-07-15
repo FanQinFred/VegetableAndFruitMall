@@ -24,10 +24,10 @@ dubbo:
   #协议
   protocol:
     name: dubbo
-    port: 20903
+    port: 20881
   #指定定扫描的基础包
   scan:
-    base-packages: cn.cqu.vspace.service.impl
+    base-packages: cn.cqu.vspace
 #配置springboot热部署
 spring:
   devtools:

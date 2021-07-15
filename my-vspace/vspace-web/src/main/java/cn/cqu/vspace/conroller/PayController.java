@@ -1,8 +1,10 @@
 package cn.cqu.vspace.conroller;
 
+import cn.cqu.vspace.service.PayService;
 import cn.cqu.vspace.service.impl.PayServiceImp;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,18 +17,18 @@ import java.io.IOException;
 public class PayController {
 
     @Reference
-    PayServiceImp payServiceImp;
+    PayService payService;
 
-    @RequestMapping(value = "/pay")
+    @RequestMapping(value = "/pay",method = RequestMethod.POST)
     public String aliPay(@RequestParam("id")String id,
                          @RequestParam("type")String type,@RequestParam("money")String money) throws IOException {
-        return payServiceImp.aliPay(id,type,money);
+        return payService.aliPay(id,type,money);
     }
 
 
     @RequestMapping ("/notify")
     public void payNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        payServiceImp.alipayNotify(request,response);
+        payService.alipayNotify(request,response);
     }
 
 }

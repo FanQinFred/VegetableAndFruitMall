@@ -1,6 +1,6 @@
 server:
   address: localhost
-  port: 10000
+  port: 40000
   servlet:
     context-path: /
 dubbo:

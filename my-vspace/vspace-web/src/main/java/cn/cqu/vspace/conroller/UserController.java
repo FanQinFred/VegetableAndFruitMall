@@ -28,6 +28,5 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@Param("email") String email, @Param("pwd") String pwd) {
         return userService.register(email,pwd);
-//        return "我是你爸爸";
     }
 }
