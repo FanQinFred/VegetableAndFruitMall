@@ -31,7 +31,7 @@
 <body>
 
 <!-- Start Header Area -->
-<header class="header-area">
+<header class="header-area" id="test">
     <!-- header top start -->
     <div class="header-top">
         <div class="container">
@@ -379,8 +379,8 @@
                     <div class="category-single-item mb-md-30 mb-sm-30">
                         <div class="category-item-inner color1 text-center">
                             <div class="category-content" id="message-test01">
-                                <h3><a href="product-details.html">{{message}}</a></h3>
-                                <p>2 product</p>
+                                <h3><a href="product-details.html">vegetables</a></h3>
+                                
                             </div>
                             <div class="category-thumb">
                                 <a href="product-details.html">
@@ -395,7 +395,7 @@
                         <div class="category-item-inner color2 text-center">
                             <div class="category-content">
                                 <h3><a href="product-details.html">fruits</a></h3>
-                                <p>2 product</p>
+                                
                             </div>
                             <div class="category-thumb">
                                 <a href="product-details.html">
@@ -410,7 +410,7 @@
                         <div class="category-item-inner color3 text-center">
                             <div class="category-content">
                                 <h3><a href="product-details.html">juice</a></h3>
-                                <p>2 product</p>
+                               
                             </div>
                             <div class="category-thumb">
                                 <a href="product-details.html">
@@ -425,7 +425,7 @@
                         <div class="category-item-inner color4 text-center">
                             <div class="category-content">
                                 <h3><a href="product-details.html">meats</a></h3>
-                                <p>2 product</p>
+                                
                             </div>
                             <div class="category-thumb">
                                 <a href="product-details.html">
@@ -2334,13 +2334,33 @@
 <script src="assets/js/plugins.js"></script>
 <!--=== Active Js ===-->
 <script src="assets/js/active.js"></script>
+<!--=== Axios JS ===-->
+<script src="assets/js/axios.js"></script>
 
+<script type="module">
+    import {popularCategories} from "/assets/js/index.js"
 
-<script>
     new Vue({
       el: '#test',
       data: {
-        message: 'Hello Vue.js!'
+        PopularCategoriesVegetables:'',
+        PopularCategoriesVegetables:'',
+      },
+      created(){
+        this.PopularCategories()
+      },
+      methods:{
+        PopularCategories(){
+            console.log("test login");
+            popularCategories()
+            .then((response) => {
+          
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        }
       }
     
     }) 
