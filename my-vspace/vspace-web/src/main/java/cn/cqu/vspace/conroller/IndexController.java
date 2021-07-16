@@ -6,6 +6,7 @@ import cn.cqu.vspace.service.IndexService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.Random;
 //使用dubbo注解远程调用user-service
 @RestController
 @RequestMapping("/index")
+@CrossOrigin
 public class IndexController {
     @Reference
     IndexService indexService;

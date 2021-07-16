@@ -20,7 +20,7 @@
 
     <!-- Modernizer JS -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
-
+    <script src="assets/js/vue.js"></script>
     <!--[if lt IE 9]>
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -282,8 +282,9 @@
 </header>
 <!-- end Header Area -->
 
+
 <!-- main wrapper start -->
-<main>
+<main  id="test">
     <!-- hero slider area start -->
     <section class="hero-slider-area">
         <div class="hero-slider-active slider-arrow-style">
@@ -377,8 +378,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="category-single-item mb-md-30 mb-sm-30">
                         <div class="category-item-inner color1 text-center">
-                            <div class="category-content">
-                                <h3><a href="product-details.html">vegetables</a></h3>
+                            <div class="category-content" id="message-test01">
+                                <h3><a href="product-details.html">{{message}}</a></h3>
                                 <p>2 product</p>
                             </div>
                             <div class="category-thumb">
@@ -2333,5 +2334,18 @@
 <script src="assets/js/plugins.js"></script>
 <!--=== Active Js ===-->
 <script src="assets/js/active.js"></script>
+
+
+<script>
+    new Vue({
+      el: '#test',
+      data: {
+        message: 'Hello Vue.js!'
+      }
+    
+    }) 
+</script>
+
+
 </body>
 </html>
