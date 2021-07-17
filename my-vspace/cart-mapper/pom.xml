@@ -10,7 +10,52 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cart-mapper</artifactId>
+    <dependencies>
+        <!--mybatis整合springboot依赖-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!--mysql数据库驱动依赖-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--数据源依赖: 此处使用spring boot starter jdbc数据源,
+        也可以根据需求更换成其他数据源比如c3p0、durid等-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!--pojo依赖-->
+        <dependency>
+            <groupId>cn.cqu</groupId>
+            <artifactId>my-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--添加配置助手依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!--添加日志依赖: 在父pom中已经去除了log4j的依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+        <!--添加单元测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>Dm8JdbcDriver18</artifactId>
+            <version>8.1.1.49</version>
+        </dependency>
 
+
+    </dependencies>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>

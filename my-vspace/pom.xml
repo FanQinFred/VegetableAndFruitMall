@@ -21,6 +21,15 @@
         <module>picture-service</module>
         <module>pay-api</module>
         <module>pay-service1</module>
+        <module>cart-api</module>
+        <module>cart-service</module>
+        <module>cart-mapper</module>
+        <module>search-api</module>
+        <module>search-service</module>
+        <module>search-mapper</module>
+        <module>shop-api</module>
+        <module>shop-service</module>
+        <module>shop-mapper</module>
     </modules>
 
     <parent>
