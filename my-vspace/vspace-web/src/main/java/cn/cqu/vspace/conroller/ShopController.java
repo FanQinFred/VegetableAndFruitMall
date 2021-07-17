@@ -20,7 +20,7 @@ public class ShopController {
     ShopService shopService;
 
     @RequestMapping(value = "/getIdByCategoryId", method = RequestMethod.POST)
-    public JSONObject GoodsIdByCategoryId (@Param("token") String token, @Param("categoryId") int category_Id){
+    public JSONObject GoodsIdByCategoryId (@Param("token") String token, @Param("category_Id") int category_Id){
         return shopService.GoodsIdByCategoryId(token, category_Id);
     }
     @RequestMapping(value = "/getInfoById", method = RequestMethod.POST)
@@ -37,8 +37,11 @@ public class ShopController {
         return shopService.addCompareList(token, goodsIdList);
     }
     @RequestMapping(value = "/wish", method = RequestMethod.POST)
-    public JSONObject AddWish (@Param("token") String token, @Param("goodsIdList") String goodsStr){
-        String[] goods = goodsStr.split("-");
+    public JSONObject AddWish (@Param("token") String token, @Param("id") String id){
+        System.out.println("124124");
+        System.out.println(token);
+        System.out.println(id);
+        String[] goods = id.split("-");
         List<Integer> goodsIdList = new ArrayList<>();
         for (String good : goods) {
             goodsIdList.add(Integer.parseInt(good));

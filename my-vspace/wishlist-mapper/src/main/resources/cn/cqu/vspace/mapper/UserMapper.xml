@@ -93,10 +93,10 @@
   </delete>
   <insert id="insert" parameterType="cn.cqu.vspace.pojo.User">
     insert into "SHOPPING"."USER" ( EMAIL, PWD,
-      TOKEN, TOKEN_VALID, IMG_URL, 
+      TOKEN, TOKEN_VALID, IMG_URL,
       ROLE)
     values (#{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
-      #{token,jdbcType=VARCHAR}, #{tokenValid,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{tokenValid,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR},
       #{role,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.User">
@@ -193,4 +193,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <select id="selectByToken" resultMap="BaseResultMap">
+    select * from "SHOPPING"."USER" where TOKEN=#{token,jdbcType=VARCHAR}
+  </select>
 </mapper>

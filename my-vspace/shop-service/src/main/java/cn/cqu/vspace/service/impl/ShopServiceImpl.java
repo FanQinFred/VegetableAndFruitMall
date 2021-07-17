@@ -101,8 +101,14 @@ public class ShopServiceImpl implements ShopService {
             result.put("status", "200");
             return result;
         }
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andEmailEqualTo("879891091@qq.com");
+        List<User> users = userMapper.selectByExample(example);
+
         JSONObject error = new JSONObject();
         error.put("status","500");
+        error.put("token", users.get(0).getToken());
         return error;
     }
 
