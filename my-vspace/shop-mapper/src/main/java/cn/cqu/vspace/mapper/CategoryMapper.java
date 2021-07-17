@@ -25,4 +25,5 @@ public interface CategoryMapper {
     int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
 
     List<Category> selectByPrimaryKey(Integer categoryId);
+    List<Integer> findGoodsIdsByCategory(int categoryId);
 }

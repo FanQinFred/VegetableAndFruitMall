@@ -1,4 +1,4 @@
-package cn.cqu.vspace.service.utils;
+package cn.cqu.vspace;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;

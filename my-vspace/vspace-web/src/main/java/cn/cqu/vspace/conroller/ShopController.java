@@ -2,7 +2,7 @@ package cn.cqu.vspace.conroller;
 
 import cn.cqu.vspace.service.ShopService;
 import com.alibaba.fastjson.JSONObject;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,6 +48,7 @@ public class ShopController {
     @RequestMapping(value = "/allCategories", method = RequestMethod.GET)
     public JSONObject AllCategories (){
         return shopService.AllCategories();
+//        return new JSONObject();
     }
     @RequestMapping(value = "/wishlist", method = RequestMethod.POST)
     JSONObject GetWishList (@Param("token") String token){

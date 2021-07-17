@@ -6,16 +6,16 @@ import cn.cqu.vspace.service.ShopService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class ShopServiceImpl implements ShopService {
     @Autowired
     UserMapper userMapper;
-    @Autowired
-    ShopMapper shopMapper;
     @Autowired
     GoodsMapper goodsMapper;
     @Autowired
@@ -27,7 +27,7 @@ public class ShopServiceImpl implements ShopService {
         List<User> list;
         list = userMapper.selectByToken(token);
         if(!list.isEmpty()){
-            List<Integer>goodsIdList = shopMapper.findGoodsIdsByCategory(category_Id);
+            List<Integer>goodsIdList = categoryMapper.findGoodsIdsByCategory(category_Id);
             JSONObject result = new JSONObject();
             JSONArray array = new JSONArray();
             array.addAll(goodsIdList);
@@ -108,17 +108,26 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public JSONObject AllCategories() {
+        System.out.println("123123123123123123123llllllllllllllllll");
         CategoryExample example = new CategoryExample();
-        List<Category> categoryList = categoryMapper.selectByExample(example);
         JSONObject result = new JSONObject();
-        JSONArray array = new JSONArray();
-        for (Category c : categoryList){
-            JSONObject item = new JSONObject();
-            item.put("name",c.getCategoryName());
-            item.put("id", c.getCategoryId());
-            array.add(item);
+        List<Category> categoryList = categoryMapper.selectByExample(example);
+        if(categoryList.isEmpty()){
+            System.out.println("empty-------------------------");
+        }else{
+            JSONArray array = new JSONArray();
+            System.out.println("empty-------------------------");
+            for (Category c : categoryList){
+                JSONObject item = new JSONObject();
+                item.put("name",c.getCategoryName());
+                item.put("id", c.getCategoryId());
+                array.add(item);
+            }
+            System.out.println("empty-------------------------");
+            result.put("list", array);
         }
-        result.put("list", array);
+        result.put("status","200");
+        System.out.println("empty-------------------------");
         return result;
     }
 

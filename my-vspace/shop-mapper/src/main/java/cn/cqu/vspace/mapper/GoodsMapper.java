@@ -23,4 +23,6 @@ public interface GoodsMapper {
     int updateByExampleSelective(@Param("record") Goods record, @Param("example") GoodsExample example);
 
     int updateByExample(@Param("record") Goods record, @Param("example") GoodsExample example);
+
+    List<Integer> findGoodsById(int goodsId);
 }
