@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UserServiceImp implements UserSerivce {
     @Autowired
-    static UserMapper userMapper;
+    UserMapper userMapper;
 
     @Override
     public String login(String email, String pwd) {
@@ -98,7 +98,7 @@ public class UserServiceImp implements UserSerivce {
             user.setToken("");
             user.setTokenValid((byte) 0);
             user.setRole("0");
-
+//            System.out.println(userMapper.insert(user)==null);
             if (userMapper.insert(user) > 0) {
                 return "{'status':'200','code':'100'}";
             }
@@ -107,16 +107,6 @@ public class UserServiceImp implements UserSerivce {
             e.printStackTrace();
             return "{'status':'500','code':'200'}";
         }
-//        return "{'status':'500','code':'200'}";
-    }
-
-    public static void main(String[] args) {
-        UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
-        criteria.andEmailEqualTo("111");
-        example.setOrderByClause("email ASC");
-        example.setDistinct(true);
-        List<User> list = userMapper.selectByExample(example);
     }
 }
 

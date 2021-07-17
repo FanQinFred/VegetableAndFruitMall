@@ -5,6 +5,7 @@ import cn.cqu.vspace.service.PictureService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/pic")
 @RestController
+@CrossOrigin
 public class PictureController {
     //远程调度: 图片服务器
     @Reference
