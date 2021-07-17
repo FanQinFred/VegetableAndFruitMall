@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: SYSDBA
+    password: 123456789
+    url: jdbc:dm://0.0.0.0:5236/DAMENG?useUnicode=true&amp;characterEncoding=utf-8
+    driver-class-name: dm.jdbc.driver.DmDriver
+mybatis:
+  mapper-locations:classpath:cn/cqu/vspace/mapper/*.xml
+logging:
+  level:
+    com:
+      cestc:
+        vspace:
+          mapper: debug
