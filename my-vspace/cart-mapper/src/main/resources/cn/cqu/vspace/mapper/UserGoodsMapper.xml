@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     GOODS_ID, USER_ID, CartOrWishList, AMOUNT
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -86,10 +86,10 @@
   <insert id="insert">
     insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID, CartOrWishList,
       AMOUNT)
-    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cartorwishlist,jdbcType=INTEGER}, 
+    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cartorwishlist,jdbcType=INTEGER},
       #{amount,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.UserGoods">
+  <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.UserGoodsExample">
     insert into USER_GOODS
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultType="java.lang.Long">
     select count(*) from USER_GOODS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
