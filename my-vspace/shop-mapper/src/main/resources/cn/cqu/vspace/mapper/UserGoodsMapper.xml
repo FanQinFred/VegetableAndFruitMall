@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cqu.vspace.mapper.UserGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.UserGoods">
+  <resultMap id="BaseResultMap" type="cn.cqu.vspace.pojo.UserGoods">
     <result column="GOODS_ID" jdbcType="INTEGER" property="goodsId" />
     <result column="USER_ID" jdbcType="INTEGER" property="userId" />
     <result column="CartOrWishList" jdbcType="INTEGER" property="cartorwishlist" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     GOODS_ID, USER_ID, CartOrWishList, AMOUNT
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -82,7 +82,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.demo.entity.UserGoodsExample">
+  <delete id="deleteByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample">
     delete from USER_GOODS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -91,10 +91,10 @@
   <insert id="insert">
     insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID, CartOrWishList,
       AMOUNT)
-    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cartorwishlist,jdbcType=INTEGER}, 
+    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cartorwishlist,jdbcType=INTEGER},
       #{amount,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.UserGoods">
+  <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.UserGoods">
     insert into USER_GOODS
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
@@ -125,7 +125,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultType="java.lang.Long">
     select count(*) from USER_GOODS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
