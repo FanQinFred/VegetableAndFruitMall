@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 <head>
@@ -20,6 +20,7 @@
 
     <!-- Modernizer JS -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
+	<script src="assets/js/vue.js"></script>
 
     <!--[if lt IE 9]>
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -306,11 +307,11 @@
 
     <!-- cart main wrapper start -->
     <div class="cart-main-wrapper pt-60 pb-60">
-        <div class="container">
+        <div class="container" id="app" v-cloak>
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Cart Table Area -->
-                    <div class="cart-table table-responsive">
+                    <div class="cart-table table-responsive" >
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -322,59 +323,23 @@
                                 <th class="pro-remove">Remove</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                                           src="assets/img/product/product-1.jpg"
-                                                                           alt="Product"/></a></td>
-                                <td class="pro-title"><a href="#">Endeavor Daytrip</a></td>
-                                <td class="pro-price"><span>$295.00</span></td>
-                                <td class="pro-quantity">
-                                    <div class="pro-qty"><input type="text" value="1"></div>
-                                </td>
-                                <td class="pro-subtotal"><span>$295.00</span></td>
-                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                                           src="assets/img/product/product-2.jpg"
-                                                                           alt="Product"/></a></td>
-                                <td class="pro-title"><a href="#">Joust Duffle Bags</a></td>
-                                <td class="pro-price"><span>$275.00</span></td>
-                                <td class="pro-quantity">
-                                    <div class="pro-qty"><input type="text" value="2"></div>
-                                </td>
-                                <td class="pro-subtotal"><span>$550.00</span></td>
-                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                                           src="assets/img/product/product-3.jpg"
-                                                                           alt="Product"/></a></td>
-                                <td class="pro-title"><a href="#">Compete Track Totes</a></td>
-                                <td class="pro-price"><span>$295.00</span></td>
-                                <td class="pro-quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1"/>
-                                    </div>
-                                </td>
-                                <td class="pro-subtotal"><span>$295.00</span></td>
-                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                                           src="assets/img/product/product-4.jpg"
-                                                                           alt="Product"/></a></td>
-                                <td class="pro-title"><a href="#">Bess Yoga Shorts</a></td>
-                                <td class="pro-price"><span>$110.00</span></td>
-                                <td class="pro-quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="3"/>
-                                    </div>
-                                </td>
-                                <td class="pro-subtotal"><span>$110.00</span></td>
-                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                            </tr>
+                            <tbody >
+								<tr v-for='value in cartdata'>
+									<td class="pro-thumbnail"><a href="#"><img class="img-fluid"
+																			   src="assets/img/product/product-1.jpg"
+																			   alt="Product"/></a></td>
+									<td class="pro-title"><a href="#">{{value.name}}</a></td>
+									<td class="pro-price"><span>${{value.price}}</span></td>
+									<td class="pro-quantity">
+										<div class="pro-qty" >
+											<span class="dec qtybtn" @click="value.num--">-</span>
+											<input v-model = "value.num" type="text"  placeholder="1" >
+											<span class="inc qtybtn" @click="value.num++">+</span>
+										</div>
+									</td>
+									<td class="pro-subtotal"><span>${{value.price*value.num}}</span></td>
+									<td class="pro-remove"><a href="#"><i class="fa fa-trash-o" @click="Remove(value)"></i></a></td>
+								</tr>
                             </tbody>
                         </table>
                     </div>
@@ -383,11 +348,11 @@
                         <div class="apply-coupon-wrapper">
                             <form action="#" method="post" class=" d-block d-md-flex">
                                 <input type="text" placeholder="Enter Your Coupon Code" required/>
-                                <button class="btn btn__bg btn__sqr">Apply Coupon</button>
+                                <button class="btn btn__bg btn__sqr" @click="Apply_Coupon">Apply Coupon</button>
                             </form>
                         </div>
                         <div class="cart-update mt-sm-16">
-                            <a href="#" class="btn btn__bg btn__sqr">Update Cart</a>
+                            <a href="#" class="btn btn__bg btn__sqr" @click="Update">Update Cart</a>
                         </div>
                     </div>
                 </div>
@@ -402,15 +367,15 @@
                                 <table class="table">
                                     <tr>
                                         <td>Sub Total</td>
-                                        <td>$230</td>
+                                        <td>${{sub_total}}</td>
                                     </tr>
                                     <tr>
                                         <td>Shipping</td>
-                                        <td>$70</td>
+                                        <td>${{Shipping}}</td>
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <td class="total-amount">$300</td>
+                                        <td class="total-amount">${{Shipping+sub_total}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -665,5 +630,54 @@
 <script src="assets/js/plugins.js"></script>
 <!--=== Active Js ===-->
 <script src="assets/js/active.js"></script>
+
+<script src="assets/js/axios.js"></script>
+<script type ="module">
+	import {apply_Coupon,updata} from "./assets/js/cart.js"
+	
+    new Vue({
+      el: '#app',
+      data: {
+		cartdata:[
+		{name:'data1',price:1,num:2,picture:"assets/img/product/product-1.jpg"},
+		{name:'data2',price:2,num:2,picture:"assets/img/product/product-1.jpg"}
+		],
+		sub_total:6,
+		Shipping:70
+	},
+      methods:{
+		Apply_Coupon(){
+			console.log("Apply_Coupon login");
+			apply_Coupon()
+			.then((response) => {
+			          
+			})
+			.catch((error) => {
+			    console.log(error);
+			});
+		},
+        Update(){
+            console.log("update");
+			updata()
+			.then((response) => {
+			    
+			})
+			.catch((error) => {
+			    console.log(error);
+			});
+			this.sub_total = 0
+			for(var j=0;j<this.cartdata.length;j++){
+				this.sub_total +=this.cartdata[j].price*this.cartdata[j].num
+			}
+        },
+		Remove(value){
+			this.cartdata.splice(this.cartdata.indexOf(value),1);
+		},
+		
+      }
+    }) 
+</script>
+
 </body>
+
 </html>

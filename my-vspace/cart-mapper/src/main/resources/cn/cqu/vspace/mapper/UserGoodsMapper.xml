@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cqu.vspace.mapper.UserGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.UserGoods">
+  <resultMap id="BaseResultMap" type="cn.cqu.vspace.pojo.UserGoods">
     <result column="GOODS_ID" jdbcType="INTEGER" property="goodsId" />
     <result column="USER_ID" jdbcType="INTEGER" property="userId" />
     <result column="CartOrWishList" jdbcType="INTEGER" property="cartorwishlist" />
@@ -82,12 +82,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.demo.entity.UserGoodsExample">
-    delete from USER_GOODS
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
+
   <insert id="insert">
     insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID, CartOrWishList,
       AMOUNT)
