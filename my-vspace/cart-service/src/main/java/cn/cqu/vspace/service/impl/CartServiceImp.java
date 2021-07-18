@@ -39,7 +39,7 @@ public class CartServiceImp implements CartService {
                     UserGoods userGoods = new UserGoods();
                     userGoods.setUserId(userid);
                     userGoods.setGoodsId(id);
-                    userGoodsMapper.insert(userGoods);
+                    userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId());
                 }
             }
             JSONObject correctInfo = new JSONObject();

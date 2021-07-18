@@ -9,6 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface UserGoodsMapper {
-    int insert(UserGoods goods);
+    int insert(@Param("goodsId") int goodsId, @Param("userId") int userId);
     List<UserGoods> selectByExample(UserGoodsExample record);
 }

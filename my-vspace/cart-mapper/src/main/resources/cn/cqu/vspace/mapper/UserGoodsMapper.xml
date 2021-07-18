@@ -86,7 +86,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.cqu.vspace.pojo.UserGoods">
+  <insert id="insert">
     insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID)
     values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
   </insert>
