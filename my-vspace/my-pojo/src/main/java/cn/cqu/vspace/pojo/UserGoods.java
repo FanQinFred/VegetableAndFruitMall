@@ -1,11 +1,13 @@
 package cn.cqu.vspace.pojo;
 
-import java.io.Serializable;
-
-public class UserGoods implements Serializable {
+public class UserGoods {
     private Integer goodsId;
 
     private Integer userId;
+
+    private Integer cartorwishlist;
+
+    private Integer amount;
 
     public Integer getGoodsId() {
         return goodsId;
@@ -21,5 +23,21 @@ public class UserGoods implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getCartorwishlist() {
+        return cartorwishlist;
+    }
+
+    public void setCartorwishlist(Integer cartorwishlist) {
+        this.cartorwishlist = cartorwishlist;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 }
