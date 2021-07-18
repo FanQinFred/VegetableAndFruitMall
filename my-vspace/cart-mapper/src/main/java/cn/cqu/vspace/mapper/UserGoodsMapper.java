@@ -11,4 +11,5 @@ import java.util.List;
 public interface UserGoodsMapper {
     int insert(@Param("goodsId") int goodsId, @Param("userId") int userId);
     List<UserGoods> selectByExample(UserGoodsExample record);
+    int updateAmount(@Param("goodsId") int goodsId, @Param("userId") int userId, @Param("amount") int amount);
 }

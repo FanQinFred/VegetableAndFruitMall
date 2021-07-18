@@ -96,21 +96,17 @@ public class ShopServiceImpl implements ShopService {
                     UserGoods userGoods = new UserGoods();
                     userGoods.setGoodsId(gId);
                     userGoods.setUserId(userId);
-                    userGoodsMapper.insert(userGoods);
+                    userGoods.setAmount(1);
+                    userGoods.setCartorwishlist(2);
+                    userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId(), userGoods.getCartorwishlist(), userGoods.getAmount());
                 }
             }
             JSONObject result = new JSONObject();
             result.put("status", "200");
             return result;
         }
-        UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
-        criteria.andEmailEqualTo("879891091@qq.com");
-        List<User> users = userMapper.selectByExample(example);
-
         JSONObject error = new JSONObject();
         error.put("status","500");
-        error.put("token", users.get(0).getToken());
         return error;
     }
 
@@ -148,6 +144,7 @@ public class ShopServiceImpl implements ShopService {
             JSONObject result = new JSONObject();
             UserGoodsExample userGoodsExample = new UserGoodsExample();
             UserGoodsExample.Criteria criteria = userGoodsExample.createCriteria();
+            criteria.andCartorwishlistGreaterThanOrEqualTo(1);
             criteria.andUserIdEqualTo(userId);
             List<UserGoods> userGoodsList = userGoodsMapper.selectByExample(userGoodsExample);
             JSONArray array = new JSONArray();
@@ -155,6 +152,8 @@ public class ShopServiceImpl implements ShopService {
                 JSONObject item = new JSONObject();
                 item.put("goodId", userGoods.getGoodsId());
                 item.put("userId", userGoods.getUserId());
+                item.put("cartOrWishList", userGoods.getCartorwishlist());
+                item.put("amount", userGoods.getAmount());
                 array.add(item);
             }
             result.put("list", array);

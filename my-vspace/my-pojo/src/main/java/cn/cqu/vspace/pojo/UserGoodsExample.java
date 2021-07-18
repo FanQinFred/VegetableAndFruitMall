@@ -1,10 +1,9 @@
 package cn.cqu.vspace.pojo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserGoodsExample implements Serializable {
+public class UserGoodsExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -222,6 +221,126 @@ public class UserGoodsExample implements Serializable {
 
         public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("USER_ID not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistIsNull() {
+            addCriterion("CartOrWishList is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistIsNotNull() {
+            addCriterion("CartOrWishList is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistEqualTo(Integer value) {
+            addCriterion("CartOrWishList =", value, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistNotEqualTo(Integer value) {
+            addCriterion("CartOrWishList <>", value, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistGreaterThan(Integer value) {
+            addCriterion("CartOrWishList >", value, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CartOrWishList >=", value, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistLessThan(Integer value) {
+            addCriterion("CartOrWishList <", value, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistLessThanOrEqualTo(Integer value) {
+            addCriterion("CartOrWishList <=", value, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistIn(List<Integer> values) {
+            addCriterion("CartOrWishList in", values, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistNotIn(List<Integer> values) {
+            addCriterion("CartOrWishList not in", values, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistBetween(Integer value1, Integer value2) {
+            addCriterion("CartOrWishList between", value1, value2, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartorwishlistNotBetween(Integer value1, Integer value2) {
+            addCriterion("CartOrWishList not between", value1, value2, "cartorwishlist");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountIsNull() {
+            addCriterion("AMOUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountIsNotNull() {
+            addCriterion("AMOUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountEqualTo(Integer value) {
+            addCriterion("AMOUNT =", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountNotEqualTo(Integer value) {
+            addCriterion("AMOUNT <>", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountGreaterThan(Integer value) {
+            addCriterion("AMOUNT >", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("AMOUNT >=", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountLessThan(Integer value) {
+            addCriterion("AMOUNT <", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountLessThanOrEqualTo(Integer value) {
+            addCriterion("AMOUNT <=", value, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountIn(List<Integer> values) {
+            addCriterion("AMOUNT in", values, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountNotIn(List<Integer> values) {
+            addCriterion("AMOUNT not in", values, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountBetween(Integer value1, Integer value2) {
+            addCriterion("AMOUNT between", value1, value2, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAmountNotBetween(Integer value1, Integer value2) {
+            addCriterion("AMOUNT not between", value1, value2, "amount");
             return (Criteria) this;
         }
     }

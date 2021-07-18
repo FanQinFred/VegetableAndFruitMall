@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cqu.vspace.mapper.UserGoodsMapper">
-  <resultMap id="BaseResultMap" type="cn.cqu.vspace.pojo.UserGoods">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.UserGoods">
     <result column="GOODS_ID" jdbcType="INTEGER" property="goodsId" />
     <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="CartOrWishList" jdbcType="INTEGER" property="cartorwishlist" />
+    <result column="AMOUNT" jdbcType="INTEGER" property="amount" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,9 +66,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    GOODS_ID, USER_ID
+    GOODS_ID, USER_ID, CartOrWishList, AMOUNT
   </sql>
-  <select id="selectByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -80,17 +82,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample">
+  <delete id="deleteByExample" parameterType="com.example.demo.entity.UserGoodsExample">
     delete from USER_GOODS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.cqu.vspace.pojo.UserGoods">
-    insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID)
-    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+  <insert id="insert">
+    insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID, CartOrWishList,
+      AMOUNT)
+    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cartorwishlist,jdbcType=INTEGER}, 
+      #{amount,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.UserGoods">
+  <insert id="insertSelective" parameterType="com.example.demo.entity.UserGoods">
     insert into USER_GOODS
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
@@ -98,6 +102,12 @@
       </if>
       <if test="userId != null">
         USER_ID,
+      </if>
+      <if test="cartorwishlist != null">
+        CartOrWishList,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -107,9 +117,15 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
+      <if test="cartorwishlist != null">
+        #{cartorwishlist,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultType="java.lang.Long">
     select count(*) from USER_GOODS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -124,6 +140,12 @@
       <if test="record.userId != null">
         USER_ID = #{record.userId,jdbcType=INTEGER},
       </if>
+      <if test="record.cartorwishlist != null">
+        CartOrWishList = #{record.cartorwishlist,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null">
+        AMOUNT = #{record.amount,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -132,12 +154,11 @@
   <update id="updateByExample" parameterType="map">
     update USER_GOODS
     set GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
-      USER_ID = #{record.userId,jdbcType=INTEGER}
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      CartOrWishList = #{record.cartorwishlist,jdbcType=INTEGER},
+      AMOUNT = #{record.amount,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <select id="selectGoodsByUid" resultType="map">
-    select * from "SHOPPING"."USER_GOODS" where USER_ID = #{userId, jdbcType=INTEGER}
-  </select>
 </mapper>

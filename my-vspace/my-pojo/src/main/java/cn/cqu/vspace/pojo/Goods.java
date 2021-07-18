@@ -1,24 +1,36 @@
 package cn.cqu.vspace.pojo;
 
+import org.apache.solr.client.solrj.beans.Field;
+
 import java.io.Serializable;
 
+
 public class Goods implements Serializable {
+    @Field("goodsId")
     private Integer goodsId;
 
+    @Field("goodsName")
     private String goodsName;
 
+    @Field("goodsRate")
     private String goodsRate;
 
+    @Field("goodsImgUrl")
     private String goodsImgUrl;
 
+    @Field("goodsOriginalPrice")
     private String goodsOriginalPrice;
 
+    @Field("goodsCurrentPrice")
     private String goodsCurrentPrice;
 
+    @Field("goodsSeason")
     private String goodsSeason;
 
+    @Field("goodsDescription;")
     private String goodsDescription;
 
+    @Field("goodsAmount")
     private String goodsAmount;
 
     public Integer getGoodsId() {

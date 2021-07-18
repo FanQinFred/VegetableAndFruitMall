@@ -34,12 +34,17 @@ public class CartServiceImp implements CartService {
                 UserGoodsExample.Criteria criteria = userGoodsExample.createCriteria();
                 criteria.andGoodsIdEqualTo(id);
                 criteria.andUserIdEqualTo(userid);
+                criteria.andCartorwishlistNotEqualTo(1);
                 List<UserGoods> userGoodsList = userGoodsMapper.selectByExample(userGoodsExample);
                 if(userGoodsList.isEmpty()){
                     UserGoods userGoods = new UserGoods();
                     userGoods.setUserId(userid);
                     userGoods.setGoodsId(id);
                     userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId());
+                }else{
+                    for(UserGoods userGoods : userGoodsList){
+                        userGoodsMapper.updateAmount(userGoods.getGoodsId(), userid, userGoods.getAmount()+1);
+                    }
                 }
             }
             JSONObject correctInfo = new JSONObject();
@@ -67,6 +72,7 @@ public class CartServiceImp implements CartService {
                 GoodsExample goodsExample = new GoodsExample();
                 GoodsExample.Criteria criteria1 = goodsExample.createCriteria();
                 criteria1.andGoodsIdEqualTo(userGoods.getGoodsId());
+                criteria.andCartorwishlistNotEqualTo(1);
                 List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
                 for(Goods good : goodsList){
                     JSONObject goodJson = new JSONObject();
