@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.cqu.vspace.mapper.UserGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.UserGoods">
+  <resultMap id="BaseResultMap" type="cn.cqu.vspace.pojo.UserGoods">
     <result column="GOODS_ID" jdbcType="INTEGER" property="goodsId" />
     <result column="USER_ID" jdbcType="INTEGER" property="userId" />
   </resultMap>
@@ -72,7 +72,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from USER_GOODS
+    from "SHOPPING"."USER_GOODS"
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -80,64 +80,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.demo.entity.UserGoodsExample">
-    delete from USER_GOODS
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
+
   <insert id="insert">
-    insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID)
+    insert into "SHOPPING".""SHOPPING"."USER_GOODS"" (GOODS_ID, USER_ID)
     values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.UserGoods">
-    insert into USER_GOODS
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        GOODS_ID,
-      </if>
-      <if test="userId != null">
-        USER_ID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultType="java.lang.Long">
-    select count(*) from USER_GOODS
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update USER_GOODS
-    <set>
-      <if test="record.goodsId != null">
-        GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
-        USER_ID = #{record.userId,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update USER_GOODS
-    set GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
-      USER_ID = #{record.userId,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <select id="selectGoodsByUid" resultType="">
-    select * from "SHOPPING"."USER_GOODS" where USER_ID = #{userId, jdbcType=Integer}
-  </select>
+
+
+
+
 </mapper>
