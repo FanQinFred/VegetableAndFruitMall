@@ -28,8 +28,9 @@ public class ShopController {
         return shopService.GoodsInfoById(token, goodsId);
     }
     @RequestMapping(value = "/compare", method = RequestMethod.POST)
-    public JSONObject addCompareList (@Param("token") String token, @Param("goodsIdList") String goodsStr){
-        String[] goods = goodsStr.split("-");
+    public JSONObject addCompareList (@Param("token") String token, @Param("id") String id){
+        System.out.println(id+"   "+token);
+        String[] goods = id.split("-");
         List<Integer> goodsIdList = new ArrayList<>();
         for (String good : goods) {
             goodsIdList.add(Integer.parseInt(good));

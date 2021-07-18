@@ -22,12 +22,14 @@ public class ShopServiceImpl implements ShopService {
     CategoryMapper categoryMapper;
     @Autowired
     UserGoodsMapper userGoodsMapper;
+    @Autowired
+    GoodsCategoryMapper goodsCategoryMapper;
     @Override
     public JSONObject GoodsIdByCategoryId(String token, int category_Id) {
         List<User> list;
         list = userMapper.selectByToken(token);
         if(!list.isEmpty()){
-            List<Integer>goodsIdList = categoryMapper.findGoodsIdsByCategory(category_Id);
+            List<Integer>goodsIdList = goodsCategoryMapper.selectByCategory(category_Id);
             JSONObject result = new JSONObject();
             JSONArray array = new JSONArray();
             array.addAll(goodsIdList);

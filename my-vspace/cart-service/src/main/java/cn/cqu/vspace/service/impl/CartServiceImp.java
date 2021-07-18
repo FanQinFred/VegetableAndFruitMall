@@ -7,10 +7,13 @@ import cn.cqu.vspace.pojo.*;
 import cn.cqu.vspace.service.CartService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.List;
 
+@Service
 public class CartServiceImp implements CartService {
     @Autowired
     UserMapper userMapper;

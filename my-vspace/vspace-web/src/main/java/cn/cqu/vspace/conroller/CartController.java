@@ -2,7 +2,8 @@ package cn.cqu.vspace.conroller;
 
 import cn.cqu.vspace.service.CartService;
 import com.alibaba.fastjson.JSONObject;
-import jdk.nashorn.internal.ir.annotations.Reference;
+
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

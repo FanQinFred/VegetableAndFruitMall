@@ -25,11 +25,11 @@
         <module>cart-service</module>
         <module>cart-mapper</module>
         <module>search-api</module>
-        <module>search-service</module>
-        <module>search-mapper</module>
         <module>shop-api</module>
         <module>shop-service</module>
         <module>shop-mapper</module>
+        <module>search-mapper</module>
+        <module>search-service</module>
     </modules>
 
     <parent>

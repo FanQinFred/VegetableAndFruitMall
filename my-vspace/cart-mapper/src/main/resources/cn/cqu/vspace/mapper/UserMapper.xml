@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.dao.UserGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.UserGoods">
-    <result column="GOODS_ID" jdbcType="INTEGER" property="goodsId" />
+<mapper namespace="cn.cqu.vspace.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.cqu.vspace.pojo.User">
     <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="TOKEN" jdbcType="VARCHAR" property="token" />
+    <result column="TOKEN_VALID" jdbcType="TINYINT" property="tokenValid" />
+    <result column="IMG_URL" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="ROLE" jdbcType="VARCHAR" property="role" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    GOODS_ID, USER_ID
+    USER_ID, EMAIL, PWD, TOKEN, TOKEN_VALID, IMG_URL, ROLE
   </sql>
-  <select id="selectByExample" parameterType="cn.cqu.vspace.pojo.UserGoodsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.cqu.vspace.pojo.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from USER_GOODS
+    from "SHOPPING"."USER"
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -80,49 +85,95 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.demo.entity.UserGoodsExample">
-    delete from USER_GOODS
+  <delete id="deleteByExample" parameterType="cn.cqu.vspace.pojo.UserExample">
+    delete from "SHOPPING"."USER"
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.cqu.vspace.pojo.UserGoods">
-    insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID)
-    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="cn.cqu.vspace.pojo.User">
+    insert into "SHOPPING"."USER" ( EMAIL, PWD,
+      TOKEN, TOKEN_VALID, IMG_URL,
+      ROLE)
+    values (#{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+      #{token,jdbcType=VARCHAR}, #{tokenValid,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR},
+      #{role,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.UserGoods">
-    insert into USER_GOODS
+  <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.User">
+    insert into "SHOPPING"."USER"
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        GOODS_ID,
-      </if>
       <if test="userId != null">
         USER_ID,
       </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+      <if test="token != null">
+        TOKEN,
+      </if>
+      <if test="tokenValid != null">
+        TOKEN_VALID,
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL,
+      </if>
+      <if test="role != null">
+        ROLE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenValid != null">
+        #{tokenValid,jdbcType=TINYINT},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.entity.UserGoodsExample" resultType="java.lang.Long">
-    select count(*) from USER_GOODS
+  <select id="countByExample" parameterType="cn.cqu.vspace.pojo.UserExample" resultType="java.lang.Long">
+    select count(*) from "SHOPPING"."USER"
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update USER_GOODS
+    update "SHOPPING"."USER"
     <set>
-      <if test="record.goodsId != null">
-        GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.userId != null">
-        USER_ID = #{record.userId,jdbcType=INTEGER},
+      <if test="record.pwd != null">
+        PWD = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        TOKEN = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tokenValid != null">
+        TOKEN_VALID = #{record.tokenValid,jdbcType=TINYINT},
+      </if>
+      <if test="record.imgUrl != null">
+        IMG_URL = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null">
+        ROLE = #{record.role,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -130,14 +181,19 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update USER_GOODS
-    set GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
-      USER_ID = #{record.userId,jdbcType=INTEGER}
+    update "SHOPPING"."USER"
+    set
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      PWD = #{record.pwd,jdbcType=VARCHAR},
+      TOKEN = #{record.token,jdbcType=VARCHAR},
+      TOKEN_VALID = #{record.tokenValid,jdbcType=TINYINT},
+      IMG_URL = #{record.imgUrl,jdbcType=VARCHAR},
+      ROLE = #{record.role,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <select id="selectGoodsByUid" resultType="">
-    select * from "SHOPPING"."USER_GOODS" where USER_ID = #{userId, jdbcType=Integer}
+  <select id="selectByToken" resultMap="BaseResultMap">
+    select * from "SHOPPING"."USER" where TOKEN=#{token,jdbcType=VARCHAR}
   </select>
 </mapper>
