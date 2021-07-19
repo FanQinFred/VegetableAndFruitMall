@@ -37,7 +37,7 @@ public class ShopController {
         }
         return shopService.addCompareList(token, goodsIdList);
     }
-    @RequestMapping(value = "/wish", method = RequestMethod.POST)
+    @RequestMapping(value = "/wish", method = RequestMethod.POST)//wait
     public JSONObject AddWish (@Param("token") String token, @Param("id") String id){
         System.out.println("124124");
         System.out.println(token);
@@ -54,7 +54,7 @@ public class ShopController {
         return shopService.AllCategories();
 //        return new JSONObject();
     }
-    @RequestMapping(value = "/wishlist", method = RequestMethod.POST)
+    @RequestMapping(value = "/wishlist", method = RequestMethod.POST)  //wait
     JSONObject GetWishList (@Param("token") String token){
         return shopService.GetWishList(token);
     }

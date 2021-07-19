@@ -21,7 +21,7 @@ public class CartController {
     @Reference
     CartService cartService;
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)//wait
     public JSONObject updateCart(@Param("token") String token, @Param("goodsId") String goodsId){
         String[] list = goodsId.split("-");
         List<Integer> goodsList = new ArrayList<>(list.length);
@@ -31,7 +31,7 @@ public class CartController {
         return cartService.updateCart(token, goodsList);
     }
 
-    @RequestMapping(value = "/cart", method = RequestMethod.POST)
+    @RequestMapping(value = "/cart", method = RequestMethod.POST)//wait
     public JSONObject getCarList(@Param("token") String token){
         return cartService.getCart(token);
     }

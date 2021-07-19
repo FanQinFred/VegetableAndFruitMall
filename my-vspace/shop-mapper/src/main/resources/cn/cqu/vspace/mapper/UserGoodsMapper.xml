@@ -91,8 +91,8 @@
   <insert id="insert">
     insert into "SHOPPING"."USER_GOODS" (GOODS_ID, USER_ID, CartOrWishList,
       AMOUNT)
-    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{cartorwishlist,jdbcType=INTEGER},
-      #{amount,jdbcType=INTEGER})
+    values (#{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{CartOrWishList,jdbcType=INTEGER},
+      #{AMOUNT,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.UserGoods">
     insert into USER_GOODS
