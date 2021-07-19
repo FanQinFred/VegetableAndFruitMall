@@ -692,7 +692,7 @@
 <script src="assets/js/axios.js"></script>
 <script src="assets/js/vue.js"></script>
 <script type="module">
-    import { getInfoById } from "./assets/js/detail.js"
+    import { getInfoById ,getUrlParam} from "./assets/js/detail.js"
 
     new Vue({
         el: '#test',
@@ -711,7 +711,8 @@
         },
         created() {
             var that = this;
-            var goodsid = $.query.get("goodsId");
+            // var goodsid = $.query.get("goodsId");
+            var goodsid = getUrlParam("goodsId");
             let request_data = {
                 'goodsId': goodsid
             };
