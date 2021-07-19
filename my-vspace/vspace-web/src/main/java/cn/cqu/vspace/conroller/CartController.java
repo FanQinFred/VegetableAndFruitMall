@@ -23,7 +23,11 @@ public class CartController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public JSONObject updateCart(@Param("token") String token, @Param("goodsId") String goodsId){
-        List<Integer> goodsList = null;
+        String[] list = goodsId.split("-");
+        List<Integer> goodsList = new ArrayList<>(list.length);
+        for(String item : list){
+            goodsList.add(Integer.parseInt(item));
+        }
         return cartService.updateCart(token, goodsList);
     }
 
