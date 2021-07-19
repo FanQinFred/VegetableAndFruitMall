@@ -30,6 +30,12 @@
         <module>shop-mapper</module>
         <module>search-mapper</module>
         <module>search-service</module>
+        <module>wishlist-api</module>
+        <module>wishlist-mapper</module>
+        <module>wishlist-service</module>
+        <module>index-api</module>
+        <module>index-mapper</module>
+        <module>index-service</module>
     </modules>
 
     <parent>
