@@ -25,6 +25,19 @@
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/jquery.params.js"></script>
+    <script src="assets/js/axios.js"></script>
+    <script src="assets/js/vue.js"></script>
+
 
 </head>
 
@@ -289,7 +302,7 @@
     <!-- end Header Area -->
 
     <!-- main wrapper start -->
-    <main id="test">
+    <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
             <div class="container">
@@ -311,7 +324,7 @@
         <!-- breadcrumb area end -->
 
         <!-- wishlist main wrapper start -->
-        <div class="wishlist-main-wrapper pt-60 pb-60">
+        <div class="wishlist-main-wrapper pt-60 pb-60" id="test">
             <div class="container">
                 <!-- Wishlist Page Content Start -->
                 <div class="row">
@@ -325,55 +338,23 @@
                                         <th class="pro-title">Product</th>
                                         <th class="pro-price">Price</th>
                                         <th class="pro-quantity">Stock Status</th>
-                                        <th class="pro-subtotal">Add to Cart</th>
                                         <th class="pro-remove">Remove</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-for="(item, index) in wish_goods_info">
+
+                                    <!-- <li v-for="(item, index) in wish_goods_info"> -->
                                     <tr>
                                         <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                    src="assets/img/product/product-5.jpg" alt="Product" /></a></td>
-                                        <td class="pro-title"><a href="#">element snowboard</a></td>
-                                        <td class="pro-price"><span>$295.00</span></td>
+                                                    v-bind:src="item.imgUrl" alt="Product" /></a></td>
+                                        <td class="pro-title"><a href="#">{{item.name}}</a></td>
+                                        <td class="pro-price"><span>{{item.currentPrice}}</span></td>
                                         <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                        <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-white">Add to
-                                                Cart</a>
-                                        </td>
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                        <td class="pro-remove" @click="add2cart(index)"><i
+                                                    class="fa fa-trash-o"></i></a></td>
                                     </tr>
-                                    <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                    src="assets/img/product/product-6.jpg" alt="Product" /></a></td>
-                                        <td class="pro-title"><a href="#">raygun snowboard</a></td>
-                                        <td class="pro-price"><span>$275.00</span></td>
-                                        <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                        <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-white">Add to
-                                                Cart</a>
-                                        </td>
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                    src="assets/img/product/product-7.jpg" alt="Product" /></a></td>
-                                        <td class="pro-title"><a href="#">berzerker snoeboard</a></td>
-                                        <td class="pro-price"><span>$295.00</span></td>
-                                        <td class="pro-quantity"><span class="text-danger">Stock Out</span></td>
-                                        <td class="pro-subtotal"><a href="cart.html"
-                                                class="sqr-btn text-white disabled">Add to
-                                                Cart</a></td>
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
-                                                    src="assets/img/product/product-8.jpg" alt="Product" /></a></td>
-                                        <td class="pro-title"><a href="#">turbo snowboard</a></td>
-                                        <td class="pro-price"><span>$110.00</span></td>
-                                        <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                        <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-white">Add to
-                                                Cart</a>
-                                        </td>
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                    </tr>
+                                    <!-- </li> -->
+
                                 </tbody>
                             </table>
                         </div>
@@ -621,26 +602,30 @@
     </div>
     <!-- Scroll to Top End -->
 
-    <!--=======================Javascript============================-->
-    <!--=== All Vendor Js ===-->
-    <script src="assets/js/vendor.js"></script>
-    <!--=== All Plugins Js ===-->
-    <script src="assets/js/plugins.js"></script>
-    <!--=== Active Js ===-->
-    <script src="assets/js/active.js"></script>
-
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
-    <script src="assets/js/jquery.params.js"></script>
-    <script src="assets/js/axios.js"></script>
-    <script src="assets/js/vue.js"></script>
     <script type="module">
-        import { wishlist } from "./assets/js/wishlist.js"
-        import { getInfoById } from "./assets/js/getInfoById.js"
-
+        import { wishlist, getInfoById, AddWish } from "./assets/js/wishlist.js"
         new Vue({
             el: '#test',
             data: {
-
+                wishlist_ids: {},
+                wish_goods_info: [{
+                    goodsId: '1',
+                    imgUrl: 'assets/img/product/product-7.jpg',
+                    name: 'berzerker snoeboard',
+                    currentPrice: '299'
+                },
+                {
+                    goodsId: '2',
+                    imgUrl: 'https://img0.baidu.com/it/u=1478349845,4278190484&fm=26&fmt=auto&gp=0.jpg',
+                    name: 'icjsics soijcims',
+                    currentPrice: '399'
+                },
+                {
+                    goodsId: '3',
+                    imgUrl: 'https://img0.baidu.com/it/u=1495749927,2215570797&fm=26&fmt=auto&gp=0.jpg',
+                    name: 'xjchushcx osjncisox',
+                    currentPrice: '599'
+                }]
             },
             created() {
                 var that = this;
@@ -648,16 +633,49 @@
                 let request_data = {
 
                 };
+
                 console.log("wishlist");
-                getInfoById(request_data).then((response) => {
-               
+
+                wishlist(request_data).then((response) => {
+                    let res_data = response.data;
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (res_data.cartOrWishList == '1' | res_data.cartOrWishList == '2') {
+                            that.wishlist_ids.append(res_data[i].goodId);
+                        }
+                    }
                 }).catch((error) => {
                     console.log(error);
                 });
+
+                for (let i = 0; i < that.wishlist_ids.length; i++) {
+                    let request_data2 = {
+                        'goodsId': that.wishlist_ids[i]
+                    }
+                    getInfoById(request_data2).then((response) => {
+                        that.wish_goods_info = response.data;
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                };
             },
             methods: {
+                add2cart(goodsId) {
 
-
+                    console.log(goodsId);
+                    let request_data = {
+                        'id': goodsId
+                    };
+                    AddWish(request_data).then((response) => {
+                        if(response.data.status=='200'){
+                            alert("添加成功");
+                        }else{
+                            alert("添加失败");
+                        }
+                    }).catch((error) => {
+                        alert("添加失败");
+                        console.log(error);
+                    });
+                }
             }
         })
     </script>
