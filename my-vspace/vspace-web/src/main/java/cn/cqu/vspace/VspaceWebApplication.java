@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 //启动dubbo
 @EnableDubbo
-//启动事务管理器
-@EnableTransactionManagement
 public class VspaceWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(VspaceWebApplication.class,args);
