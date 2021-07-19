@@ -36,6 +36,8 @@
         <module>index-api</module>
         <module>index-mapper</module>
         <module>index-service</module>
+        <module>cache-api</module>
+        <module>cache-service</module>
     </modules>
 
     <parent>

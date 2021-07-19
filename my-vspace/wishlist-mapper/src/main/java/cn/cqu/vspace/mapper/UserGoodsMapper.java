@@ -12,5 +12,6 @@ import java.util.List;
 public interface UserGoodsMapper {
     int insert(UserGoods goods);
     List<UserGoods> selectByExample(UserGoodsExample record);
-    int delete(@Param("gid") int gid, @Param("uid") int uid);
+    int delete(@Param("gid") int gid, @Param("uid") int uid, @Param("cartOrWish") int cartOrWish);
+    int updateToCart(@Param("gid") int gid, @Param("uid") int uid, @Param("cartOrWish") int cartOrWish);
 }

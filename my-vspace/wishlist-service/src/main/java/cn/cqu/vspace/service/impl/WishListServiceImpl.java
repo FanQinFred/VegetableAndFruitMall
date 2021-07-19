@@ -27,7 +27,19 @@ public class WishListServiceImpl implements WishListService {
         if(!list.isEmpty()){
             int userId = list.get(0).getUserId();
             for(int gid : goodsIdList){
-                userGoodsMapper.delete(gid, userId);
+                UserGoodsExample userGoodsExample = new UserGoodsExample();
+                UserGoodsExample.Criteria criteria = userGoodsExample.createCriteria();
+                criteria.andUserIdEqualTo(userId);
+                criteria.andGoodsIdEqualTo(gid);
+                List<UserGoods> userGoodsList = userGoodsMapper.selectByExample(userGoodsExample);
+                for(UserGoods goods : userGoodsList){
+                    if(goods.getCartorwishlist()==1){
+                        userGoodsMapper.delete(gid, userId, 1);
+                    }else{
+                        userGoodsMapper.updateToCart(gid, userId, 2);
+                    }
+                }
+
             }
             JSONObject result = new JSONObject();
             result.put("status", 200);
@@ -48,6 +60,7 @@ public class WishListServiceImpl implements WishListService {
             UserGoodsExample userGoodsExample = new UserGoodsExample();
             UserGoodsExample.Criteria criteria = userGoodsExample.createCriteria();
             criteria.andUserIdEqualTo(userId);
+            criteria.andCartorwishlistNotEqualTo(0);
             List<UserGoods> userGoodsList = userGoodsMapper.selectByExample(userGoodsExample);
             JSONArray array = new JSONArray();
             for(UserGoods userGoods : userGoodsList){
