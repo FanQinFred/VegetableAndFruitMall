@@ -82,12 +82,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--添加业务层对mapper层的依赖-->
-        <dependency>
-            <groupId>cn.cqu</groupId>
-            <artifactId>user-mapper</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
         <!--测试插件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
