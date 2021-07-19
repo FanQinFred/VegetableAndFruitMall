@@ -95,9 +95,7 @@
                                             <span class="cart-qty">Qty: {{ item.qty }}</span>
                                             <span>${{item.price}}</span>
                                         </div>
-                                        <div class="del-icon">
-                                            <i class="fa fa-times"></i>
-                                        </div>
+                                        
                                     </li>
                                     
                                     <li class="mini-cart-price">
@@ -817,32 +815,32 @@
                         <div class="blog-item">
                             <div class="single-blog-item bg-gray">
                                 <div class="blog-img-container">
-                                    <a href="blog-details.html" class="blog-img-holder blog-img-holder__1"></a>
+                                    <a href="javascript:void(0);" class="blog-img-holder blog-img-holder__1" @click="ShowBlogDetail(blogList[0])"></a>
                                 </div>
                                 <div class="post-info">
                                     <div class="post-date">
                                         <i class="ion-ios-calendar-outline"></i>
                                         <span>{{blogList[0].date}}</span>
                                     </div>
-                                    <h5 class="post-title"><a href="blog-details.html">{{blogList[0].title}}</a></h5>
+                                    <h5 class="post-title"><a href="javascript:void(0);" @click="ShowBlogDetail(blogList[0])">{{blogList[0].title}}</a></h5>
                                     <p>{{blogList[0].content}}</p>
-                                    <a href="blog-details.html" class="read-more">read more</a>
+                                    <a href="javascript:void(0);" class="read-more" @click="ShowBlogDetail(blogList[0])">read more</a>
                                 </div>
                             </div>
                         </div>
                         <div class="blog-item">
                             <div class="single-blog-item bg-gray">
                                 <div class="blog-img-container">
-                                    <a href="blog-details.html" class="blog-img-holder blog-img-holder__2"></a>
+                                    <a href="javascript:void(0);" class="blog-img-holder blog-img-holder__2" @click="ShowBlogDetail(blogList[1])"></a>
                                 </div>
                                 <div class="post-info">
                                     <div class="post-date">
                                         <i class="ion-ios-calendar-outline"></i>
                                         <span>{{blogList[1].date}}</span>
                                     </div>
-                                    <h5 class="post-title"><a href="blog-details.html">{{blogList[1].title}}</a></h5>
+                                    <h5 class="post-title"><a href="javascript:void(0);" @click="ShowBlogDetail(blogList[1])">{{blogList[1].title}}</a></h5>
                                     <p>{{blogList[1].content}}</p>
-                                    <a href="blog-details.html" class="read-more">read more</a>
+                                    <a href="javascript:void(0);" class="read-more" @click="ShowBlogDetail(blogList[1])" @click="ShowBlogDetail(blogList[1])">read more</a>
                                 </div>
                             </div>
                         </div>
@@ -1474,13 +1472,13 @@
         
         blogList:[
             {
-                id:4,
+                id:1,
                 date:'01 Jan 2019',
                 title:'真不错',
                 content:'太厉害了'
             },
             {
-                id:4,
+                id:2,
                 date:'01 Jan 2019',
                 title:'真不错',
                 content:'太厉害了'
@@ -1621,8 +1619,13 @@
                 window.sessionStorage.setItem("compareList",compareList.toString())
              }
              console.log(window.sessionStorage.getItem("compareList"))
+        },
+        ShowBlogDetail(item){
+            console.log("ShowBlogDetail")
+                let id = item.id
+                let url = "blog-details.html?blogId="+id;//此处拼接内容
+                window.location.href = url;
         }
-        
       }
     
     }) 
@@ -1720,10 +1723,10 @@
                 });
             },
             ShowProductDetail(item){
-            console.log("ShowProductDetail")
-            let id = item.id
-            let url = "product-details.html?goodsId="+id;//此处拼接内容
-            window.location.href = url;
+                console.log("ShowProductDetail")
+                let id = item.id
+                let url = "product-details.html?goodsId="+id;//此处拼接内容
+                window.location.href = url;
             }
         }
         
@@ -1796,6 +1799,12 @@
             
         },
         methods:{
+            NewArrivals(){
+
+            },
+            topRated(){
+
+            },
             ShowProductDetail(item){
             console.log("ShowProductDetail")
             let id = item.id
