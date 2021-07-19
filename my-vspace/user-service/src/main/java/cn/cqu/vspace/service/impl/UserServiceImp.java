@@ -40,14 +40,15 @@ public class UserServiceImp implements UserSerivce {
                 String token = TokenUtils.token(email, pwd);
 
                 user.setTokenValid((byte) 1);
-                user.setToken("55555");
+                user.setToken(token);
 
                 UserExample example2 = new UserExample();
                 UserExample.Criteria criteria2 = example2.createCriteria();
                 criteria2.andEmailEqualTo(email);
                 criteria2.andPwdEqualTo(pwd);
                 userMapper.updateByExampleSelective(user, example2);
-                return "{'status':'200','code':'100','token':'" + token + "'}";
+                Integer userid=user.getUserId();
+                return "{'status':'200','code':'100','token':'" + token + "','userid':'"+ userid +"'}";
             }
             return "{'status':'200','code':'200','token':'" + null + "'}";
         } catch (Exception e) {

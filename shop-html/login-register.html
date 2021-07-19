@@ -750,11 +750,12 @@
                             'pwd':that.pwd
                         }
                     }).then(res => {
-                        console.log(res.data)
+                        console.log(res.data);
+                        // sessionStorage
+                        window.sessionStorage.setItem("token", res.data.token);
+                        window.sessionStorage.setItem("userid", res.data.userid);
                     });
-                    // window.location = "http://www.02405.com/";
-                    // window.history.back();
-                    
+                    // to index.html
                     document.location = "/shop-html/index.html";
                 },
                 register() {
