@@ -24,10 +24,10 @@
         <module>cart-api</module>
         <module>cart-service</module>
         <module>cart-mapper</module>
-        <module>search-api</module>
         <module>shop-api</module>
         <module>shop-service</module>
         <module>shop-mapper</module>
+        <module>search-api</module>
         <module>search-mapper</module>
         <module>search-service</module>
         <module>wishlist-api</module>
