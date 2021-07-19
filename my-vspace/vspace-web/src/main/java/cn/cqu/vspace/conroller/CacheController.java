@@ -18,12 +18,12 @@ import java.util.List;
 public class CacheController {
 
     @Reference
-    private CacheService cacheService;
+    CacheService cacheService;
 
     @Reference
-    private ShopService shopService;
+    ShopService shopService;
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/goodsById", method = RequestMethod.POST)
     public JSONObject findGoodsById(@Param("token") String token, @Param("goodsId") String goodsId){
         String[] list = goodsId.split("-");
         List<Integer> goodsList = new ArrayList<>(list.length);

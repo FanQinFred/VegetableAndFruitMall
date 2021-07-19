@@ -19,7 +19,7 @@ import java.util.List;
 public class CartController {
 
     @Reference
-    private CartService cartService;
+    CartService cartService;
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public JSONObject updateCart(@Param("token") String token, @Param("goodsId") String goodsId){
