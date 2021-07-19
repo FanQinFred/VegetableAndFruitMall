@@ -32,7 +32,7 @@ service.interceptors.response.use(
     function (response) {
         let data = response.data;
 
-        if (data.status != 200) {
+        if (data.status != '200') {
             // Message.error(data.message);
             return Promise.reject(data);
             

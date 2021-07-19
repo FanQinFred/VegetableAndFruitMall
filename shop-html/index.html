@@ -18,11 +18,15 @@
     <!--=== Main Style CSS ===-->
     <link href="assets/css/style.css" rel="stylesheet">
 
-    
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/jquery.params.js"></script>
 
     <!-- Modernizer JS -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
     <script src="assets/js/vue.js"></script>
+    
+    
+  
     <!--[if lt IE 9]>
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -79,44 +83,32 @@
                                 <button><i class="ion-bag"></i>
                                     <span class="notification">2</span>
                                 </button>
-                                <ul class="cart-list">
-                                    <li>
+                                <ul class="cart-list" id="hd">
+                                    
+                                    <li v-for="(item, index) in cartList">
                                         <div class="cart-img">
-                                            <a href="product-details.html"><img src="assets/img/cart/cart-1.jpg"
+                                            <a href="#" @click="ShowProductDetail(item)"><img v-bind:src="item.src"
                                                                                 alt=""></a>
                                         </div>
                                         <div class="cart-info">
-                                            <h4><a href="product-details.html">simple product</a></h4>
-                                            <span class="cart-qty">Qty: 1</span>
-                                            <span>$60.00</span>
+                                            <h4><a href="#" @click="ShowProductDetail(item)">{{item.name}}</a></h4>
+                                            <span class="cart-qty">Qty: {{ item.qty }}</span>
+                                            <span>${{item.price}}</span>
                                         </div>
                                         <div class="del-icon">
                                             <i class="fa fa-times"></i>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="cart-img">
-                                            <a href="product-details.html"><img src="assets/img/cart/cart-2.jpg"
-                                                                                alt=""></a>
-                                        </div>
-                                        <div class="cart-info">
-                                            <h4><a href="product-details.html">virtual product</a></h4>
-                                            <span class="cart-qty">Qty: 2</span>
-                                            <span>$100.00</span>
-                                        </div>
-                                        <div class="del-icon">
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
+                                    
                                     <li class="mini-cart-price">
                                         <span class="subtotal">subtotal : </span>
-                                        <span class="subtotal-price ml-auto">$110.00</span>
+                                        <span class="subtotal-price ml-auto">${{subtotal}}</span>
                                     </li>
                                     <li class="checkout-btn">
-                                        <a href="#">View Cart</a>
+                                        <a href="cart.html">View Cart</a>
                                     </li>
                                     <li class="checkout-btn">
-                                        <a href="#">checkout</a>
+                                        <a href="checkout.html">checkout</a>
                                     </li>
                                 </ul>
                             </div>
@@ -252,11 +244,11 @@
                     <div class="category-single-item mb-md-30 mb-sm-30">
                         <div class="category-item-inner color1 text-center">
                             <div class="category-content" id="message-test01">
-                                <h3><a href="product-details.html">vegetables</a></h3>
+                                <h3><a href="#" @click="ShowProductDetail(PopularCategoriesVegetables)">vegetables</a></h3>
                                 
                             </div>
                             <div class="category-thumb">
-                                <a href="product-details.html">
+                                <a href="#" @click="ShowProductDetail(PopularCategoriesVegetables)">
                                     <img src="assets/img/category/cat-1.png" alt="">
                                 </a>
                             </div>
@@ -267,11 +259,11 @@
                     <div class="category-single-item mb-md-30 mb-sm-30">
                         <div class="category-item-inner color2 text-center">
                             <div class="category-content">
-                                <h3><a href="product-details.html">fruits</a></h3>
+                                <h3><a href="#" @click="ShowProductDetail(PopularCategoriesFruits)">fruits</a></h3>
                                 
                             </div>
                             <div class="category-thumb">
-                                <a href="product-details.html">
+                                <a href="#" @click="ShowProductDetail(PopularCategoriesFruits)">
                                     <img src="assets/img/category/cat-2.png" alt="">
                                 </a>
                             </div>
@@ -282,11 +274,11 @@
                     <div class="category-single-item mb-md-30 mb-sm-30">
                         <div class="category-item-inner color3 text-center">
                             <div class="category-content">
-                                <h3><a href="product-details.html">juice</a></h3>
+                                <h3><a href="#" @click="ShowProductDetail(PopularCategoriesJuice)">juice</a></h3>
                                
                             </div>
                             <div class="category-thumb">
-                                <a href="product-details.html">
+                                <a href="#" @click="ShowProductDetail(PopularCategoriesJuice)">
                                     <img src="assets/img/category/cat-3.png" alt="">
                                 </a>
                             </div>
@@ -297,11 +289,11 @@
                     <div class="category-single-item mb-md-30 mb-sm-30">
                         <div class="category-item-inner color4 text-center">
                             <div class="category-content">
-                                <h3><a href="product-details.html">meats</a></h3>
+                                <h3><a href="#" @click="ShowProductDetail(PopularCategoriesMeats)">meats</a></h3>
                                 
                             </div>
                             <div class="category-thumb">
-                                <a href="product-details.html">
+                                <a href="#" @click="ShowProductDetail(PopularCategoriesMeats)">
                                     <img src="assets/img/category/cat-4.png" alt="">
                                 </a>
                             </div>
@@ -355,7 +347,7 @@
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <!-- 点击背景图片跳转到单个的商品页面 -->
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(item)">
                                                     <img v-bind:src="item.src" alt="">
                                                 </a>
                                                 <!-- 显示快捷浏览弹窗 -->
@@ -371,7 +363,7 @@
                                                 </div>
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{ item.name }}</a>
+                                                        <a href="#" @click="ShowProductDetail(item)">{{ item.name }}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -379,11 +371,11 @@
                                                     <span class="old-price"><del></del></span>
                                                 </div>
                                                 <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" @click="AddToWishList(item)"><i
                                                             class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"><i
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" @click="AddToCart(item)"><i
                                                             class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" @click="AddToCompareList(item)"><i
                                                             class="ion-ios-shuffle"></i></a>
                                                 </div>
                                             </div>
@@ -402,7 +394,7 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6" v-for="(item,index) in OurProductsListVegetables">
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(item)">
                                                     <img v-bind:src="item.src" alt="">
                                                 </a>
                                                 <div class="quick-view-link">
@@ -418,7 +410,7 @@
                                                 </div>
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{item.name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(item)">{{item.name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -426,13 +418,15 @@
                                                     
                                                 </div>
                                                 <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist" @click="AddToWishList(item)"><i
                                                             class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"><i
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart" @click="AddToCart(item)"><i
                                                             class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Compare" @click="AddToCompareList(item)"><i
                                                             class="ion-ios-shuffle"></i></a>
+                                
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -447,7 +441,7 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6" v-for="(item,index) in OurProductsListFruits">
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(item)">
                                                     <img v-bind:src="item.src" alt="">
                                                 </a>
                                                 <div class="quick-view-link">
@@ -463,7 +457,7 @@
                                                 </div>
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{item.name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(item)">{{item.name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -471,12 +465,12 @@
                                                     
                                                 </div>
                                                 <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                                            class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"><i
-                                                            class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                            class="ion-ios-shuffle"></i></a>
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist" @click="AddToWishList(item)"><i
+                                                        class="ion-android-favorite-outline"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart" @click="AddToCart(item)"><i
+                                                        class="ion-bag"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Compare" @click="AddToCompareList(item)"><i
+                                                        class="ion-ios-shuffle"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -491,7 +485,7 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6" v-for="(item,index) in OurProductsListJuice">
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(item)">
                                                     <img v-bind:src="item.src" alt="">
                                                 </a>
                                                 <div class="quick-view-link">
@@ -507,7 +501,7 @@
                                                 </div>
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{item.name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(item)">{{item.name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -515,12 +509,12 @@
                                                     
                                                 </div>
                                                 <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                                            class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"><i
-                                                            class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                            class="ion-ios-shuffle"></i></a>
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist" @click="AddToWishList(item)"><i
+                                                        class="ion-android-favorite-outline"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart" @click="AddToCart(item)"><i
+                                                        class="ion-bag"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Compare" @click="AddToCompareList(item)"><i
+                                                        class="ion-ios-shuffle"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -535,7 +529,7 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6" v-for="(item,index) in OurProductsListMeats">
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(item)">
                                                     <img v-bind:src="item.src" alt="">
                                                 </a>
                                                 <div class="quick-view-link">
@@ -551,7 +545,7 @@
                                                 </div>
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{item.name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(item)">{{item.name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -559,12 +553,12 @@
                                                     <span class="old-price"><del></del></span>
                                                 </div>
                                                 <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                                            class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"><i
-                                                            class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                            class="ion-ios-shuffle"></i></a>
+                                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist" @click="AddToWishList(item)"><i
+                                                        class="ion-android-favorite-outline"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart" @click="AddToCart(item)"><i
+                                                        class="ion-bag"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Compare" @click="AddToCompareList(item)"><i
+                                                        class="ion-ios-shuffle"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -771,7 +765,7 @@
                             <div class="col" v-for="(item,index) in bestSellerList" style="width: 800px;">
                                 <div class="single-item mb-30" >
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
+                                        <a href="#" @click="ShowProductDetail(item)">
                                             <img v-bind:src="item.src" alt="">
                                         </a>
                                         <div class="quick-view-link">
@@ -785,7 +779,7 @@
                                         
                                         <div class="product-name">
                                             <h4 class="h5">
-                                                <a href="product-details.html">{{item.name}}</a>
+                                                <a href="#" @click="ShowProductDetail(item)">{{item.name}}</a>
                                             </h4>
                                         </div>
                                         <div class="price-box">
@@ -939,7 +933,7 @@
                                         
                                     </div>
                                     <div class="product-name">
-                                        <h4><a href="product-details.html">{{quick_view_item.name}}</a></h4>
+                                        <h4><a href="#" @click="ShowProductDetail(quick_view_item)">{{quick_view_item.name}}</a></h4>
                                     </div>
                                     <div class="price-box">
                                         <span class="regular-price">${{quick_view_item.price}}</span>
@@ -948,20 +942,14 @@
                                     <!-- 商品评论 -->
                                     <p>{{quick_view_item.description}}</p>
                                     <div class="action-link mb-20">
-                                        <!-- 添加购物车 -->
-                                        <a href="#" data-toggle="tooltip" title="Add to cart" class="add-to-cart">add to
-                                            cart</a>
-                                        <!-- 添加收藏列表 -->
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="ion-android-favorite-outline"></i></a>
+                                        
                                         <!-- 添加到比较列表 -->
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
+                                        <a href="javascript:void(0);" data-toggle="tooltip" title="Compare" @click="AddToCompareList(quick_view_item)"><i
                                             class="ion-ios-shuffle"></i></a>
+                                            
+                            
                                     </div>
-                                    <!-- 购买数量 -->
-                                    <div class="quantity mb-20">
-                                        <div class="pro-qty"><input type="text" :value="amount"></div>
-                                    </div>
+                                   
                                     <!-- 商品库存 -->
                                     <div class="availability mb-20">
                                         <h5>Availability:</h5>
@@ -1022,14 +1010,14 @@
                                     <li>
                                         <div class="single-item single-item__footer-category">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(newArrivalList[0])">
                                                     <img v-bind:src="newArrivalList[0].src" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-description">
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{newArrivalList[0].name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(newArrivalList[0])">{{newArrivalList[0].name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -1042,14 +1030,14 @@
                                     <li>
                                         <div class="single-item single-item__footer-category">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(newArrivalList[1])">
                                                     <img v-bind:src="newArrivalList[1].src" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-description">
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{newArrivalList[1].name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(newArrivalList[1])">{{newArrivalList[1].name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -1061,14 +1049,14 @@
                                     <li>
                                         <div class="single-item single-item__footer-category">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(newArrivalList[2])">
                                                     <img v-bind:src="newArrivalList[2].src" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-description">
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{newArrivalList[2].name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(newArrivalList[2])">{{newArrivalList[2].name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -1092,14 +1080,14 @@
                                     <li>
                                         <div class="single-item single-item__footer-category">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(topRatedList[0])">
                                                     <img v-bind:src="topRatedList[0].src" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-description">
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{topRatedList[0].name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(topRatedList[0])">{{topRatedList[0].name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -1112,14 +1100,14 @@
                                     <li>
                                         <div class="single-item single-item__footer-category">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(topRatedList[1])">
                                                     <img v-bind:src="topRatedList[1].src" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-description">
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{topRatedList[1].name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(topRatedList[1])">{{topRatedList[1].name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -1132,14 +1120,14 @@
                                     <li>
                                         <div class="single-item single-item__footer-category">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="#" @click="ShowProductDetail(topRatedList[2])">
                                                     <img v-bind:src="topRatedList[2].src" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-description">
                                                 <div class="product-name">
                                                     <h4 class="h5">
-                                                        <a href="product-details.html">{{topRatedList[2].name}}</a>
+                                                        <a href="#" @click="ShowProductDetail(topRatedList[2])">{{topRatedList[2].name}}</a>
                                                     </h4>
                                                 </div>
                                                 <div class="price-box">
@@ -1223,18 +1211,27 @@
 <script src="assets/js/axios.js"></script>
 
 <script type="module">
-    import {popularCategories,ourProducts,whatPeopleSay,bestSellers,fromTheBlog,newArrivals,topRated} from "./assets/js/index.js"
+    import {popularCategories,ourProducts,whatPeopleSay,bestSellers,fromTheBlog,newArrivals,topRated,addToCart,addToWishList} from "./assets/js/index.js"
 
     new Vue({
       el: '#one',
       data: {
         
-        PopularCategoriesVegetables:'',
-        PopularCategoriesFruits:'',
-        PopularCategoriesJuice:'',
-        PopularCategoriesMeats:'',
+        PopularCategoriesVegetables:{
+                id:1
+            },
+        PopularCategoriesFruits:{
+                id:2
+            },
+        PopularCategoriesJuice:{
+                id:3  
+            },
+        PopularCategoriesMeats:{
+                id:4
+            },
         OurProductsListMango:[
             {
+                id:4,
                 rate:1,
                 name:'goods1',
                 price:'100.00',
@@ -1243,6 +1240,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:2,
                 name:'goods2',
                 price:'100.00',
@@ -1251,6 +1249,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:3,
                 name:'goods3',
                 price:'100.00',
@@ -1259,6 +1258,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:4,
                 name:'goods4',
                 price:'100.00'   ,
@@ -1269,6 +1269,7 @@
         ],
         OurProductsListVegetables:[
             {
+                id:4,
                 rate:1,
                 name:'goods1',
                 price:'100.00',
@@ -1277,6 +1278,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:2,
                 name:'goods2',
                 price:'100.00',
@@ -1285,6 +1287,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:3,
                 name:'goods3',
                 price:'100.00',
@@ -1293,6 +1296,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:4,
                 name:'goods4',
                 price:'100.00',
@@ -1303,6 +1307,7 @@
         ],
         OurProductsListFruits:[
             {
+                id:4,
                 rate:1,
                 name:'goods1',
                 price:'100.00',
@@ -1311,6 +1316,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:2,
                 name:'goods2',
                 price:'100.00',
@@ -1319,6 +1325,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:3,
                 name:'goods3',
                 price:'100.00',
@@ -1327,6 +1334,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:4,
                 name:'goods4',
                 price:'100.00',
@@ -1337,6 +1345,7 @@
         ],
         OurProductsListJuice:[
             {
+                id:4,
                 rate:1,
                 name:'goods1',
                 price:'100.00',
@@ -1345,6 +1354,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:2,
                 name:'goods2',
                 price:'100.00',
@@ -1353,6 +1363,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:3,
                 name:'goods3',
                 price:'100.00',
@@ -1361,6 +1372,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:4,
                 name:'goods4',
                 price:'100.00',
@@ -1371,6 +1383,7 @@
         ],
         OurProductsListMeats:[
             {
+                id:4,
                 rate:1,
                 name:'goods1',
                 price:'100.00',
@@ -1379,6 +1392,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:2,
                 name:'goods2',
                 price:'100.00',
@@ -1387,6 +1401,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:3,
                 name:'goods3',
                 price:'100.00',
@@ -1395,6 +1410,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:4,
                 name:'goods4',
                 price:'100.00',
@@ -1405,18 +1421,21 @@
         ],
         reviewList:[
             {
+                id:4,
                 src:'https://img1.baidu.com/it/u=1711386180,128110372&fm=26&fmt=auto&gp=0.jpg',
                 content:'垃圾',
                 rate:1,
                 name:'埼玉'
             },
             {
+                id:4,
                 src:'https://img1.baidu.com/it/u=1711386180,128110372&fm=26&fmt=auto&gp=0.jpg',
                 content:'垃圾',
                 rate:2,
                 name:'埼玉'
             },
             {
+                id:4,
                 src:'https://img1.baidu.com/it/u=1711386180,128110372&fm=26&fmt=auto&gp=0.jpg',
                 content:'垃圾',
                 rate:3,
@@ -1425,6 +1444,7 @@
         ],
         bestSellerList:[
             {
+                id:4,
                 rate:1,
                 name:'goods1',
                 price:'100.00',
@@ -1433,6 +1453,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:2,
                 name:'goods1',
                 price:'100.00',
@@ -1441,6 +1462,7 @@
                 stock:'2'
             },
             {
+                id:4,
                 rate:3,
                 name:'goods1',
                 price:'100.00',
@@ -1449,21 +1471,16 @@
                 stock:'2'
             }
         ],
-        sale:{
-            rate:3,
-                name:'goods1',
-                price:'100.00',
-                src:'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
-                description:'真不错',
-                stock:'2'
-        },
+        
         blogList:[
             {
+                id:4,
                 date:'01 Jan 2019',
                 title:'真不错',
                 content:'太厉害了'
             },
             {
+                id:4,
                 date:'01 Jan 2019',
                 title:'真不错',
                 content:'太厉害了'
@@ -1485,10 +1502,10 @@
             console.log("PopularCategories")
             popularCategories()
             .then((response) => {
-                this.PopularCategoriesVegetables=response.data.vegetable[0]
-                this.PopularCategoriesFruits=response.data.fruit[0]
-                this.PopularCategoriesJuice=response.data.juice[0]
-                this.PopularCategoriesMeats=response.data.meat[0]
+                this.PopularCategoriesVegetables=response.data.vegetable[0].id
+                this.PopularCategoriesFruits=response.data.fruit[0].id
+                this.PopularCategoriesJuice=response.data.juice[0].id
+                this.PopularCategoriesMeats=response.data.meat[0].id
             })
             .catch((error) => {
                 console.log(error);
@@ -1562,16 +1579,62 @@
             .catch((error) => {
                 console.log(error);
             });
+        },
+        ShowProductDetail(item){
+            console.log("ShowProductDetail")
+            let id = item.id
+            let url = "product-details.html?goodsId="+id;//此处拼接内容
+            window.location.href = url;
+        },
+        AddToWishList(item){
+            console.log("AddToWishList")
+            addToWishList()
+            .then((response) => {
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        },
+        AddToCart(item){
+            console.log("AddToCart")
+            addToCart()
+            .then((response) => {
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        },
+        AddToCompareList(item){
+            console.log("AddToCompareList")
+
+             let list = window.sessionStorage.getItem("compareList")
+             if(list==null){
+                let compareList = new Array()
+                compareList.push(item.id)
+                window.sessionStorage.setItem("compareList",compareList.toString())
+             }else if(!list.includes(item.id)){
+                 
+                let compareList = list.split(",")
+                compareList.push(item.id)
+                window.sessionStorage.setItem("compareList",compareList.toString())
+             }
+             console.log(window.sessionStorage.getItem("compareList"))
         }
+        
       }
     
     }) 
 </script>
+
 <script>
-    var qv = new Vue({
+
+    let qv = new Vue({
         el: '#quick_view',
         data: {
             quick_view_item: {
+                id:4,
                 rate:3,
                 name:'goods3',
                 price:'100.00',
@@ -1580,17 +1643,91 @@
                 stock:'2'
 
             },
-            amount:'2',
+            amount:'1',
         },
         created(){
             
         },
         methods:{
+            ShowProductDetail(item){
+                console.log("ShowProductDetail")
+                let id = item.id
+                let url = "product-details.html?goodsId="+id;//此处拼接内容
+                window.location.href = url;
+            },
             
+            AddToCompareList(item){
+                console.log("AddToCompareList")
+                let list = window.sessionStorage.getItem("compareList")
+                if(list==null){
+                    let compareList = new Array()
+                    compareList.push(item.id)
+                    window.sessionStorage.setItem("compareList",compareList.toString())
+                }else if(!list.includes(item.id)){
+                    
+                    let compareList = list.split(",")
+                    compareList.push(item.id)
+                    window.sessionStorage.setItem("compareList",compareList.toString())
+                }
+                console.log(window.sessionStorage.getItem("compareList"))
+            }
         }
         
         }) 
     
+    
+</script>
+<script type="module">
+    import {getCart} from "./assets/js/index.js"
+    var hd = new Vue({
+        el: '#hd',
+        data: {
+           cartList:[
+               {
+                   id:4,
+                   name:'真好吃',
+                   qty:6,
+                   price:'6',
+                   src:'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+               },
+               {
+                   id:4,
+                   name:'真好吃',
+                   qty:6,
+                   price:'6',
+                   src:'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+               }
+           ],
+           subtotal:6,
+        },
+        created(){
+            this.GetCart()
+        },
+        methods:{
+            GetCart(){
+            console.log("GetCart")
+                getCart()
+                .then((response) => {
+                    
+                    
+                    this.subtotal = 0
+                    for(let i = 0;i<this.cartList.length;i++){
+                        this.subtotal+=this.cartList[i].price
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            },
+            ShowProductDetail(item){
+            console.log("ShowProductDetail")
+            let id = item.id
+            let url = "product-details.html?goodsId="+id;//此处拼接内容
+            window.location.href = url;
+            }
+        }
+        
+        }) 
 </script>
 <script>
     new Vue({
@@ -1598,6 +1735,7 @@
         data: {
             newArrivalList:[
                 {
+                    id:4,
                     rate:3,
                     name:'goods1',
                     price:'100.00',
@@ -1606,6 +1744,7 @@
                     stock:'2'
                 },
                 {
+                    id:4,
                     rate:3,
                     name:'goods1',
                     price:'100.00',
@@ -1614,6 +1753,7 @@
                     stock:'2'
                 },
                 {
+                    id:4,
                     rate:3,
                     name:'goods1',
                     price:'100.00',
@@ -1624,6 +1764,7 @@
             ],
             topRatedList:[
                 {
+                    id:4,
                     rate:3,
                     name:'goods1',
                     price:'100.00',
@@ -1632,6 +1773,7 @@
                     stock:'2'
                 },
                 {
+                    id:4,
                     rate:3,
                     name:'goods1',
                     price:'100.00',
@@ -1640,6 +1782,7 @@
                     stock:'2'
                 },
                 {
+                    id:4,
                     rate:3,
                     name:'goods1',
                     price:'100.00',
@@ -1653,7 +1796,12 @@
             
         },
         methods:{
-            
+            ShowProductDetail(item){
+            console.log("ShowProductDetail")
+            let id = item.id
+            let url = "product-details.html?goodsId="+id;//此处拼接内容
+            window.location.href = url;
+            }
         }
         
         }) 

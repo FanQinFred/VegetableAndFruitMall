@@ -58,3 +58,29 @@ export function topRated(data) {
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
+
+
+export function getCart(data) {
+    return service.request({
+        method: 'post',
+        url: 'http://localhost:40000/cart/cart',
+        data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
+    })
+}
+
+export function addToWishList(data) {
+    return service.request({
+        method: 'post',
+        url: 'http://localhost:40000//shop/wish',
+        data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
+    })
+}
+
+export function addToCart(data) {
+    return service.request({
+        method: 'post',
+        url: 'http://localhost:40000/shop/addCart',
+        data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
+    })
+}
+
