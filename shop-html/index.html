@@ -1532,6 +1532,55 @@
 
                 console.log(this.OurProductsListFruits)
 
+                this.OurProductsListVegetables = []
+                for(let i=0;i<4;i++){
+                    let l ={
+                        id:response.data.ourProductList.Vegetables[i].goodsId,
+                        rate:parseFloat(response.data.ourProductList.Vegetables[i].goodsRate),
+                        name:response.data.ourProductList.Vegetables[i].goodsName,
+                        price:response.data.ourProductList.Vegetables[i].goodsCurrentPrice,
+                        src:response.data.ourProductList.Vegetables[i].goodsImgUrl,
+                        description:response.data.ourProductList.Vegetables[i].goodsDescription,
+                        stock:response.data.ourProductList.Vegetables[i].goodsAmount,
+                    }
+                    this.OurProductsListVegetables.push(l)
+                }
+
+                console.log(this.OurProductsListVegetables)
+
+                this.OurProductsListJuice = []
+                for(let i=0;i<4;i++){
+                    let l ={
+                        id:response.data.ourProductList.Juice[i].goodsId,
+                        rate:parseFloat(response.data.ourProductList.Juice[i].goodsRate),
+                        name:response.data.ourProductList.Juice[i].goodsName,
+                        price:response.data.ourProductList.Juice[i].goodsCurrentPrice,
+                        src:response.data.ourProductList.Juice[i].goodsImgUrl,
+                        description:response.data.ourProductList.Juice[i].goodsDescription,
+                        stock:response.data.ourProductList.Juice[i].goodsAmount,
+                    }
+                    this.OurProductsListJuice.push(l)
+                }
+
+                console.log(this.OurProductsListJuice)
+
+                this.OurProductsListMeats = []
+                for(let i=0;i<4;i++){
+                    let l ={
+                        id:response.data.ourProductList.Meats[i].goodsId,
+                        rate:parseFloat(response.data.ourProductList.Meats[i].goodsRate),
+                        name:response.data.ourProductList.Meats[i].goodsName,
+                        price:response.data.ourProductList.Meats[i].goodsCurrentPrice,
+                        src:response.data.ourProductList.Meats[i].goodsImgUrl,
+                        description:response.data.ourProductList.Meats[i].goodsDescription,
+                        stock:response.data.ourProductList.Meats[i].goodsAmount,
+                    }
+                    this.OurProductsListMeats.push(l)
+                }
+
+                console.log(this.OurProductsListMeats)
+    
+
                 this.OurProductsListMango = []
                 for(let i=0;i<4;i++){
                     let l ={
@@ -1547,7 +1596,6 @@
                 }
 
                 console.log(this.OurProductsListMango)
-    
             })
             .catch((error) => {
                 console.log(error);
@@ -1564,6 +1612,7 @@
         WhatPeopleSay(){
             console.log("WhatPeopleSay")
             whatPeopleSay()
+            
             .then((response) => {
                 
             })
