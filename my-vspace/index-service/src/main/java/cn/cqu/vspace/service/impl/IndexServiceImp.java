@@ -139,7 +139,13 @@ public class IndexServiceImp implements IndexService {
         JSONObject jsonObject = new JSONObject();
         try {
             JSONArray jsonArray = new JSONArray();
-            jsonArray.addAll(blogMapper.selectTopSix());
+            JSONArray jsonArray1 = new JSONArray();
+            List<Blog> blogs = blogMapper.selectTopSix();
+            jsonArray.addAll(blogs);
+            for (Blog blog : blogs){
+                jsonArray1.addAll(userMapper.getByUserId(blog.getUserId()));
+            }
+            jsonObject.put("userList",jsonArray1);
             jsonObject.put("list",jsonArray);
             jsonObject.put("status","200");
         }catch (Exception e){
