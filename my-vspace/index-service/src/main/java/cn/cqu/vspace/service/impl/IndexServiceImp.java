@@ -11,6 +11,8 @@ import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -292,12 +294,19 @@ public class IndexServiceImp implements IndexService {
     public JSONObject getReviewByBlogId(Integer blogId) {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
+        JSONArray jsonArray1 = new JSONArray();
         try {
             ReviewExample reviewExample = new ReviewExample();
             ReviewExample.Criteria criteria = reviewExample.createCriteria();
             criteria.andBlogIdEqualTo(blogId);
-            jsonArray.addAll(reviewMapper.selectByExample(reviewExample));
+            List<Review> reviews = reviewMapper.selectByExample(reviewExample);
+            jsonArray.addAll(reviews);
+
+            for (Review review : reviews){
+                jsonArray1.addAll(userMapper.getByUserId(review.getUserId()));
+            }
             jsonObject.put("list",jsonArray);
+            jsonObject.put("userList",jsonArray1);
             jsonObject.put("status","200");
         }catch (Exception e){
             e.printStackTrace();
@@ -310,12 +319,19 @@ public class IndexServiceImp implements IndexService {
     public JSONObject getReviewByGoodsId(Integer goodsId) {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
+        JSONArray jsonArray1 = new JSONArray();
         try {
             ReviewExample reviewExample = new ReviewExample();
             ReviewExample.Criteria criteria = reviewExample.createCriteria();
             criteria.andGoodsIdEqualTo(goodsId);
-            jsonArray.addAll(reviewMapper.selectByExample(reviewExample));
+            List<Review> reviews = reviewMapper.selectByExample(reviewExample);
+            jsonArray.addAll(reviews);
+
+            for (Review review : reviews){
+                jsonArray1.addAll(userMapper.getByUserId(review.getUserId()));
+            }
             jsonObject.put("list",jsonArray);
+            jsonObject.put("userList",jsonArray1);
             jsonObject.put("status","200");
         }catch (Exception e){
             e.printStackTrace();
@@ -325,8 +341,24 @@ public class IndexServiceImp implements IndexService {
     }
 
     @Override
-    public JSONObject comment(String content, String name, String email) {
+    public JSONObject comment(String content, Integer name, String token, Integer blogId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            Review review = new Review();
+            User user = userMapper.getUserByToken(token).get(0);
+            review.setBlogId(blogId);
+            review.setGoodsId(null);
+            review.setUserId(user.getUserId());
+            review.setReviewRate(null);
+            review.setReviewHot(content);
+            review.setReviewDate(new Date().toString());
+            reviewMapper.insert(review);
+            jsonObject.put("status","200");
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("status","500");
+        }
 
-        return null;
+        return jsonObject;
     }
 }

@@ -16,5 +16,5 @@ public interface IndexService {
     JSONObject getBlogById(Integer id);
     JSONObject getReviewByBlogId(Integer blogId);
     JSONObject getReviewByGoodsId(Integer goodsId);
-    JSONObject comment(String content, String name, String email);
+    JSONObject comment(String content, Integer name, String token, Integer blogId);
 }

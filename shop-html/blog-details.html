@@ -716,6 +716,7 @@
                 this.GetBlogById(this.GetData1())
                 this.NewArrivals()
                 this.TopRated()
+                this.GetReviewByBlogId(this.GetData1())
             },
             methods: {
                 NewArrivals() {
@@ -748,7 +749,7 @@
                 },
                 NewComment() {
                     console.log("NewComment")
-                    
+
                     axios({
                         url: 'http://fanqin.vaiwan.com/index/getReviewByBlogId',
                         method: 'post',
@@ -805,18 +806,26 @@
                         });
 
                 },
-                GetReviewByBlogId() {
+                GetReviewByBlogId(id) {
                     console.log("GetReviewByBlogId")
 
                     axios({
                         url: 'http://fanqin.vaiwan.com/index/getReviewByBlogId',
                         method: 'post',
                         params: {
-                            'blogId': this.blog.id
+                            'blogId': id
                         },
                     })
                         .then((response) => {
-                            
+                            this.commentList = []
+                            for (let i = 0; i < response.data.list.length; i++) {
+                                let l = {
+                                    writer: "",
+                                    date: response.data.list[i].reviewDate,
+                                    content: response.data.list[i].reviewHot,
+                                    src: ""
+                                }
+                            }
                         })
                         .catch((error) => {
                             console.log(error);
