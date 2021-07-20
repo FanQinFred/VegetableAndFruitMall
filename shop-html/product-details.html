@@ -387,7 +387,7 @@
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="tab_three">
-                                                <form action="#" class="review-form">
+                                                <div class="review-form">
                                                     <h5>1 review for <span>Chaz Kangeroo Hoodies</span></h5>
                                                     <div class="total-reviews">
                                                         <div class="rev-avatar">
@@ -417,7 +417,8 @@
                                                             <label class="col-form-label"><span
                                                                     class="text-danger">*</span>
                                                                 Your Name</label>
-                                                            <input type="text" class="form-control" required>
+                                                            <input v-model="comment_Your_Name" type="text"
+                                                                class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -425,7 +426,8 @@
                                                             <label class="col-form-label"><span
                                                                     class="text-danger">*</span>
                                                                 Your Email</label>
-                                                            <input type="email" class="form-control" required>
+                                                            <input v-model="comment_Your_Email" type="email"
+                                                                class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -433,7 +435,8 @@
                                                             <label class="col-form-label"><span
                                                                     class="text-danger">*</span>
                                                                 Your Review</label>
-                                                            <textarea class="form-control" required></textarea>
+                                                            <textarea v-model="comment_Your_Review" class="form-control"
+                                                                required></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -442,23 +445,43 @@
                                                                     class="text-danger">*</span>
                                                                 Rating</label>
                                                             &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                            <input type="radio" value="1" name="rating">
+                                                            <input @click="rateClick(1)" type="radio" value="1"
+                                                                name="rating">
                                                             &nbsp;
-                                                            <input type="radio" value="2" name="rating">
+                                                            <input @click="rateClick(2)" type="radio" value="2"
+                                                                name="rating">
                                                             &nbsp;
-                                                            <input type="radio" value="3" name="rating">
+                                                            <input @click="rateClick(3)" type="radio" value="3"
+                                                                name="rating">
                                                             &nbsp;
-                                                            <input type="radio" value="4" name="rating">
+                                                            <input @click="rateClick(4)" type="radio" value="4"
+                                                                name="rating">
                                                             &nbsp;
-                                                            <input type="radio" value="5" name="rating" checked>
+                                                            <input @click="rateClick(5)" type="radio" value="5"
+                                                                name="rating" checked>
+                                                            &nbsp;
+                                                            <input @click="rateClick(6)" type="radio" value="6"
+                                                                name="rating">
+                                                            &nbsp;
+                                                            <input @click="rateClick(7)" type="radio" value="7"
+                                                                name="rating">
+                                                            &nbsp;
+                                                            <input @click="rateClick(8)" type="radio" value="8"
+                                                                name="rating">
+                                                            &nbsp;
+                                                            <input @click="rateClick(9)" type="radio" value="9"
+                                                                name="rating">
+                                                            &nbsp;
+                                                            <input @click="rateClick(10)" type="radio" value="10"
+                                                                name="rating">
                                                             &nbsp;Good
                                                         </div>
                                                     </div>
                                                     <div class="buttons">
-                                                        <button class="btn btn__btn-gray"
+                                                        <button @click="comment" class="btn btn__btn-gray"
                                                             type="submit">Continue</button>
                                                     </div>
-                                                </form> <!-- end of review-form -->
+                                                </div> <!-- end of review-form -->
                                             </div>
                                         </div>
                                     </div>
@@ -1063,6 +1086,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
     <script src="assets/js/jquery.params.js"></script>
     <script src="assets/js/axios.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="module">
         import { getInfoById, getUrlParam } from "./assets/js/detail.js"
@@ -1071,11 +1095,16 @@
             data: {
                 goods_info: {},
                 goodsid: 2,
-                rate:4
+                rate: 4,
+
+                comment_Your_Name: '',
+                comment_Your_Email: '',
+                comment_Your_Review: '',
+                comment_Rating: '5'
             },
             created() {
                 var that = this;
-                that.goodsid = getUrlParam("goodsId");
+                // that.goodsid = getUrlParam("goodsId");
                 console.log("goodsid: " + that.goodsid);
                 let request_data = {
                     goodsId: that.goodsid
@@ -1095,13 +1124,53 @@
                 }).then(res => {
                     // sessionStorage
                     var json = res.data;
-                    that.goods_info=json;
+                    that.goods_info = json;
                     console.log(that.goods_info);
                     // handle data
-                    that.rate=parseFloat(that.goods_info.rate);
+                    that.rate = parseFloat(that.goods_info.rate);
                 });
             },
             methods: {
+                rateClick(rate) {
+                    this.comment_Rating =String(rate);
+                },
+                comment() {
+                    var that = this;
+                    let token = window.localStorage.getItem("token");
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/detail/comment',
+                        method: 'post',
+                        params: {
+                            'goodsid': that.goodsid,
+                            'blogid': '0',
+                            'yourName': that.comment_Your_Name,
+                            'yourEmail': that.comment_Your_Email,
+                            'yourView': that.comment_Your_Review,
+                            'rating': that.comment_Rating
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    }).then(res => {
+                        console.log(res);
+                        var json_data = eval('(' + res.data + ')');
+                        if (json_data.code != '100') {
+                            swal("提交评论出错！");
+                        } else {
+                            swal({
+                                title: "成功",
+                                text: "提交评论成功！",
+                                icon: "success",
+                            });
+                            // to index.html
+                            window.setTimeout(show_index, 2000);
+                            function show_index() {
+                                // document.location = "./product_detail.html";
+                            }
+                        }
+
+                    });
+                }
             }
         })
     </script>
