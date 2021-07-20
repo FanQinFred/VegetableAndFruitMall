@@ -86,6 +86,7 @@ public class ShopServiceImpl implements ShopService {
         list = userMapper.selectByToken(token);
         if(!list.isEmpty()){
             int userId = list.get(0).getUserId();
+            int insertCount = 0;
             for(int gId : goodsId){
                 UserGoodsExample userGoodsExample = new UserGoodsExample();
                 UserGoodsExample.Criteria criteria = userGoodsExample.createCriteria();
@@ -93,6 +94,7 @@ public class ShopServiceImpl implements ShopService {
                 criteria.andGoodsIdEqualTo(gId);
                 List<UserGoods> userGoodsList = userGoodsMapper.selectByExample(userGoodsExample);
                 if(userGoodsList.isEmpty()){
+                    insertCount++;
                     UserGoods userGoods = new UserGoods();
                     userGoods.setGoodsId(gId);
                     userGoods.setUserId(userId);
@@ -103,6 +105,8 @@ public class ShopServiceImpl implements ShopService {
             }
             JSONObject result = new JSONObject();
             result.put("status", "200");
+            result.put("addCount", goodsId.size());
+            result.put("insertCount", insertCount);
             return result;
         }
         JSONObject error = new JSONObject();
