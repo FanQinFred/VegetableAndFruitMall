@@ -6,6 +6,7 @@ import cn.cqu.vspace.service.IndexService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,6 +30,9 @@ public class IndexServiceImp implements IndexService {
 
     @Autowired
     ReviewMapper reviewMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public JSONObject bestSellers() {
@@ -212,9 +216,20 @@ public class IndexServiceImp implements IndexService {
         JSONObject jsonObject = new JSONObject();
         try {
             List<Review> list = reviewMapper.selectTopThree();
+            List<User> userList = new ArrayList<>();
+            for (Review review : list){
+                Integer id = review.getUserId();
+                UserExample userExample = new UserExample();
+                UserExample.Criteria criteria = userExample.createCriteria();
+                criteria.andUserIdEqualTo(id);
+                userList.addAll(userMapper.selectByExample(userExample));
+            }
             JSONArray jsonArray = new JSONArray();
             jsonArray.addAll(list);
+            JSONArray jsonArray1 = new JSONArray();
+            jsonArray1.addAll(userList);
             jsonObject.put("list",jsonArray);
+            jsonObject.put("userList",jsonArray1);
             jsonObject.put("status","200");
         }catch (Exception e){
             e.printStackTrace();
