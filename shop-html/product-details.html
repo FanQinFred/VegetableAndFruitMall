@@ -25,6 +25,7 @@
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="assets/js/vue.js"></script>
 
 </head>
 
@@ -317,31 +318,7 @@
                     <div class="col-lg-5 col-md-6">
                         <div class="product-large-slider img-zoom mb-20 slider-arrow-style slider-arrow-style__style-2">
                             <div class="pro-large-img">
-                                <img src="assets/img/product/product-details-img1.jpg" alt="" />
-                            </div>
-                            <div class="pro-large-img">
-                                <img src="assets/img/product/product-details-img2.jpg" alt="" />
-                            </div>
-                            <div class="pro-large-img">
-                                <img src="assets/img/product/product-details-img3.jpg" alt="" />
-                            </div>
-                            <div class="pro-large-img">
-                                <img src="assets/img/product/product-details-img4.jpg" alt="" />
-                            </div>
-                            <div class="pro-large-img">
-                                <img src="assets/img/product/product-details-img4.jpg" alt="" />
-                            </div>
-                        </div>
-                        <div class="pro-nav slick-padding_2 slider-arrow-style slider-arrow-style__style-2">
-                            <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img1.jpg" alt="" />
-                            </div>
-                            <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img2.jpg" alt="" />
-                            </div>
-                            <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img3.jpg" alt="" />
-                            </div>
-                            <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img4.jpg" alt="" />
-                            </div>
-                            <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img5.jpg" alt="" />
+                                <img v-bind:src="goods_info.imgUrl" alt="" />
                             </div>
                         </div>
                     </div>
@@ -349,23 +326,17 @@
                         <div class="product-details-des">
                             <div class="product-content-list">
                                 <div class="ratings">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
+                                    <!-- <li v-for="(item, index) in cartList"> -->
+                                    <span v-for="(item,index) in rate"><i class="ion-android-star"></i></span>
                                 </div>
                                 <div class="product-name">
-                                    <h4><a href="product-details.html">Condimentum organic vegetables</a></h4>
+                                    <h4><a href="product-details.html">{{goods_info.name}}</a></h4>
                                 </div>
                                 <div class="price-box">
-                                    <span class="regular-price">$160.00</span>
-                                    <span class="old-price"><del>$130.00</del></span>
+                                    <span class="regular-price">${{goods_info.currentPrice}}</span>
+                                    <span class="old-price"><del>${{goods_info.originalPrice}}</del></span>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est
-                                    tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis
-                                    justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-                                    nulla.</p>
+                                <p>{{goods_info.description}}</p>
                                 <div class="action-link mb-20">
                                     <a href="#" data-toggle="tooltip" title="Add to cart" class="add-to-cart">add to
                                         cart</a>
@@ -379,7 +350,7 @@
                                 </div>
                                 <div class="availability mb-20">
                                     <h5>Availability:</h5>
-                                    <span>10 in stock</span>
+                                    <span>{{goods_info.amount}} in stock</span>
                                 </div>
                                 <div class="share-icon">
                                     <h5>share:</h5>
@@ -412,19 +383,7 @@
                                         <div class="tab-content reviews-tab">
                                             <div class="tab-pane fade show active" id="tab_one">
                                                 <div class="tab-one">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                        fringilla augue nec est tristique auctor. Ipsum metus feugiat
-                                                        sem,
-                                                        quis fermentum turpis eros eget velit. Donec ac tempus ante.
-                                                        Fusce
-                                                        ultricies massa massa. Fusce aliquam, purus eget sagittis
-                                                        vulputate,
-                                                        sapien libero hendrerit est, sed commodo augue nisi non neque
-                                                        Cras neque metus, consequat et blandit et, luctus a nunc. Etiam
-                                                        gravida vehicula tellus, in imperdiet ligula euismod eget.
-                                                        Pellentesque habitant morbi tristique senectus et netus et
-                                                        malesuada
-                                                        fames ac turpis egestas</P>
+                                                    <p>{{goods_info.description}}</P>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="tab_three">
@@ -1104,31 +1063,43 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
     <script src="assets/js/jquery.params.js"></script>
     <script src="assets/js/axios.js"></script>
-    <script src="assets/js/vue.js"></script>
 
     <script type="module">
         import { getInfoById, getUrlParam } from "./assets/js/detail.js"
-
         new Vue({
             el: '#test',
             data: {
                 goods_info: {},
-                goodsid: 2
+                goodsid: 2,
+                rate:4
             },
             created() {
                 var that = this;
                 // that.goodsid = getUrlParam("goodsId");
                 console.log("goodsid: " + that.goodsid);
                 let request_data = {
-                    goodsid: "2"
+                    goodsId: that.goodsid
                 };
-                getInfoById(request_data).then((response) => {
-                    that.goods_info = response.data;
+                console.log(request_data);
+
+                let token = window.localStorage.getItem("token");
+                axios({
+                    url: 'http://fanqin.vaiwan.com/shop/getInfoById',
+                    method: 'post',
+                    params: {
+                        'goodsId': that.goodsid
+                    },
+                    headers: {
+                        'token': token
+                    }
+                }).then(res => {
+                    // sessionStorage
+                    var json = res.data;
+                    that.goods_info=json;
                     console.log(that.goods_info);
-                })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                    // handle data
+                    that.rate=parseFloat(that.goods_info.rate);
+                });
             },
             methods: {
             }

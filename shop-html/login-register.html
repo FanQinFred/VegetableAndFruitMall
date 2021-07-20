@@ -721,8 +721,8 @@
                         // sessionStorage
                         var json = eval('(' + res.data + ')');
                         console.log(json);
-                        window.sessionStorage.setItem("token", json.token);
-                        window.sessionStorage.setItem("userid", json.userid);
+                        window.localStorage.setItem("token", json.token);
+                        window.localStorage.setItem("userid", json.userid);
                         swal("登陆成功 亲 即将跳转到首页...");
                     });
                     // to index.html
@@ -778,8 +778,8 @@
                             swal("登出失败 即将强制登出...");
                         }
                         // to index.html
-                        window.sessionStorage.setItem("token", "");
-                        window.sessionStorage.setItem("userid", "");
+                        window.localStorage.setItem("token", "");
+                        window.localStorage.setItem("userid", "");
                         window.setTimeout(show_index, 2000);
                         function show_index() {
                             document.location = "/shop-html/index.html";

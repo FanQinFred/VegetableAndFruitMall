@@ -19,12 +19,13 @@ public class ShopController {
     ShopService shopService;
 
     @RequestMapping(value = "/getIdByCategoryId", method = RequestMethod.POST)
-    public JSONObject GoodsIdByCategoryId (@RequestHeader("token") String token, @Param("category_Id") int category_Id){
-        return shopService.GoodsIdByCategoryId(token, category_Id);
+    public JSONObject GoodsIdByCategoryId (@RequestHeader("token") String token, @Param("category_Id") Integer category_Id){
+        return shopService.GoodsIdByCategoryId(token, category_Id.intValue());
     }
     @RequestMapping(value = "/getInfoById", method = RequestMethod.POST)
-    public JSONObject GoodsInfoById (@RequestHeader("token") String token, @Param("goodsId")int goodsId){
-        return shopService.GoodsInfoById(token, goodsId);
+    public JSONObject GoodsInfoById (@RequestHeader("token") String token, @RequestParam("goodsId")String goodsId){
+        System.out.println("goodsId: "+goodsId);
+        return shopService.GoodsInfoById(token, Integer.parseInt(goodsId));
     }
     @RequestMapping(value = "/compare", method = RequestMethod.POST)
     public JSONObject addCompareList (@RequestHeader("token") String token, @Param("id") String id){
