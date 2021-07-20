@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class CacheController {
     ShopService shopService;
 
     @RequestMapping(value = "/goodsById", method = RequestMethod.POST)
-    public JSONObject findGoodsById(@Param("token") String token, @Param("goodsId") String goodsId){
+    public JSONObject findGoodsById(@RequestHeader("token") String token, @Param("goodsId") String goodsId){
         String[] list = goodsId.split("-");
         List<Integer> goodsList = new ArrayList<>(list.length);
         for(String item : list){
