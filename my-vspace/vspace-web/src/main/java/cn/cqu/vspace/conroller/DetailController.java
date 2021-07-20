@@ -3,6 +3,7 @@ package cn.cqu.vspace.conroller;
 import cn.cqu.vspace.pojo.Goods;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import java.util.List;
 //使用dubbo注解远程调用user-service
 @RestController
 @RequestMapping("/detail")
+@CrossOrigin
 public class DetailController {
     //使用dubbo注解远程调用user-service
     @Reference

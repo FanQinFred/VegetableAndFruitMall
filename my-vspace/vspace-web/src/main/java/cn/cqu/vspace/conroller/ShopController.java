@@ -4,10 +4,7 @@ import cn.cqu.vspace.service.ShopService;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,18 +12,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/shop")
+@CrossOrigin
 public class ShopController {
 
     @Reference
     ShopService shopService;
 
     @RequestMapping(value = "/getIdByCategoryId", method = RequestMethod.POST)
-    public JSONObject GoodsIdByCategoryId (@RequestHeader("token") String token, @Param("category_Id") int category_Id){
-        return shopService.GoodsIdByCategoryId(token, category_Id);
+    public JSONObject GoodsIdByCategoryId (@RequestHeader("token") String token, @Param("category_Id") Integer category_Id){
+        return shopService.GoodsIdByCategoryId(token, category_Id.intValue());
     }
     @RequestMapping(value = "/getInfoById", method = RequestMethod.POST)
-    public JSONObject GoodsInfoById (@RequestHeader("token") String token, @Param("goodsId")int goodsId){
-        return shopService.GoodsInfoById(token, goodsId);
+    public JSONObject GoodsInfoById (@RequestHeader("token") String token, @RequestParam("goodsId")String goodsId){
+        System.out.println("goodsId: "+goodsId);
+        return shopService.GoodsInfoById(token, Integer.parseInt(goodsId));
     }
     @RequestMapping(value = "/compare", method = RequestMethod.POST)
     public JSONObject addCompareList (@RequestHeader("token") String token, @Param("id") String id){
