@@ -93,7 +93,7 @@
   </delete>
   <insert id="insert" parameterType="cn.cqu.vspace.pojo.Review">
     insert into "SHOPPING"."REVIEW" (BLOG_ID, GOODS_ID,
-      USER_ID, REVIEW_RATE, REVIEW_HOT, 
+      USER_ID, REVIEW_RATE, REVIEW_HOT
       )
     values (#{blogId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
       #{userId,jdbcType=INTEGER}, #{reviewRate,jdbcType=VARCHAR}, #{reviewHot,jdbcType=VARCHAR})
