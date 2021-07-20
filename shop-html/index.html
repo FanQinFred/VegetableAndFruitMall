@@ -1614,7 +1614,9 @@
             whatPeopleSay()
             
             .then((response) => {
-                
+                for(let i = 0; i< 3;i++){
+                    
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -1624,7 +1626,19 @@
             console.log("BestSellers")
             bestSellers()
             .then((response) => {
-                
+                this.bestSellerList = []
+                for(let i=0;i<3;i++){
+                    let l = {
+                        id:response.data.list[i].goodsId,
+                        rate:parseFloat(response.data.list[i].goodsRate),
+                        name:response.data.list[i].goodsName,
+                        price:response.data.list[i].goodsCurrentPrice,
+                        src:response.data.list[i].goodsImgUrl,
+                        description:response.data.list[i].goodsDescription,
+                        stock:response.data.list[i].goodsAmount
+                    }
+                    this.bestSellerList.push(l)
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -1644,7 +1658,19 @@
             console.log("NewArrivals")
             newArrivals()
             .then((response) => {
-                
+                na.newArrivalList = []
+                for(let i = 0;i<3;i++){
+                    let l = {
+                        id:response.data.list[i].goodsId,
+                        rate:parseFloat(response.data.list[i].goodsRate),
+                        name:response.data.list[i].goodsName,
+                        price:response.data.list[i].goodsCurrentPrice,
+                        src:response.data.list[i].goodsImgUrl,
+                        description:response.data.list[i].goodsDescription,
+                        stock:response.data.list[i].goodsAmount
+                    }
+                    na.newArrivalList.push(l)
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -1654,7 +1680,19 @@
             console.log("TopRated")
             topRated()
             .then((response) => {
-                
+                na.topRatedList = []
+                for(let i = 0;i<3;i++){
+                    let l = {
+                        id:response.data.list[i].goodsId,
+                        rate:parseFloat(response.data.list[i].goodsRate),
+                        name:response.data.list[i].goodsName,
+                        price:response.data.list[i].goodsCurrentPrice,
+                        src:response.data.list[i].goodsImgUrl,
+                        description:response.data.list[i].goodsDescription,
+                        stock:response.data.list[i].goodsAmount
+                    }
+                    na.topRatedList.push(l)
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -1815,7 +1853,7 @@
         }) 
 </script>
 <script>
-    new Vue({
+    var na = new Vue({
         el: '#new_arrivals',
         data: {
             newArrivalList:[
