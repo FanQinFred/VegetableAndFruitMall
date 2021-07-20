@@ -351,7 +351,7 @@ public class IndexServiceImp implements IndexService {
             review.setUserId(user.getUserId());
             review.setReviewRate(null);
             review.setReviewHot(content);
-            review.setReviewDate(new Date().toString());
+            review.setReviewDate(null);
             reviewMapper.insert(review);
             jsonObject.put("status","200");
         }catch (Exception e){
