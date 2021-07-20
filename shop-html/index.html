@@ -1500,10 +1500,10 @@
             console.log("PopularCategories")
             popularCategories()
             .then((response) => {
-                this.PopularCategoriesVegetables=response.data.vegetable[0].id
-                this.PopularCategoriesFruits=response.data.fruit[0].id
-                this.PopularCategoriesJuice=response.data.juice[0].id
-                this.PopularCategoriesMeats=response.data.meat[0].id
+                this.PopularCategoriesVegetables={id:response.data.vegetable[0].goodsId}
+                this.PopularCategoriesFruits={id:response.data.fruit[0].goodsId}
+                this.PopularCategoriesJuice={id:response.data.juice[0].goodsId}
+                this.PopularCategoriesMeats={id:response.data.meat[0].goodsId}
             })
             .catch((error) => {
                 console.log(error);

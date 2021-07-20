@@ -3,7 +3,7 @@ import service from "./request.js"
 export function popularCategories(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/popularCategories',
+        url: 'http://fanqin.vaiwan.com/index/popularCategories',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -11,7 +11,7 @@ export function popularCategories(data) {
 export function ourProducts(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/ourProducts',
+        url: 'http://fanqin.vaiwan.com/index/ourProducts',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -19,7 +19,7 @@ export function ourProducts(data) {
 export function whatPeopleSay(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/whatPeopleSay',
+        url: 'http://fanqin.vaiwan.com/index/whatPeopleSay',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -28,7 +28,7 @@ export function whatPeopleSay(data) {
 export function bestSellers(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/bestSellers',
+        url: 'http://fanqin.vaiwan.com/index/bestSellers',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -37,7 +37,7 @@ export function bestSellers(data) {
 export function fromTheBlog(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/blog',
+        url: 'http://fanqin.vaiwan.com/index/blog',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -46,7 +46,7 @@ export function fromTheBlog(data) {
 export function newArrivals(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/newArrival',
+        url: 'http://fanqin.vaiwan.com/index/newArrival',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -54,7 +54,7 @@ export function newArrivals(data) {
 export function topRated(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/topRated',
+        url: 'http://fanqin.vaiwan.com/index/topRated',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -63,7 +63,7 @@ export function topRated(data) {
 export function getCart(data) {
     return service.request({
         method: 'post',
-        url: 'http://localhost:40000/cart/cart',
+        url: 'http://fanqin.vaiwan.com/cart/cart',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -71,7 +71,7 @@ export function getCart(data) {
 export function addToWishList(data) {
     return service.request({
         method: 'post',
-        url: 'http://localhost:40000//shop/wish',
+        url: 'http://fanqin.vaiwan.com//shop/wish',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -79,7 +79,7 @@ export function addToWishList(data) {
 export function addToCart(data) {
     return service.request({
         method: 'post',
-        url: 'http://localhost:40000/shop/addCart',
+        url: 'http://fanqin.vaiwan.com/shop/addCart',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
