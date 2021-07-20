@@ -1843,14 +1843,13 @@
                     if (list == null) {
                         let compareList = new Array()
                         compareList.push(item.id)
-                        window.sessionStorage.setItem("compareList", compareList.toString())
+                        window.localStorage.setItem("compareList", compareList.toString())
                     } else if (!list.includes(item.id)) {
 
                         let compareList = list.split(",")
                         compareList.push(item.id)
-                        window.sessionStorage.setItem("compareList", compareList.toString())
+                        window.localStorage.setItem("compareList", compareList.toString())
                     }
-                    console.log(window.sessionStorage.getItem("compareList"))
                 },
                 ShowBlogDetail(item) {
                     console.log("ShowBlogDetail")
