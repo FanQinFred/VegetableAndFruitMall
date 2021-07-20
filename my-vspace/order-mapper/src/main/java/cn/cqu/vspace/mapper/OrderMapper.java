@@ -3,8 +3,11 @@ package cn.cqu.vspace.mapper;
 import cn.cqu.vspace.pojo.Order;
 import cn.cqu.vspace.pojo.OrderExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface OrderMapper {
     long countByExample(OrderExample example);
 

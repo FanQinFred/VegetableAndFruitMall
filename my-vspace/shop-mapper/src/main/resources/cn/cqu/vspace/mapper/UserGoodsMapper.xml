@@ -164,7 +164,7 @@
   <update id="updateAmount">
     update "SHOPPING"."USER_GOODS"
     set AMOUNT = #{amount, jdbcType=INTEGER}
-    where GOODS_ID = #{goodsID, jdbcType=INTEGER} and USER_ID = #{userId, jdbcType=INTEGER}
+    where GOODS_ID = #{goodsId, jdbcType=INTEGERs and USER_ID = #{userId, jdbcType=INTEGER}
   </update>
   <update id="updateCartOrWishList">
     update "SHOPPING"."USER_GOODS"

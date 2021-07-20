@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
                 order.setUserId(list.get(0).getUserId());
                 order.setOrderTotal(Double.parseDouble(total));
                 order.setGoodsId(Integer.parseInt(goodsId));
-                orderMapper.insert(order);
+                orderMapper.insertSelective(order);
                 JSONObject result = new JSONObject();
                 result.put("status", "200");
                 return result;
@@ -88,7 +88,10 @@ public class OrderServiceImpl implements OrderService {
                     item.put("date",order.getOrderDate());
                     item.put("total",order.getOrderTotal());
                     item.put("orderStatus",order.getOrderStatus());
+                    array.add(item);
                 }
+                result.put("list", array);
+                return result;
             }
         }
         JSONObject error = new JSONObject();
