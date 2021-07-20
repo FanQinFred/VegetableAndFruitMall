@@ -3,7 +3,7 @@ import service from "./request.js"
 export function newComment(data) {
     return service.request({
         method: 'post',
-        url: 'http://localhost:40000/detail/comment',
+        url: 'http://fanqin.vaiwan.com/detail/comment',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -12,7 +12,7 @@ export function newComment(data) {
 export function recentPost(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/blog',
+        url: 'http://fanqin.vaiwan.com/index/blog',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -20,7 +20,7 @@ export function recentPost(data) {
 export function getBlogById(data) {
     return service.request({
         method: 'post',
-        url: 'http://localhost:40000/index/getBlogById',
+        url: 'http://fanqin.vaiwan.com/index/getBlogById',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -28,7 +28,7 @@ export function getBlogById(data) {
 export function newArrivals(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/newArrival',
+        url: 'http://fanqin.vaiwan.com/index/newArrival',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -36,7 +36,7 @@ export function newArrivals(data) {
 export function topRated(data) {
     return service.request({
         method: 'get',
-        url: 'http://localhost:40000/index/topRated',
+        url: 'http://fanqin.vaiwan.com/index/topRated',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }

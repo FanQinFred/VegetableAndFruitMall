@@ -71,7 +71,7 @@ export function getCart(data) {
 export function addToWishList(data) {
     return service.request({
         method: 'post',
-        url: 'http://fanqin.vaiwan.com//shop/wish',
+        url: 'http://fanqin.vaiwan.com/shop/wish',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }
@@ -79,7 +79,7 @@ export function addToWishList(data) {
 export function addToCart(data) {
     return service.request({
         method: 'post',
-        url: 'http://fanqin.vaiwan.com/shop/addCart',
+        url: 'http://fanqin.vaiwan.com/cart/update',
         data: data //左边的data是变量名(key)后台接受，右边的data是参数,如果两者名字相同可以只写一个
     })
 }

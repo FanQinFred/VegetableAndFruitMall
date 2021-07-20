@@ -271,8 +271,14 @@ public class IndexServiceImp implements IndexService {
             BlogExample blogExample = new BlogExample();
             BlogExample.Criteria criteria = blogExample.createCriteria();
             criteria.andBlogIdEqualTo(id);
+
             List<Blog> blogs = blogMapper.selectByExample(blogExample);
+            Integer userId = blogs.get(0).getUserId();
+            UserExample userExample = new UserExample();
+            UserExample.Criteria criteria1 = userExample.createCriteria();
+            criteria1.andUserIdEqualTo(userId);
             jsonObject.put("blog",blogs.get(0));
+            jsonObject.put("user",userMapper.selectByExample(userExample).get(0));
             jsonObject.put("status","200");
         }catch (Exception e){
             e.printStackTrace();

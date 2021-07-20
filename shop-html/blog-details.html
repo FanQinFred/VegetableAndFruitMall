@@ -647,7 +647,7 @@
     </script>
 
     <script type="module">
-        import { newComment, recentPost, getBlogById, getUrlParam, newArrivals,topRated } from "./assets/js/blog-detail.js"
+        import { newComment, recentPost, getBlogById, getUrlParam, newArrivals, topRated } from "./assets/js/blog-detail.js"
         new Vue({
             el: '#main',
             data: {
@@ -776,12 +776,23 @@
                 GetBlogById(id) {
                     console.log("GetBlogById")
 
-                    let data = {
-                        id: id
-                    }
-                    getBlogById(data)
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/index/getBlogById',
+                        method: 'post',
+                        params: {
+                            'blogId': id
+                        },
+                    })
                         .then((response) => {
-
+                            let content = response.data.blog.blogContent.split("^^")
+                            this.blog = {
+                                id: response.data.blog.blogId,
+                                title: content[0],
+                                content: content[1],
+                                writer: "埼玉",
+                                date: response.data.blog.blogDate,
+                                img_url: response.data.blog.blogImgUrl
+                            }
                         })
                         .catch((error) => {
                             console.log(error);
