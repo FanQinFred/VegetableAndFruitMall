@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="mini-cart-wrap">
                                     <button><i class="ion-bag"></i>
-                                        <span class="notification">2</span>
+                                        
                                     </button>
                                     <ul class="cart-list" id="hd">
 
@@ -506,8 +506,7 @@
     <!--=== Axios JS ===-->
     <script src="assets/js/axios.js"></script>
 
-    <script type="module">
-        import { getCart } from "./assets/js/index.js"
+    <script>
         var hd = new Vue({
             el: '#hd',
             data: {
@@ -528,20 +527,42 @@
                     }
                 ],
                 subtotal: 6,
+                amount: 1
             },
             created() {
                 this.GetCart()
             },
+
             methods: {
                 GetCart() {
+                    let token = window.localStorage.getItem("token")
                     console.log("GetCart")
-                    getCart()
-                        .then((response) => {
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/cart',
+                        method: 'post',
 
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            this.cartList = []
+                            for (let i = 0; i < response.data.list.length; i++) {
+                                let l = {
+                                    id: response.data.list[i].id,
+                                    name: response.data.list[i].name,
+                                    qty: parseInt(response.data.list[i].amount),
+                                    price: response.data.list[i].currentPrice,
+                                    src: response.data.list[i].imgUrl
+                                }
+                                this.cartList.push(l)
+                            }
 
                             this.subtotal = 0
+                            this.amount = 0
                             for (let i = 0; i < this.cartList.length; i++) {
-                                this.subtotal += this.cartList[i].price
+                                this.subtotal += parseFloat(this.cartList[i].price)
+                                this.amount += parseInt(this.cartList[i].amount)
                             }
                         })
                         .catch((error) => {
@@ -558,7 +579,8 @@
 
         })
     </script>
-    <script>
+    <script type="module">
+        import {  newArrivals, topRated } from "./assets/js/index.js"
         new Vue({
             el: '#new_arrivals',
             data: {
@@ -622,7 +644,8 @@
                 ]
             },
             created() {
-
+                this.NewArrivals()
+                this.TopRated()
             },
             methods: {
                 ShowProductDetail(item) {
@@ -630,7 +653,51 @@
                     let id = item.id
                     let url = "product-details.html?goodsId=" + id;//此处拼接内容
                     window.location.href = url;
-                }
+                },
+                NewArrivals() {
+                    console.log("NewArrivals")
+                    newArrivals()
+                        .then((response) => {
+                            this.newArrivalList = []
+                            for (let i = 0; i < 3; i++) {
+                                let l = {
+                                    id: response.data.list[i].goodsId,
+                                    rate: parseFloat(response.data.list[i].goodsRate),
+                                    name: response.data.list[i].goodsName,
+                                    price: response.data.list[i].goodsCurrentPrice,
+                                    src: response.data.list[i].goodsImgUrl,
+                                    description: response.data.list[i].goodsDescription,
+                                    stock: response.data.list[i].goodsAmount
+                                }
+                                this.newArrivalList.push(l)
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                TopRated() {
+                    console.log("TopRated")
+                    topRated()
+                        .then((response) => {
+                            this.topRatedList = []
+                            for (let i = 0; i < 3; i++) {
+                                let l = {
+                                    id: response.data.list[i].goodsId,
+                                    rate: parseFloat(response.data.list[i].goodsRate),
+                                    name: response.data.list[i].goodsName,
+                                    price: response.data.list[i].goodsCurrentPrice,
+                                    src: response.data.list[i].goodsImgUrl,
+                                    description: response.data.list[i].goodsDescription,
+                                    stock: response.data.list[i].goodsAmount
+                                }
+                                this.topRatedList.push(l)
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
             }
 
         })
@@ -779,12 +846,13 @@
                                     id: response.data.list[i].blogId,
                                     title: content[0],
                                     content: content[1],
-                                    writer: response.data.usrList[i].email,
+                                    writer: response.data.userList[i].email,
                                     date: response.data.list[i].blogDate,
                                     img_url: response.data.list[i].blogImgUrl
                                 }
                                 this.recent_post.push(l)
                             }
+                            
                         })
                         .catch((error) => {
                             console.log(error);

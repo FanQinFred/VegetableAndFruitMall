@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/order")
 @CrossOrigin
 public class OrderController {
-    //1
     @Reference
     OrderService orderService;
     @RequestMapping(value = "/add", method = RequestMethod.POST)
