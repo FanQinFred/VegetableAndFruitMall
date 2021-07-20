@@ -287,4 +287,40 @@ public class IndexServiceImp implements IndexService {
 
         return jsonObject;
     }
+
+    @Override
+    public JSONObject getReviewByBlogId(Integer blogId) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        try {
+            ReviewExample reviewExample = new ReviewExample();
+            ReviewExample.Criteria criteria = reviewExample.createCriteria();
+            criteria.andBlogIdEqualTo(blogId);
+            jsonArray.addAll(reviewMapper.selectByExample(reviewExample));
+            jsonObject.put("list",jsonArray);
+            jsonObject.put("status","200");
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("status","500");
+        }
+        return jsonObject;
+    }
+
+    @Override
+    public JSONObject getReviewByGoodsId(Integer goodsId) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        try {
+            ReviewExample reviewExample = new ReviewExample();
+            ReviewExample.Criteria criteria = reviewExample.createCriteria();
+            criteria.andGoodsIdEqualTo(goodsId);
+            jsonArray.addAll(reviewMapper.selectByExample(reviewExample));
+            jsonObject.put("list",jsonArray);
+            jsonObject.put("status","200");
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("status","500");
+        }
+        return jsonObject;
+    }
 }

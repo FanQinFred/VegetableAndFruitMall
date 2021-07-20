@@ -789,7 +789,7 @@
                                 id: response.data.blog.blogId,
                                 title: content[0],
                                 content: content[1],
-                                writer: "埼玉",
+                                writer:response.data.user.role,
                                 date: response.data.blog.blogDate,
                                 img_url: response.data.blog.blogImgUrl
                             }

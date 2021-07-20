@@ -14,4 +14,6 @@ public interface IndexService {
     JSONObject whatPeopleSay();
     JSONObject sale();
     JSONObject getBlogById(Integer id);
+    JSONObject getReviewByBlogId(Integer blogId);
+    JSONObject getReviewByGoodsId(Integer goodsId);
 }

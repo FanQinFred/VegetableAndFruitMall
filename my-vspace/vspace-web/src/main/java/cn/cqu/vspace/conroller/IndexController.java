@@ -25,6 +25,16 @@ public class IndexController {
         return indexService.getBlogById(blogId);
     }
 
+    @RequestMapping(value = "/getReviewByBlogId", method = RequestMethod.POST)
+    JSONObject getReviewByBlogId(@Param("blogId") Integer blogId){
+        return indexService.getBlogById(blogId);
+    }
+
+    @RequestMapping(value = "/getReviewByGoodsId", method = RequestMethod.POST)
+    JSONObject getReviewByGoodsId(@Param("goodsId") Integer goodsId){
+        return indexService.getBlogById(goodsId);
+    }
+
     @RequestMapping(value = "/bestSellers",method = RequestMethod.GET)
     JSONObject bestSellers(){
         return indexService.bestSellers();
