@@ -341,7 +341,7 @@ public class IndexServiceImp implements IndexService {
     }
 
     @Override
-    public JSONObject comment(String content, Integer name, String token, Integer blogId) {
+    public JSONObject comment(String content, String token, Integer blogId) {
         JSONObject jsonObject = new JSONObject();
         try {
             Review review = new Review();

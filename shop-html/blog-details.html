@@ -235,16 +235,7 @@
                                             <textarea name="commnet" placeholder="Write a comment"
                                                 v-model="new_comment.content"></textarea>
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 mb-sm-20">
-                                            <label>Name</label>
-                                            <input type="text" class="coment-field" placeholder="Name"
-                                                v-model="new_comment.name">
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 mb-sm-20">
-                                            <label>Email</label>
-                                            <input type="text" class="coment-field" placeholder="Email"
-                                                v-model="new_comment.email">
-                                        </div>
+                                        
 
                                         <div class="col-12">
                                             <div class="coment-btn mt-20">
@@ -747,18 +738,23 @@
 
                     return blogId
                 },
+        
                 NewComment() {
                     console.log("NewComment")
-
+                    let token = window.localStorage.getItem("token")
                     axios({
-                        url: 'http://fanqin.vaiwan.com/index/getReviewByBlogId',
+                        url: 'http://fanqin.vaiwan.com/index/comment',
                         method: 'post',
                         params: {
-                            'blogId': this.blog.id
+                            'blogId': this.blog.id,
+                            'content': this.new_comment.content
                         },
+                        headers:{
+                            'token':token
+                        }
                     })
                         .then((response) => {
-
+                            this.GetReviewByBlogId(this.GetData1())
                         })
                         .catch((error) => {
                             console.log(error);
@@ -820,11 +816,12 @@
                             this.commentList = []
                             for (let i = 0; i < response.data.list.length; i++) {
                                 let l = {
-                                    writer: "",
+                                    writer: response.data.userList[i].email,
                                     date: response.data.list[i].reviewDate,
                                     content: response.data.list[i].reviewHot,
-                                    src: ""
+                                    src: response.data.userList[i].imgUrl
                                 }
+                                this.commentList.push(l)
                             }
                         })
                         .catch((error) => {

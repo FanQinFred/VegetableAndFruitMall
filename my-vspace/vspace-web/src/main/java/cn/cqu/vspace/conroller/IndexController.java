@@ -118,4 +118,9 @@ public class IndexController {
     JSONObject sale(){
         return indexService.sale();
     }
+
+    @RequestMapping(value = "/comment",method = RequestMethod.POST)
+    JSONObject comment(@Param("content") String content, @RequestHeader("token") String token,@Param("blogId")Integer blogId){
+        return indexService.comment(content,token,blogId);
+    }
 }

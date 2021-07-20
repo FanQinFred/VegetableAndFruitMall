@@ -95,7 +95,7 @@
     insert into "SHOPPING"."REVIEW" (BLOG_ID, GOODS_ID,
       USER_ID, REVIEW_RATE, REVIEW_HOT, 
       REVIEW_DATE)
-    values (#{reviewId,jdbcType=INTEGER}, #{blogId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+    values (#{blogId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
       #{userId,jdbcType=INTEGER}, #{reviewRate,jdbcType=VARCHAR}, #{reviewHot,jdbcType=VARCHAR}, 
       #{reviewDate,jdbcType=VARCHAR})
   </insert>
@@ -122,9 +122,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="reviewId != null">
-        #{reviewId,jdbcType=INTEGER},
-      </if>
       <if test="blogId != null">
         #{blogId,jdbcType=INTEGER},
       </if>
