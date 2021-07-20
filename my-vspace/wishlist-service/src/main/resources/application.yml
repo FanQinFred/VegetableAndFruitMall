@@ -1,7 +1,7 @@
 #配置服务项目的ip地址 端口号
 server:
   address: localhost
-  port: 4588
+  port: 4333
 #配置dubbo信息
 dubbo:
   application:
@@ -24,7 +24,7 @@ dubbo:
 #协议
   protocol:
     name: dubbo
-    port: 21913
+    port: 21777
 #指定定扫描的基础包
   scan:
     base-packages: cn.cqu.vspace.service.impl
