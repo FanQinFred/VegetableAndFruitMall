@@ -21,6 +21,7 @@ public class WishListController {
     public JSONObject deleteGoodsInWishList(@RequestHeader("token") String token, @Param("id") String id){
         String[] goods = id.split("-");
         List<Integer> goodsIdList = new ArrayList<>();
+
         for (String good : goods) {
             goodsIdList.add(Integer.parseInt(good));
         }
