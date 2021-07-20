@@ -1686,13 +1686,18 @@
                         .then((response) => {
                             this.reviewList = []
                             for (let i = 0; i < 3; i++) {
+                                let j = 0
+                                if (response.data.list[i].reviewRate != null) {
+                                    j = parseFloat(response.data.list[i].reviewRate)
+                                }
                                 let l = {
                                     id: response.data.list[i].reviewId,
                                     src: response.data.userList[i].imgUrl,
                                     content: response.data.list[i].reviewHot,
-                                    rate: parseFloat(response.data.list[i].reviewRate),
+                                    rate: j,
                                     name: response.data.userList[i].role
                                 }
+                                console.log(l)
                                 this.reviewList.push(l)
                             }
 

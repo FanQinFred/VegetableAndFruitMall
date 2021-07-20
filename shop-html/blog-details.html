@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="mini-cart-wrap">
                                     <button><i class="ion-bag"></i>
-                                        
+
                                     </button>
                                     <ul class="cart-list" id="hd">
 
@@ -506,6 +506,7 @@
     <!--=== Axios JS ===-->
     <script src="assets/js/axios.js"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         var hd = new Vue({
             el: '#hd',
@@ -580,7 +581,7 @@
         })
     </script>
     <script type="module">
-        import {  newArrivals, topRated } from "./assets/js/index.js"
+        import { newArrivals, topRated } from "./assets/js/index.js"
         new Vue({
             el: '#new_arrivals',
             data: {
@@ -822,10 +823,16 @@
                         }
                     })
                         .then((response) => {
+                            swal({
+                                title: "成功",
+                                text: "提交评论成功！",
+                                icon: "success",
+                            });
                             this.GetReviewByBlogId(this.GetData1())
                             this.new_comment.content = ''
                         })
                         .catch((error) => {
+                            swal("提交评论出错！");
                             console.log(error);
                         });
                 },
@@ -852,7 +859,7 @@
                                 }
                                 this.recent_post.push(l)
                             }
-                            
+
                         })
                         .catch((error) => {
                             console.log(error);
