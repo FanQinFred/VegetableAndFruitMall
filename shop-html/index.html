@@ -2006,8 +2006,8 @@
                             this.subtotal = 0
                             this.amount = 0
                             for (let i = 0; i < this.cartList.length; i++) {
-                                this.subtotal += this.cartList[i].price
-                                this.amount += this.cartList[i].amount
+                                this.subtotal += parseFloat(this.cartList[i].price)
+                                this.amount += parseInt(this.cartList[i].amount)
                             }
                         })
                         .catch((error) => {
