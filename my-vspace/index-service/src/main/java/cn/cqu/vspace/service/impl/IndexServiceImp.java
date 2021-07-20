@@ -56,11 +56,11 @@ public class IndexServiceImp implements IndexService {
         JSONArray Juice = new JSONArray();
         JSONArray Meats = new JSONArray();
         try {
-            List<Integer> MangoIds = goodsCategoryMapper.selectByCategory(0);
-            List<Integer> VegetableIds = goodsCategoryMapper.selectByCategory(1);
-            List<Integer> FruitIds = goodsCategoryMapper.selectByCategory(2);
-            List<Integer> JuiceIds = goodsCategoryMapper.selectByCategory(3);
-            List<Integer> MeatsIds = goodsCategoryMapper.selectByCategory(4);
+            List<Integer> MangoIds = goodsCategoryMapper.selectByCategory(1);
+            List<Integer> VegetableIds = goodsCategoryMapper.selectByCategory(2);
+            List<Integer> FruitIds = goodsCategoryMapper.selectByCategory(3);
+            List<Integer> JuiceIds = goodsCategoryMapper.selectByCategory(4);
+            List<Integer> MeatsIds = goodsCategoryMapper.selectByCategory(5);
 
 
             for (Integer id : MangoIds){

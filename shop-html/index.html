@@ -1515,6 +1515,39 @@
             ourProducts()
             .then((response) => {
                 
+                
+                this.OurProductsListFruits = []
+                for(let i=0;i<4;i++){
+                    let l ={
+                        id:response.data.ourProductList.Fruits[i].goodsId,
+                        rate:parseFloat(response.data.ourProductList.Fruits[i].goodsRate),
+                        name:response.data.ourProductList.Fruits[i].goodsName,
+                        price:response.data.ourProductList.Fruits[i].goodsCurrentPrice,
+                        src:response.data.ourProductList.Fruits[i].goodsImgUrl,
+                        description:response.data.ourProductList.Fruits[i].goodsDescription,
+                        stock:response.data.ourProductList.Fruits[i].goodsAmount,
+                    }
+                    this.OurProductsListFruits.push(l)
+                }
+
+                console.log(this.OurProductsListFruits)
+
+                this.OurProductsListMango = []
+                for(let i=0;i<4;i++){
+                    let l ={
+                        id:response.data.ourProductList.Mango[i].goodsId,
+                        rate:parseFloat(response.data.ourProductList.Mango[i].goodsRate),
+                        name:response.data.ourProductList.Mango[i].goodsName,
+                        price:response.data.ourProductList.Mango[i].goodsCurrentPrice,
+                        src:response.data.ourProductList.Mango[i].goodsImgUrl,
+                        description:response.data.ourProductList.Mango[i].goodsDescription,
+                        stock:response.data.ourProductList.Mango[i].goodsAmount,
+                    }
+                    this.OurProductsListMango.push(l)
+                }
+
+                console.log(this.OurProductsListMango)
+    
             })
             .catch((error) => {
                 console.log(error);
