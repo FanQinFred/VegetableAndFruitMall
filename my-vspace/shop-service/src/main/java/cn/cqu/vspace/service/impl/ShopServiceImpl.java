@@ -107,6 +107,7 @@ public class ShopServiceImpl implements ShopService {
             result.put("status", "200");
             result.put("addCount", goodsId.size());
             result.put("insertCount", insertCount);
+            result.put("email", list.get(0).getEmail());
             return result;
         }
         JSONObject error = new JSONObject();
