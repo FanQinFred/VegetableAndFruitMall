@@ -23,8 +23,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout(@Param("email") String email, @Param("pwd") String pwd) {
-        return userService.logout(email,pwd);
+    public String logout(@Param("token") String token) {
+        return userService.logout(token);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
