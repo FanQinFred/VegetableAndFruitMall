@@ -194,10 +194,10 @@
     </if>
   </update>
   <select id="getUserByToken" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT * FROM "SHOPPING"."USR" WHERE TOKEN = #{token,jdbcType=VARCHAR}
+    SELECT * FROM "SHOPPING"."USER" WHERE TOKEN = #{token,jdbcType=VARCHAR}
   </select>
 
   <select id="getByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT * FROM "SHOPPING"."USR" WHERE USER_ID = #{userId,jdbcType=INTEGER}
+    SELECT * FROM "SHOPPING"."USER" WHERE USER_ID = #{userId,jdbcType=INTEGER}
   </select>
 </mapper>
