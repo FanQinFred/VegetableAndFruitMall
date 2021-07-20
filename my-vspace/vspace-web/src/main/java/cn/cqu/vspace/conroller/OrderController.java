@@ -27,7 +27,7 @@ public class OrderController {
     public JSONObject showOrders(String token){
         return orderService.showOrders(token);
     }
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public JSONObject updateOrder(String token, String orderId, String goodsId, String status, String total){
         return orderService.updateOrder(token, orderId, goodsId, status, total);
     }
