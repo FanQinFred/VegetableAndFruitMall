@@ -211,7 +211,7 @@ public class IndexServiceImp implements IndexService {
     public JSONObject whatPeopleSay() {
         JSONObject jsonObject = new JSONObject();
         try {
-            List<Goods> list = goodsMapper.selectTopThree();
+            List<Review> list = reviewMapper.selectTopThree();
             JSONArray jsonArray = new JSONArray();
             jsonArray.addAll(list);
             jsonObject.put("list",jsonArray);

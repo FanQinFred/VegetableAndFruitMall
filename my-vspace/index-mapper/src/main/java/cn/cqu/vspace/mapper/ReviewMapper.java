@@ -24,4 +24,6 @@ public interface ReviewMapper {
 
     int updateByExample(@Param("record") Review record, @Param("example") ReviewExample example);
 
+
+    List<Review> selectTopThree();
 }
