@@ -27,12 +27,14 @@ public class IndexController {
 
     @RequestMapping(value = "/getReviewByBlogId", method = RequestMethod.POST)
     JSONObject getReviewByBlogId(@Param("blogId") Integer blogId){
-        return indexService.getBlogById(blogId);
+        return indexService.getReviewByBlogId(blogId);
     }
+
+
 
     @RequestMapping(value = "/getReviewByGoodsId", method = RequestMethod.POST)
     JSONObject getReviewByGoodsId(@Param("goodsId") Integer goodsId){
-        return indexService.getBlogById(goodsId);
+        return indexService.getReviewByGoodsId(goodsId);
     }
 
     @RequestMapping(value = "/bestSellers",method = RequestMethod.GET)

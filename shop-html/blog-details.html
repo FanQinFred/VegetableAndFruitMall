@@ -748,8 +748,14 @@
                 },
                 NewComment() {
                     console.log("NewComment")
-                    console.log(this.new_comment)
-                    newComment(this.new_comment)
+                    
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/index/getReviewByBlogId',
+                        method: 'post',
+                        params: {
+                            'blogId': this.blog.id
+                        },
+                    })
                         .then((response) => {
 
                         })
@@ -789,7 +795,7 @@
                                 id: response.data.blog.blogId,
                                 title: content[0],
                                 content: content[1],
-                                writer:response.data.user.role,
+                                writer: response.data.user.role,
                                 date: response.data.blog.blogDate,
                                 img_url: response.data.blog.blogImgUrl
                             }
@@ -798,6 +804,23 @@
                             console.log(error);
                         });
 
+                },
+                GetReviewByBlogId() {
+                    console.log("GetReviewByBlogId")
+
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/index/getReviewByBlogId',
+                        method: 'post',
+                        params: {
+                            'blogId': this.blog.id
+                        },
+                    })
+                        .then((response) => {
+                            
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                 }
 
             },

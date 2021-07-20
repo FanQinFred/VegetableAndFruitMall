@@ -323,4 +323,10 @@ public class IndexServiceImp implements IndexService {
         }
         return jsonObject;
     }
+
+    @Override
+    public JSONObject comment(String content, String name, String email) {
+
+        return null;
+    }
 }
