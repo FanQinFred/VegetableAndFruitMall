@@ -753,8 +753,8 @@
                                     text: "将自动为你登陆...",
                                     icon: "success",
                                 });
-                                that.email=that.r_email;
-                                that.pwd=that.r_pwd1;
+                                that.email = that.r_email;
+                                that.pwd = that.r_pwd1;
                                 that.login();
                             } else {
                                 swal("出错啦！");
@@ -773,8 +773,17 @@
                         }
                     }).then(res => {
                         console.log(res.data);
-                        if (res.data.code == '200') {
+                        if (res.data.code == '100') {
                             swal("登出成功 亲 再见");
+                        } else {
+                            swal("登出失败 即将强制登出...");
+                        }
+                        // to index.html
+                        window.sessionStorage.setItem("token", "");
+                        window.sessionStorage.setItem("userid", "");
+                        window.setTimeout(show_index, 2000);
+                        function show_index() {
+                            document.location = "/shop-html/index.html";
                         }
                     })
                 }
