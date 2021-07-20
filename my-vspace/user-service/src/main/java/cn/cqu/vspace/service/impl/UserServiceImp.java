@@ -27,7 +27,7 @@ public class UserServiceImp implements UserSerivce {
 
             if (list.isEmpty()) {
                 System.out.println("未查询到用户");
-                return "{'status':'500','code':'200','token':'" + null + "'}";
+                return "{status:'500',code:'200',token:'" + null + "'}";
             } else {
                 System.out.println("查询到用户");
                 System.out.println(list.get(0).toString());
@@ -48,21 +48,21 @@ public class UserServiceImp implements UserSerivce {
                 criteria2.andPwdEqualTo(pwd);
                 userMapper.updateByExampleSelective(user, example2);
                 Integer userid=user.getUserId();
-                return "{'status':'200','code':'100','token':'" + token + "','userid':'"+ userid +"'}";
+                return "{status:'200',code:'100',token:'" + token + "',userid:'"+ userid +"'}";
             }
-            return "{'status':'200','code':'200','token':'" + null + "'}";
+            return "{status:'200',code:'200',token:'" + null + "'}";
         } catch (Exception e) {
             e.printStackTrace();
-            return "{'status':'500','code':'200','token':'" + null + "'}";
+            return "{status:'500',code:'200',token:'" + null + "'}";
         }
     }
 
     @Override
-    public String logout(String email, String pwd) {
+    public String logout(String token) {
         try {
             UserExample example = new UserExample();
             UserExample.Criteria criteria = example.createCriteria();
-            criteria.andEmailEqualTo(email);
+            criteria.andTokenEqualTo(token);
             example.setOrderByClause("email ASC");
             example.setDistinct(true);
             List<User> list = userMapper.selectByExample(example);
@@ -71,20 +71,19 @@ public class UserServiceImp implements UserSerivce {
             } else
                 System.out.println(list.get(0).toString());
             User user = list.get(0);
-            if (user.getEmail().equals(email) && user.getPwd().equals(pwd)) {
+            if (user.getToken().equals(token)) {
                 user.setTokenValid((byte) 0);
                 UserExample example2 = new UserExample();
                 UserExample.Criteria criteria2 = example2.createCriteria();
-                criteria2.andEmailEqualTo(email);
-                criteria2.andPwdEqualTo(pwd);
+                criteria2.andTokenEqualTo(token);
                 userMapper.updateByExampleSelective(user, example2);
-                return "{'status':'200','code':'100'}";
+                return "{status:'200',code:'100'}";
 
             }
-            return "'status':'200','code':'200'";
+            return "status:'200',code:'200'";
         } catch (Exception e) {
             e.printStackTrace();
-            return "'status':'500','code':'200'";
+            return "status:'500',code:'200'";
         }
     }
 
@@ -101,12 +100,12 @@ public class UserServiceImp implements UserSerivce {
             user.setRole("0");
 //            System.out.println(userMapper.insert(user)==null);
             if (userMapper.insert(user) > 0) {
-                return "{'status':'200','code':'100'}";
+                return "{status:'200',code:'100'}";
             }
-            return "{'status':'500','code':'200'}";
+            return "{status:'500',code:'200'}";
         } catch (Exception e) {
             e.printStackTrace();
-            return "{'status':'500','code':'200'}";
+            return "{status:'500',code:'200'}";
         }
     }
 }

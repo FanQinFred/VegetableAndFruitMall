@@ -345,7 +345,7 @@
     <!-- end Header Area -->
 
     <!-- main wrapper start -->
-    <main id="test">
+    <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
             <div class="container">
@@ -367,7 +367,7 @@
         <!-- breadcrumb area end -->
 
         <!-- login register wrapper start -->
-        <div class="login-register-wrapper pt-60 pb-60">
+        <div class="login-register-wrapper pt-60 pb-60" id="test">
             <div class="container">
                 <div class="member-area-from-wrap">
                     <div class="row">
@@ -375,29 +375,13 @@
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap pr-lg-50">
                                 <h2>Sign In</h2>
-                                <form action="#" method="post">
+                                <form method="post">
                                     <div class="single-input-item">
                                         <input v-model="email" type="email" placeholder="Email or Username" required />
                                     </div>
                                     <div class="single-input-item">
                                         <input v-model="pwd" type="number" placeholder="Enter your
                                                 Password" required />
-                                    </div>
-                                    <div class="single-input-item">
-                                        <div class="login-reg-form-meta
-                                                d-flex align-items-center
-                                                justify-content-between">
-                                            <div class="remember-meta">
-                                                <div class="custom-control
-                                                        custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember
-                                                        Me</label>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="forget-pwd">Forget
-                                                Password?</a>
-                                        </div>
                                     </div>
                                     <div class="single-input-item">
                                         <button type="button" @click="login" class="btn
@@ -410,50 +394,28 @@
 
                         <!-- Register Content Start -->
                         <div class="col-lg-6">
-                            <div class="login-reg-form-wrap mt-md-60
-                                    mt-sm-60">
+                            <div class="login-reg-form-wrap mt-md-60 mt-sm-60">
                                 <h2>Singup Form</h2>
-                                <form action="#" method="post">
+
+                                <form method="post">
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Full
-                                                Name" required />
+                                        <input v-model="r_name" type="name" placeholder="请输入你的用户名..." required />
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Enter your Email" required />
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <input type="password" placeholder="Enter your
-                                                        Password" required />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
-                                                <input type="password" placeholder="Repeat your
-                                                        Password" required />
-                                            </div>
-                                        </div>
+                                        <input v-model="r_email" type="email" placeholder="请输入你的邮箱..." required />
                                     </div>
                                     <div class="single-input-item">
-                                        <div class="login-reg-form-meta">
-                                            <div class="remember-meta">
-                                                <div class="custom-control
-                                                        custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="subnewsletter">
-                                                    <label class="custom-control-label" for="subnewsletter">Subscribe
-                                                        Our
-                                                        Newsletter</label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <input v-model="r_pwd1" type="password" placeholder="请输入密码..." required />
                                     </div>
                                     <div class="single-input-item">
-                                        <button class="btn btn__bg
-                                                btn__sqr">Register</button>
+                                        <input v-model="r_pwd2" type="password" placeholder="请再次输入密码..." required />
+                                    </div>
+                                    <div class="single-input-item">
+                                        <button type="button" @click="register" class="btn
+                                                btn__bg btn__sqr">Register</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                         <!-- Register Content End -->
@@ -728,60 +690,92 @@
     <script src="assets/js/active.js"></script>
 
     <script src="assets/js/axios.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- https://sweetalert.js.org/guides/ -->
     <script>
         new Vue({
             el: '#test',
             data: {
                 message: 'Hello Vue!',
-                email: '2022@cqu.edu.cn',
-                pwd: '2022'
+                email: '',
+                pwd: '',
+
+                r_email: '',
+                r_pwd1: '',
+                r_pwd2: '',
+                r_name: ''
             },
             methods: {
                 login() {
-                    var that=this;
+                    var that = this;
                     console.log(that.email);
                     console.log(that.pwd);
                     axios({
-                        url: 'http://localhost:40000/login/login',
+                        url: 'http://fanqin.vaiwan.com/login/login',
                         method: 'post',
                         params: {
-                            'email':that.email,
-                            'pwd':that.pwd
+                            'email': that.email,
+                            'pwd': that.pwd
                         }
                     }).then(res => {
                         console.log(res.data);
                         // sessionStorage
-                        window.sessionStorage.setItem("token", res.data.token);
-                        window.sessionStorage.setItem("userid", res.data.userid);
+                        var json = eval('(' + res.data + ')');
+                        console.log(json);
+                        window.sessionStorage.setItem("token", json.token);
+                        window.sessionStorage.setItem("userid", json.userid);
+                        swal("登陆成功 亲 即将跳转到首页...");
                     });
                     // to index.html
-                    document.location = "/shop-html/index.html";
+                    window.setTimeout(show_index, 2000);
+                    function show_index() {
+                        document.location = "/shop-html/index.html";
+                    }
                 },
                 register() {
-                    var that=this;
-                    axios({
-                        url: 'http://localhost:40000/login/register',
-                        method: 'post',
-                        params: {
-                            'email':that.email,
-                            'pwd':that.pwd
-                        }
-                    }).then(res => {
-                        console.log(res.data)
-                    })
+                    var that = this;
+                    if (that.r_pwd1 != that.r_pwd2) {
+                        swal("两次密码不一样哦 亲");
+                    } else {
+                        axios({
+                            url: 'http://fanqin.vaiwan.com/login/register',
+                            method: 'post',
+                            params: {
+                                'email': that.r_email,
+                                'pwd': that.r_pwd1
+                            }
+                        }).then(res => {
+                            var json = eval('(' + res.data + ')');
+                            console.log(json);
+                            if (json.code == '100') {
+                                swal({
+                                    title: "注册成功 亲!",
+                                    text: "将自动为你登陆...",
+                                    icon: "success",
+                                });
+                                that.email=that.r_email;
+                                that.pwd=that.r_pwd1;
+                                that.login();
+                            } else {
+                                swal("出错啦！");
+                            }
+                        })
+                    }
                 },
                 logout() {
-                    var that=this;
+                    var that = this;
                     axios({
-                        url: 'http://localhost:40000/login/logout',
+                        url: 'http://fanqin.vaiwan.com/login/logout',
                         method: 'post',
                         params: {
-                            'email':that.email,
-                            'pwd':that.pwd
+                            'email': that.email,
+                            'pwd': that.pwd
                         }
                     }).then(res => {
-                        console.log(res.data)
+                        console.log(res.data);
+                        if (res.data.code == '200') {
+                            swal("登出成功 亲 再见");
+                        }
                     })
                 }
             }
