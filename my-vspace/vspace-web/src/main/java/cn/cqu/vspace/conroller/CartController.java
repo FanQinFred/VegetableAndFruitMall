@@ -22,7 +22,7 @@ public class CartController {
     CartService cartService;
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)//wait
-    public JSONObject updateCart(@Param("token") String token, @Param("goodsId") String goodsId){
+    public JSONObject updateCart(@RequestHeader("token") String token, @Param("goodsId") String goodsId){
         String[] list = goodsId.split("-");
         List<Integer> goodsList = new ArrayList<>(list.length);
         for(String item : list){
@@ -32,7 +32,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.POST)//wait
-    public JSONObject getCarList(@Param("token") String token){
+    public JSONObject getCarList(@RequestHeader("token") String token){
         return cartService.getCart(token);
     }
 
