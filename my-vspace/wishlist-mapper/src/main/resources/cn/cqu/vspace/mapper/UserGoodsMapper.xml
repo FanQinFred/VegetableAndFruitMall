@@ -167,7 +167,7 @@
   </delete>
   <update id="updateToCart">
     update "SHOPPING"."USER_GOODS"
-    set CartOrWishList = #{0, jdbcType=INTEGER}
+    set CartOrWishList = #{car, jdbcType=INTEGER}
     where GOODS_ID = #{goodsID, jdbcType=INTEGER} and USER_ID = #{userId, jdbcType=INTEGER} and CartOrWishList = #{cartOrWish, jdbcType=INTEGER}
   </update>
 </mapper>

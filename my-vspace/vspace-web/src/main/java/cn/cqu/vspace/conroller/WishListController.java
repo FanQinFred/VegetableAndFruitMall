@@ -27,4 +27,9 @@ public class WishListController {
         }
         return wishListService.deleteGoodsInWishList(token, goodsIdList);
     }
+
+    @RequestMapping(value = "/wishlist", method = RequestMethod.POST)
+    public JSONObject getAllWishList(@RequestHeader("token") String token){
+        return wishListService.getAllWishList(token);
+    }
 }
