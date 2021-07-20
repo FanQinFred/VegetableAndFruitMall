@@ -3,10 +3,7 @@ package cn.cqu.vspace.conroller;
 import cn.cqu.vspace.pojo.Goods;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import cn.cqu.vspace.service.DetailService;
 
 import java.util.List;
@@ -27,7 +24,7 @@ public class DetailController {
 
     //    String goodsid, String blogid, String yourName, String yourEmail, String yourView, String rating, String token
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public String comment(@Param("goodsid") String goodsid, @Param("blogid") String blogid,@Param("yourName")  String yourName,@Param("yourEmail")  String yourEmail,@Param("yourView")  String yourView, @Param("rating") String rating, @Param("token") String token) {
+    public String comment( @RequestHeader("token") String token,@Param("goodsid") String goodsid, @Param("blogid") String blogid,@Param("yourName")  String yourName,@Param("yourEmail")  String yourEmail,@Param("yourView")  String yourView, @Param("rating") String rating) {
         return detailService.comment( goodsid,  blogid,  yourName,  yourEmail,  yourView,  rating,  token);
     }
 }

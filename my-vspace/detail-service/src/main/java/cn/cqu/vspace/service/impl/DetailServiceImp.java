@@ -11,6 +11,7 @@ import org.apache.dubbo.config.annotation.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,44 +30,44 @@ public class DetailServiceImp implements DetailService {
     @Override
     public String comment(String goodsid, String blogid, String yourName, String yourEmail, String yourView, String rating, String token) {
         try {
-
-//            UserExample example = new UserExample();
-//            UserExample.Criteria criteria = example.createCriteria();
-//            criteria.andTokenEqualTo(token);
-//            example.setDistinct(true);
             List<User> list;
+            System.out.println("token: "+token);
             list = userMapper.selectByToken(token);
-
-            System.out.println("if");
+            System.out.println(list.isEmpty());
             if (!list.isEmpty()) {
                 System.out.println("查询到用户");
                 User user = list.get(0);
                 Integer userid = user.getUserId();
-
                 Review review = new Review();
-
-                review.setBlogId(Integer.parseInt(blogid));
-                review.setGoodsId(Integer.parseInt(goodsid));
+                if(blogid.equals("-1")){
+                    System.out.println("blogid.equals");
+                    review.setBlogId(null);
+                }else{
+                    review.setBlogId(Integer.parseInt(blogid));
+                }
+                if(goodsid.equals("-1")){
+                    System.out.println("goodsid.equals");
+                    review.setGoodsId(null);
+                }else{
+                    review.setGoodsId(Integer.parseInt(goodsid));
+                }
                 review.setUserId(userid);
-
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 review.setReviewDate(df.format(new Date()));
-
                 long randomNum = System.currentTimeMillis();
                 review.setReviewHot(String.valueOf(randomNum % (10 - 1) + 1));
                 review.setReviewRate(rating);
                 if (reviewMapper.insert(review) > 0) {
-                    return "{'status':'200','code':'100'}";
+                    return "{status:'200',code:'100'}";
                 } else {
-                    return "{'status':'500','code':'200'}";
+                    return "{status:'501',code:'200'}";
                 }
             }
-
-            return "{'status':'500','code':'200'}";
+            return "{status:'502',code:'200'}";
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "{'status':'500','code':'200'}";
+            return "{status:'503',code:'200'}";
         }
     }
 
