@@ -388,10 +388,12 @@
                                             </div>
                                             <div class="tab-pane fade" id="tab_three">
                                                 <div class="review-form">
-                                                    <h5>1 review for <span>Chaz Kangeroo Hoodies</span></h5>
-                                                    <div class="total-reviews">
+                                                    <h5>{{userList.length}} review for <span>{{goods_info.name}}</span></h5>
+                                                    
+
+                                                    <div class="total-reviews" v-for="(user,index) in userList">
                                                         <div class="rev-avatar">
-                                                            <img src="assets/img/about/avatar.jpg" alt="">
+                                                            <img v-bind:src="user.imgUrl" alt="">
                                                         </div>
                                                         <div class="review-box">
                                                             <div class="ratings">
@@ -402,16 +404,13 @@
                                                                 <span><i class="ion-android-star"></i></span>
                                                             </div>
                                                             <div class="post-author">
-                                                                <p><span>admin -</span> 30 Nov, 2018</p>
+                                                                <p><span>{{user.email}} -</span> {{reviews[index].reviewDate}}</p>
                                                             </div>
-                                                            <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet
-                                                                sem
-                                                                varius ante feugiat lacinia. Nunc ipsum nulla, vulputate
-                                                                ut
-                                                                venenatis vitae, malesuada ut mi. Quisque iaculis, dui
-                                                                congue placerat pretium, augue erat accumsan lacus</p>
+                                                            <p>{{reviews[index].reviewHot}}</p>
                                                         </div>
                                                     </div>
+
+
                                                     <div class="form-group row">
                                                         <div class="col">
                                                             <label class="col-form-label"><span
@@ -1093,6 +1092,8 @@
         new Vue({
             el: '#test',
             data: {
+                token:'',
+
                 goods_info: {},
                 goodsid: 2,
                 rate: 4,
@@ -1100,10 +1101,14 @@
                 comment_Your_Name: '',
                 comment_Your_Email: '',
                 comment_Your_Review: '',
-                comment_Rating: '5'
+                comment_Rating: '5',
+
+                reviews:[],
+                userList:[]
             },
             created() {
                 var that = this;
+                that.token = window.localStorage.getItem("token");
                 // that.goodsid = getUrlParam("goodsId");
                 console.log("goodsid: " + that.goodsid);
                 let request_data = {
@@ -1111,7 +1116,6 @@
                 };
                 console.log(request_data);
 
-                let token = window.localStorage.getItem("token");
                 axios({
                     url: 'http://fanqin.vaiwan.com/shop/getInfoById',
                     method: 'post',
@@ -1119,7 +1123,7 @@
                         'goodsId': that.goodsid
                     },
                     headers: {
-                        'token': token
+                        'token': that.token
                     }
                 }).then(res => {
                     // sessionStorage
@@ -1129,6 +1133,7 @@
                     // handle data
                     that.rate = parseFloat(that.goods_info.rate);
                 });
+                that.getReviewByGoodsId()
             },
             methods: {
                 rateClick(rate) {
@@ -1136,7 +1141,6 @@
                 },
                 comment() {
                     var that = this;
-                    let token = window.localStorage.getItem("token");
                     axios({
                         url: 'http://fanqin.vaiwan.com/detail/comment',
                         method: 'post',
@@ -1149,7 +1153,7 @@
                             'rating': that.comment_Rating
                         },
                         headers: {
-                            'token': token
+                            'token': that.token
                         }
                     }).then(res => {
                         console.log(res);
@@ -1169,6 +1173,24 @@
                             }
                         }
 
+                    });
+                },
+                getReviewByGoodsId(){
+                    var that=this;
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/index/getReviewByGoodsId',
+                        method: 'post',
+                        params: {
+                            'goodsId': that.goodsid,
+                        },
+                        headers: {
+                            'token': that.token
+                        }
+                    }).then(res => {
+                        var json_data = res.data;
+                        console.log(json_data);
+                        that.reviews=json_data.list;
+                        that.userList=json_data.userList;
                     });
                 }
             }

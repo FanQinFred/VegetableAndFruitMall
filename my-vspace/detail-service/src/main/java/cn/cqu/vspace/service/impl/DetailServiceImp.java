@@ -55,7 +55,7 @@ public class DetailServiceImp implements DetailService {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 review.setReviewDate(df.format(new Date()));
                 long randomNum = System.currentTimeMillis();
-                review.setReviewHot(String.valueOf(randomNum % (10 - 1) + 1));
+                review.setReviewHot(yourView);
                 review.setReviewRate(rating);
                 if (reviewMapper.insert(review) > 0) {
                     return "{status:'200',code:'100'}";

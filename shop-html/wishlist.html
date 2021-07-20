@@ -607,6 +607,7 @@
         new Vue({
             el: '#test',
             data: {
+                token:'',
                 wishlist_ids: {},
                 wish_goods_info: [{
                     goodsId: '1',
@@ -629,7 +630,7 @@
             },
             created() {
                 var that = this;
-
+                that.token=window.localStorage.getItem("token");
                 let request_data = {
 
                 };
@@ -638,6 +639,7 @@
 
                 wishlist(request_data).then((response) => {
                     let res_data = response.data;
+                    console.log(res_data);
                     for (let i = 0; i < response.data.length; i++) {
                         if (res_data.cartOrWishList == '1' | res_data.cartOrWishList == '2') {
                             that.wishlist_ids.append(res_data[i].goodId);
@@ -657,6 +659,7 @@
                         console.log(error);
                     });
                 };
+
             },
             methods: {
                 add2cart(goodsId) {
