@@ -24,29 +24,20 @@ public class OrderServiceImpl implements OrderService {
     public JSONObject addOrder(String token, String orderId, String goodsId, String status, String total) {
         List<User> list;
         list = userMapper.selectByToken(token);
-        int count = 0;
         if(!list.isEmpty()){
-            OrderExample example = new OrderExample();
-            OrderExample.Criteria criteria = example.createCriteria();
-            criteria.andOrderIdEqualTo(Integer.parseInt(orderId));
-            List<Order> orderList = orderMapper.selectByExample(example);
-            count = orderList.size();
-            if(orderList.isEmpty()){
-                Order order = new Order();
-                order.setOrderId(Integer.parseInt(orderId));
-                order.setOrderStatus(status);
-                order.setUserId(list.get(0).getUserId());
-                order.setOrderTotal(Double.parseDouble(total));
-                order.setGoodsId(Integer.parseInt(goodsId));
-                orderMapper.insertSelective(order);
-                JSONObject result = new JSONObject();
-                result.put("status", "200");
-                return result;
-            }
+            Order order = new Order();
+            order.setOrderStatus(status);
+            order.setUserId(list.get(0).getUserId());
+            order.setOrderTotal(Double.parseDouble(total));
+            order.setGoodsId(Integer.parseInt(goodsId));
+            orderMapper.insertSelective(order);
+            JSONObject result = new JSONObject();
+            result.put("status", "200");
+            return result;
+
         }
         JSONObject error = new JSONObject();
         error.put("status","500");
-        error.put("count", count);
         return error;
     }
 
@@ -113,7 +104,6 @@ public class OrderServiceImpl implements OrderService {
             List<Order> orderList = orderMapper.selectByExample(example);
             if(!orderList.isEmpty()){
                 Order order = new Order();
-                order.setOrderId(Integer.parseInt(orderId));
                 order.setOrderStatus(status);
                 order.setUserId(list.get(0).getUserId());
                 order.setOrderTotal(Double.parseDouble(total));
