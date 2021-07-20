@@ -13,4 +13,5 @@ public interface IndexService {
     JSONObject topRated();
     JSONObject whatPeopleSay();
     JSONObject sale();
+    JSONObject getBlogById(Integer id);
 }

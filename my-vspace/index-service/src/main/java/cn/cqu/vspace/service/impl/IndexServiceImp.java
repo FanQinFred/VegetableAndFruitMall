@@ -247,4 +247,23 @@ public class IndexServiceImp implements IndexService {
 
         return jsonObject;
     }
+
+    @Override
+    public JSONObject getBlogById(Integer id) {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            BlogExample blogExample = new BlogExample();
+            BlogExample.Criteria criteria = blogExample.createCriteria();
+            criteria.andBlogIdEqualTo(id);
+            List<Blog> blogs = blogMapper.selectByExample(blogExample);
+            jsonObject.put("blog",blogs.get(0));
+            jsonObject.put("status","200");
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("status","500");
+        }
+
+        return jsonObject;
+    }
 }
