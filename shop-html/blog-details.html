@@ -235,7 +235,7 @@
                                             <textarea name="commnet" placeholder="Write a comment"
                                                 v-model="new_comment.content"></textarea>
                                         </div>
-                                        
+
 
                                         <div class="col-12">
                                             <div class="coment-btn mt-20">
@@ -707,6 +707,7 @@
                 this.GetBlogById(this.GetData1())
                 this.NewArrivals()
                 this.TopRated()
+                this.RecentPost()
                 this.GetReviewByBlogId(this.GetData1())
             },
             methods: {
@@ -738,7 +739,7 @@
 
                     return blogId
                 },
-        
+
                 NewComment() {
                     console.log("NewComment")
                     let token = window.localStorage.getItem("token")
@@ -749,12 +750,13 @@
                             'blogId': this.blog.id,
                             'content': this.new_comment.content
                         },
-                        headers:{
-                            'token':token
+                        headers: {
+                            'token': token
                         }
                     })
                         .then((response) => {
                             this.GetReviewByBlogId(this.GetData1())
+                            this.new_comment.content = ''
                         })
                         .catch((error) => {
                             console.log(error);
@@ -770,7 +772,19 @@
                     console.log("RecentPost")
                     recentPost()
                         .then((response) => {
-
+                            this.recent_post = []
+                            for (let i = 0; i < response.data.list.length; i++) {
+                                let content = response.data.list[i].blogContent.split("^^")
+                                let l = {
+                                    id: response.data.list[i].blogId,
+                                    title: content[0],
+                                    content: content[1],
+                                    writer: response.data.usrList[i].email,
+                                    date: response.data.list[i].blogDate,
+                                    img_url: response.data.list[i].blogImgUrl
+                                }
+                                this.recent_post.push(l)
+                            }
                         })
                         .catch((error) => {
                             console.log(error);
