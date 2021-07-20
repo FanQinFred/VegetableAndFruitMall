@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package cn.cqu.vspace.pojo;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.dao.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.Order">
+<mapper namespace="cn.cqu.vspace.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="cn.cqu.vspace.pojo.Order">
     <result column="ORDER_ID" jdbcType="INTEGER" property="orderId" />
     <result column="USER_ID" jdbcType="INTEGER" property="userId" />
     <result column="ORDER_DATE" jdbcType="TIMESTAMP" property="orderDate" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     ORDER_ID, USER_ID, ORDER_DATE, ORDER_STATUS, ORDER_TOTAL, GOODS_ID
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.entity.OrderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.cqu.vspace.pojo.OrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -84,13 +84,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.demo.entity.OrderExample">
+  <delete id="deleteByExample" parameterType="cn.cqu.vspace.pojo.OrderExample">
     delete from ORDER
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.entity.Order">
+  <insert id="insert" parameterType="cn.cqu.vspace.pojo.Order">
     insert into ORDER (ORDER_ID, USER_ID, ORDER_DATE, 
       ORDER_STATUS, ORDER_TOTAL, GOODS_ID
       )
@@ -98,7 +98,7 @@
       #{orderStatus,jdbcType=VARCHAR}, #{orderTotal,jdbcType=FLOAT}, #{goodsId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.entity.Order">
+  <insert id="insertSelective" parameterType="cn.cqu.vspace.pojo.Order">
     insert into ORDER
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -141,7 +141,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.entity.OrderExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.cqu.vspace.pojo.OrderExample" resultType="java.lang.Long">
     select count(*) from ORDER
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

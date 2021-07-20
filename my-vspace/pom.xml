@@ -38,6 +38,9 @@
         <module>index-service</module>
         <module>cache-api</module>
         <module>cache-service</module>
+        <module>order-api</module>
+        <module>order-service</module>
+        <module>order-mapper</module>
     </modules>
 
     <parent>

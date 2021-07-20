@@ -1,7 +1,7 @@
-package com.example.demo.dao;
+package cn.cqu.vspace.mapper;
 
-import com.example.demo.entity.Order;
-import com.example.demo.entity.OrderExample;
+import cn.cqu.vspace.pojo.Order;
+import cn.cqu.vspace.pojo.OrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

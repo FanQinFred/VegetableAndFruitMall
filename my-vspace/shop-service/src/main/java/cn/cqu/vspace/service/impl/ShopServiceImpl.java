@@ -99,8 +99,15 @@ public class ShopServiceImpl implements ShopService {
                     userGoods.setGoodsId(gId);
                     userGoods.setUserId(userId);
                     userGoods.setAmount(1);
-                    userGoods.setCartorwishlist(2);
+                    userGoods.setCartorwishlist(1);
                     userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId(), userGoods.getCartorwishlist(), userGoods.getAmount());
+                }else{
+                    for (UserGoods userGoods : userGoodsList){
+                        insertCount++;
+                        userGoods.setAmount(userGoods.getAmount()+1);
+                        userGoodsMapper.updateAmount(userGoods.getGoodsId(), userGoods.getUserId(), userGoods.getAmount());
+                        userGoodsMapper.updateCartOrWishList(userGoods.getGoodsId(), userGoods.getUserId());
+                    }
                 }
             }
             JSONObject result = new JSONObject();
