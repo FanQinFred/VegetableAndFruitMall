@@ -1827,10 +1827,11 @@
 
                     let token = window.localStorage.getItem("token")
                     axios({
-                        url: 'http://fanqin.vaiwan.com/cart/update',
+                        url: 'http://fanqin.vaiwan.com/cart/addcart',
                         method: 'post',
                         params: {
-                            'goodsId': item.id
+                            'goodsId': item.id,
+                            'count':1
                         },
                         headers: {
                             'token': token
@@ -2005,7 +2006,7 @@
                                 let l = {
                                     id: response.data.list[i].id,
                                     name: response.data.list[i].name,
-                                    qty: parseInt(response.data.list[i].amount),
+                                    qty: parseInt(response.data.list[i].count),
                                     price: response.data.list[i].currentPrice,
                                     src: response.data.list[i].imgUrl
                                 }
