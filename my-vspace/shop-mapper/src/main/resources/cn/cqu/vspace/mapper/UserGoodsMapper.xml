@@ -169,6 +169,6 @@
   <update id="updateCartOrWishList">
     update "SHOPPING"."USER_GOODS"
     set CartOrWishList = 2
-    where CartOrWishList = 0
+    where CartOrWishList = 0 and GOODS_ID = #{goodsId, jdbcType=INTEGERs and USER_ID = #{userId, jdbcType=INTEGER}
   </update>
 </mapper>
