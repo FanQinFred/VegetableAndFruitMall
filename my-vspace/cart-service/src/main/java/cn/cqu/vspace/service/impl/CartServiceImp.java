@@ -79,7 +79,7 @@ public class CartServiceImp implements CartService {
                     goodJson.put("id",good.getGoodsId());
                     goodJson.put("currentPrice",good.getGoodsCurrentPrice());
                     goodJson.put("imgUrl",good.getGoodsImgUrl());
-                    goodJson.put("amount",good.getGoodsAmount());
+                    goodJson.put("count",userGoods.getAmount());
                     goodJson.put("name",good.getGoodsName());
                     goodJson.put("originalPrice",good.getGoodsOriginalPrice());
                     goodJson.put("description",good.getGoodsDescription());
