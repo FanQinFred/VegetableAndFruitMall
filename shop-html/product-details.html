@@ -984,7 +984,7 @@
             }
         })
     </script>
-
+    
     <script>
         var hd = new Vue({
             el: '#hd',
@@ -1040,7 +1040,7 @@
                             this.subtotal = 0
                             this.amount = 0
                             for (let i = 0; i < this.cartList.length; i++) {
-                                this.subtotal += parseFloat(this.cartList[i].price) * this.cartList[i].qty
+                                this.subtotal += Math.floor(parseFloat(this.cartList[i].price) * this.cartList[i].qty*100) / 100
                                 this.amount += parseInt(this.cartList[i].amount)
                             }
                         })

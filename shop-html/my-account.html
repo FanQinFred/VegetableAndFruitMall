@@ -36,113 +36,92 @@
 
 <!-- Start Header Area -->
 <header class="header-area">
-    <!-- header top start -->
-    <div class="header-top">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="assets/img/logo/logo.png" alt="Brand Logo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="header-settings-area">
-                        <div class="header-top-left">
-                            <nav>
-                                <ul class="d-flex justify-content-center">
-                                    <li>
-                                        <div class="dropdown header-top-dropdown">
-                                            <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
-                                               aria-haspopup="true" aria-expanded="false">
-                                                my account
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="myaccount">
-                                                <a class="dropdown-item" href="my-account.html">my account</a>
-                                                <a class="dropdown-item" href="login-register.html"> login</a>
-                                                <a class="dropdown-item" href="login-register.html">register</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown header-top-dropdown">
-                                            <span>Language:</span>
-                                            <a class="dropdown-toggle" id="language" data-toggle="dropdown"
-                                               aria-haspopup="true" aria-expanded="false">
-                                                English
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="language">
-                                                <a class="dropdown-item" href="#">English</a>
-                                                <a class="dropdown-item" href="#">Français</a>
-                                                <a class="dropdown-item" href="#">Germany</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </nav>
+    <!-- Start Header Area -->
+    <header class="header-area">
+        <!-- header top start -->
+        <div class="header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="assets/img/logo/logo.png" alt="Brand Logo">
+                            </a>
                         </div>
-                        <div class="header-top-right">
-                            <div class="header-search-box">
-                                <form>
-                                    <input type="text" placeholder="Search Here">
-                                    <button><i class="ion-ios-search-strong"></i></button>
-                                </form>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="header-settings-area">
+                            <div class="header-top-left">
+                                <nav>
+                                    <ul class="d-flex justify-content-center">
+                                        <li>
+                                            <div class="dropdown header-top-dropdown">
+                                                <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    my account
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="myaccount">
+                                                    <a class="dropdown-item" href="my-account.html">my account</a>
+                                                    <a class="dropdown-item" href="login-register.html"> login</a>
+                                                    <a class="dropdown-item" href="login-register.html">register</a>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </nav>
                             </div>
-                            <div class="mini-cart-wrap">
-                                <button><i class="ion-bag"></i>
-                                    <span class="notification">2</span>
-                                </button>
-                                <ul class="cart-list">
-                                    <li>
-                                        <div class="cart-img">
-                                            <a href="product-details.html"><img src="assets/img/cart/cart-1.jpg"
-                                                                                alt=""></a>
-                                        </div>
-                                        <div class="cart-info">
-                                            <h4><a href="product-details.html">simple product</a></h4>
-                                            <span class="cart-qty">Qty: 1</span>
-                                            <span>$60.00</span>
-                                        </div>
-                                        <div class="del-icon">
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cart-img">
-                                            <a href="product-details.html"><img src="assets/img/cart/cart-2.jpg"
-                                                                                alt=""></a>
-                                        </div>
-                                        <div class="cart-info">
-                                            <h4><a href="product-details.html">virtual product</a></h4>
-                                            <span class="cart-qty">Qty: 2</span>
-                                            <span>$100.00</span>
-                                        </div>
-                                        <div class="del-icon">
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="mini-cart-price">
-                                        <span class="subtotal">subtotal : </span>
-                                        <span class="subtotal-price ml-auto">$110.00</span>
-                                    </li>
-                                    <li class="checkout-btn">
-                                        <a href="#">View Cart</a>
-                                    </li>
-                                    <li class="checkout-btn">
-                                        <a href="#">checkout</a>
-                                    </li>
-                                </ul>
+                            <div class="header-top-right">
+                                <div class="header-search-box">
+                                    <form>
+                                        <input type="text" placeholder="Search Here">
+                                        <button><i class="ion-ios-search-strong"></i></button>
+                                    </form>
+                                </div>
+                                <div class="mini-cart-wrap">
+                                    <button><i class="ion-bag"></i>
+
+                                    </button>
+                                    <ul class="cart-list" id="hd">
+
+                                        <li v-for="(item, index) in cartList">
+                                            <div class="cart-img">
+                                                <a href="#" @click="ShowProductDetail(item)"><img v-bind:src="item.src"
+                                                        alt=""></a>
+                                            </div>
+                                            <div class="cart-info">
+                                                <h4><a href="#" @click="ShowProductDetail(item)">{{item.name}}</a></h4>
+                                                <span class="cart-qty">Qty: {{ item.qty }}</span>
+                                                <span>${{item.price}}</span>
+                                            </div>
+
+                                        </li>
+
+                                        <li class="mini-cart-price">
+                                            <span class="subtotal">subtotal : </span>
+                                            <span class="subtotal-price ml-auto">${{subtotal}}</span>
+                                        </li>
+                                        <li class="checkout-btn">
+                                            <a href="cart.html">View Cart</a>
+                                        </li>
+                                        <li class="checkout-btn">
+                                            <a href="checkout.html">checkout</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- header top end -->
+        <!-- header top end -->
+
+
+
+    </header>
+    <!-- end Header Area -->
 
     <!-- main menu start -->
     <div class="main-menu-area sticky">
@@ -530,198 +509,209 @@
 <!--== Start Footer Area Wrapper ==-->
 <footer class="footer-wrapper">
 
-    <!-- footer main area start -->
-    <div class="footer-main-area">
-        <div class="container">
-            <div class="footer-main-inner bdr-top pt-56 pb-60 pb-md-20 pb-sm-20">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <div class="footer-widget-title">
-                                <h4>contact info</h4>
-                            </div>
-                            <div class="footer-widget-body">
-                                <ul class="location-wrap">
-                                    <li>
-                                        <h6 class="title">location:</h6>
-                                        <p>110-114 W George St, City Centre,<br>Glasgow G2 1NF, USA</p>
-                                    </li>
-                                    <li>
-                                        <h6 class="title">call us now:</h6>
-                                        <p>+01-23456789<br>+01-23456789</p>
-                                    </li>
-                                    <li>
-                                        <h6 class="title">email:</h6>
-                                        <p><a href="#">info@yourdomain.com</a><br><a href="#">support@yourdomain.com</a>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <div class="footer-widget-title">
-                                <h4>new arrivals</h4>
-                            </div>
-                            <div class="footer-widget-body">
-                                <ul class="category-list">
-                                    <li>
-                                        <div class="single-item single-item__footer-category">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">natural berrie</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$99.00</span>
-                                                    <span class="old-price"><del></del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-item single-item__footer-category">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">organic juice</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$99.00</span>
-                                                    <span class="old-price"><del></del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-item single-item__footer-category">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">organic food</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$99.00</span>
-                                                    <span class="old-price"><del></del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+    <!--== Start Footer Area Wrapper ==-->
+    <footer class="footer-wrapper" id="new_arrivals">
+
+        <!-- footer main area start -->
+        <div class="footer-main-area">
+            <div class="container">
+                <div class="footer-main-inner bdr-top pt-56 pb-60 pb-md-20 pb-sm-20">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="footer-widget-title">
+                                    <h4>contact info</h4>
+                                </div>
+                                <div class="footer-widget-body">
+                                    <ul class="location-wrap">
+                                        <li>
+                                            <h6 class="title">location:</h6>
+                                            <p>110-114 W George St, City Centre,<br>Glasgow G2 1NF, USA</p>
+                                        </li>
+                                        <li>
+                                            <h6 class="title">call us now:</h6>
+                                            <p>+01-23456789<br>+01-23456789</p>
+                                        </li>
+                                        <li>
+                                            <h6 class="title">email:</h6>
+                                            <p><a href="#">info@yourdomain.com</a><br><a
+                                                    href="#">support@yourdomain.com</a>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <div class="footer-widget-title">
-                                <h4>top rated product</h4>
-                            </div>
-                            <div class="footer-widget-body">
-                                <ul class="category-list">
-                                    <li>
-                                        <div class="single-item single-item__footer-category">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-12.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">natural berrie</a>
-                                                    </h4>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="footer-widget-title">
+                                    <h4>new arrivals</h4>
+                                </div>
+                                <div class="footer-widget-body">
+                                    <ul class="category-list">
+                                        <li>
+                                            <div class="single-item single-item__footer-category">
+                                                <div class="product-thumb">
+                                                    <a href="#" @click="ShowProductDetail(newArrivalList[0])">
+                                                        <img v-bind:src="newArrivalList[0].src" alt="">
+                                                    </a>
                                                 </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$99.00</span>
-                                                    <span class="old-price"><del></del></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-item single-item__footer-category">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-13.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">organic juice</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$99.00</span>
-                                                    <span class="old-price"><del></del></span>
+                                                <div class="product-description">
+                                                    <div class="product-name">
+                                                        <h4 class="h5">
+                                                            <a href="#"
+                                                                @click="ShowProductDetail(newArrivalList[0])">{{newArrivalList[0].name}}</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="regular-price">${{newArrivalList[0].price}}</span>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-item single-item__footer-category">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-14.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-description">
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">organic food</a>
-                                                    </h4>
+                                        </li>
+                                        <li>
+                                            <div class="single-item single-item__footer-category">
+                                                <div class="product-thumb">
+                                                    <a href="#" @click="ShowProductDetail(newArrivalList[1])">
+                                                        <img v-bind:src="newArrivalList[1].src" alt="">
+                                                    </a>
                                                 </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$99.00</span>
-                                                    <span class="old-price"><del></del></span>
+                                                <div class="product-description">
+                                                    <div class="product-name">
+                                                        <h4 class="h5">
+                                                            <a href="#"
+                                                                @click="ShowProductDetail(newArrivalList[1])">{{newArrivalList[1].name}}</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="regular-price">${{newArrivalList[1].price}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                        <li>
+                                            <div class="single-item single-item__footer-category">
+                                                <div class="product-thumb">
+                                                    <a href="#" @click="ShowProductDetail(newArrivalList[2])">
+                                                        <img v-bind:src="newArrivalList[2].src" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <div class="product-name">
+                                                        <h4 class="h5">
+                                                            <a href="#"
+                                                                @click="ShowProductDetail(newArrivalList[2])">{{newArrivalList[2].name}}</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="regular-price">${{newArrivalList[2].price}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget">
-                            <div class="footer-widget-title">
-                                <h4>newsletter</h4>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="footer-widget-title">
+                                    <h4>top rated product</h4>
+                                </div>
+                                <div class="footer-widget-body">
+                                    <ul class="category-list">
+                                        <li>
+                                            <div class="single-item single-item__footer-category">
+                                                <div class="product-thumb">
+                                                    <a href="#" @click="ShowProductDetail(topRatedList[0])">
+                                                        <img v-bind:src="topRatedList[0].src" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <div class="product-name">
+                                                        <h4 class="h5">
+                                                            <a href="#"
+                                                                @click="ShowProductDetail(topRatedList[0])">{{topRatedList[0].name}}</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="regular-price">${{topRatedList[0].price}}</span>
+                                                        <span class="old-price"><del></del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-item single-item__footer-category">
+                                                <div class="product-thumb">
+                                                    <a href="#" @click="ShowProductDetail(topRatedList[1])">
+                                                        <img v-bind:src="topRatedList[1].src" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <div class="product-name">
+                                                        <h4 class="h5">
+                                                            <a href="#"
+                                                                @click="ShowProductDetail(topRatedList[1])">{{topRatedList[1].name}}</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="regular-price">${{topRatedList[1].price}}</span>
+                                                        <span class="old-price"><del></del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-item single-item__footer-category">
+                                                <div class="product-thumb">
+                                                    <a href="#" @click="ShowProductDetail(topRatedList[2])">
+                                                        <img v-bind:src="topRatedList[2].src" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <div class="product-name">
+                                                        <h4 class="h5">
+                                                            <a href="#"
+                                                                @click="ShowProductDetail(topRatedList[2])">{{topRatedList[2].name}}</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="price-box">
+                                                        <span class="regular-price">${{topRatedList[2].price}}</span>
+                                                        <span class="old-price"><del></del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="footer-widget-body">
-                                <div class="newsletter-desc">
-                                    <p>Subscribe to the Kavir mailing list to receive updates on new arrivals, special
-                                        offers and other discount information.</p>
-                                    <form id="mc-form">
-                                        <input type="email" id="mc-email" autocomplete="off"
-                                               placeholder="Your email address">
-                                        <button id="mc-submit"><i class="ion-paper-airplane"></i>subscribe</button>
-                                    </form>
-                                    <!-- mailchimp-alerts Start -->
-                                    <div class="mailchimp-alerts">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-widget">
+                                <div class="footer-widget-title">
+                                    <h4>newsletter</h4>
+                                </div>
+                                <div class="footer-widget-body">
+                                    <div class="newsletter-desc">
+                                        <p>Subscribe to the Kavir mailing list to receive updates on new arrivals,
+                                            special
+                                            offers and other discount information.</p>
+                                        <form id="mc-form">
+                                            <input type="email" id="mc-email" autocomplete="off"
+                                                placeholder="Your email address">
+                                            <button id="mc-submit"><i class="ion-paper-airplane"></i>subscribe</button>
+                                        </form>
+                                        <!-- mailchimp-alerts Start -->
+                                        <div class="mailchimp-alerts">
+                                            <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                            <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                            <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                                        </div>
+                                        <!-- mailchimp-alerts end -->
                                     </div>
-                                    <!-- mailchimp-alerts end -->
                                 </div>
                             </div>
                         </div>
@@ -729,8 +719,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- footer main area end -->
+        <!-- footer main area end -->
 
     <!-- footer bottom area start -->
     <div class="footer-bootom bg-gray pt-20 pb-20">
@@ -853,6 +842,202 @@
 
 
 </script>
+<script type="module">
+    import { newArrivals, topRated } from "./assets/js/index.js"
+    new Vue({
+        el: '#new_arrivals',
+        data: {
+            newArrivalList: [
+                {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods1',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+                },
+                {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods1',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+                },
+                {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods1',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+                }
+            ],
+            topRatedList: [
+                {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods1',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+                },
+                {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods1',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+                },
+                {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods1',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+                }
+            ]
+        },
+        created() {
+            this.NewArrivals()
+            this.TopRated()
+        },
+        methods: {
+            ShowProductDetail(item) {
+                console.log("ShowProductDetail")
+                let id = item.id
+                let url = "product-details.html?goodsId=" + id;//此处拼接内容
+                window.location.href = url;
+            },
+            NewArrivals() {
+                console.log("NewArrivals")
+                newArrivals()
+                    .then((response) => {
+                        this.newArrivalList = []
+                        for (let i = 0; i < 3; i++) {
+                            let l = {
+                                id: response.data.list[i].goodsId,
+                                rate: parseFloat(response.data.list[i].goodsRate),
+                                name: response.data.list[i].goodsName,
+                                price: response.data.list[i].goodsCurrentPrice,
+                                src: response.data.list[i].goodsImgUrl,
+                                description: response.data.list[i].goodsDescription,
+                                stock: response.data.list[i].goodsAmount
+                            }
+                            this.newArrivalList.push(l)
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            TopRated() {
+                console.log("TopRated")
+                topRated()
+                    .then((response) => {
+                        this.topRatedList = []
+                        for (let i = 0; i < 3; i++) {
+                            let l = {
+                                id: response.data.list[i].goodsId,
+                                rate: parseFloat(response.data.list[i].goodsRate),
+                                name: response.data.list[i].goodsName,
+                                price: response.data.list[i].goodsCurrentPrice,
+                                src: response.data.list[i].goodsImgUrl,
+                                description: response.data.list[i].goodsDescription,
+                                stock: response.data.list[i].goodsAmount
+                            }
+                            this.topRatedList.push(l)
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+        }
 
+    })
+
+</script>
+<script>
+    var hd = new Vue({
+        el: '#hd',
+        data: {
+            cartList: [
+                {
+                    id: 4,
+                    name: '真好吃',
+                    qty: 6,
+                    price: '6',
+                    src: 'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+                },
+                {
+                    id: 4,
+                    name: '真好吃',
+                    qty: 6,
+                    price: '6',
+                    src: 'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+                }
+            ],
+            subtotal: 6,
+            amount: 1
+        },
+        created() {
+            this.GetCart()
+        },
+
+        methods: {
+            GetCart() {
+                let token = window.localStorage.getItem("token")
+                console.log("GetCart")
+                axios({
+                    url: 'http://fanqin.vaiwan.com/cart/cart',
+                    method: 'post',
+
+                    headers: {
+                        'token': token
+                    }
+                })
+                    .then((response) => {
+                        this.cartList = []
+                        for (let i = 0; i < response.data.list.length; i++) {
+                            let l = {
+                                id: response.data.list[i].id,
+                                name: response.data.list[i].name,
+                                qty: parseInt(response.data.list[i].count),
+                                price: response.data.list[i].currentPrice,
+                                src: response.data.list[i].imgUrl
+                            }
+                            this.cartList.push(l)
+                        }
+
+                        this.subtotal = 0
+                        this.amount = 0
+                        for (let i = 0; i < this.cartList.length; i++) {
+                            this.subtotal += Math.floor(parseFloat(this.cartList[i].price) * this.cartList[i].qty*100) / 100
+                            this.amount += parseInt(this.cartList[i].amount)
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            ShowProductDetail(item) {
+                console.log("ShowProductDetail")
+                let id = item.id
+                let url = "product-details.html?goodsId=" + id;//此处拼接内容
+                window.location.href = url;
+            }
+        }
+
+    })
+</script>
 </body>
 </html>

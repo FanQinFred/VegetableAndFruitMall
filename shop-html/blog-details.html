@@ -552,7 +552,7 @@
                                 let l = {
                                     id: response.data.list[i].id,
                                     name: response.data.list[i].name,
-                                    qty: parseInt(response.data.list[i].amount),
+                                    qty: parseInt(response.data.list[i].count),
                                     price: response.data.list[i].currentPrice,
                                     src: response.data.list[i].imgUrl
                                 }
@@ -562,7 +562,7 @@
                             this.subtotal = 0
                             this.amount = 0
                             for (let i = 0; i < this.cartList.length; i++) {
-                                this.subtotal += parseFloat(this.cartList[i].price)
+                                this.subtotal += Math.floor(parseFloat(this.cartList[i].price) * this.cartList[i].qty*100) / 100
                                 this.amount += parseInt(this.cartList[i].amount)
                             }
                         })
