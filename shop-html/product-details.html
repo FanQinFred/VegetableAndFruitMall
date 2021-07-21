@@ -339,9 +339,9 @@
                                     <a href="javascript:void(0);" data-toggle="tooltip" @click="AddToCart"
                                         title="Add to cart" class="add-to-cart">add to
                                         cart</a>
-                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist"><i
+                                    <a href="javascript:void(0);" data-toggle="tooltip"  @click="AddToWishList" title="Wishlist"><i
                                             class="ion-android-favorite-outline"></i></a>
-                                    <a href="javascript:void(0);" data-toggle="tooltip" title="Compare"><i
+                                    <a href="javascript:void(0);" data-toggle="tooltip"  @click="AddToCompareList" title="Compare"><i
                                             class="ion-ios-shuffle"></i></a>
                                 </div>
                                 <div class="quantity mb-20">
@@ -981,6 +981,64 @@
                             console.log(error);
                         });
                 },
+                AddToWishList(item) {
+                    console.log("AddToWishList")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/shop/wish',
+                        method: 'post',
+                        params: {
+                            'id': item.id
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                AddToCart(item) {
+                    console.log("AddToCart")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/update',
+                        method: 'post',
+                        params: {
+                            'goodsId': item.id
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            hd.GetCart()
+                            swal("添加成功")
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+                ,
+                AddToCompareList(item) {
+                    console.log("AddToCompareList")
+                    let list = window.sessionStorage.getItem("compareList")
+                    if (list == null) {
+                        let compareList = new Array()
+                        compareList.push(item.id)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    } else if (!list.includes(item.id)) {
+
+                        let compareList = list.split(",")
+                        compareList.push(item.id)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    }
+                    console.log(window.sessionStorage.getItem("compareList"))
+                }
+
             }
         })
     </script>
@@ -1053,7 +1111,65 @@
                     let id = item.id
                     let url = "product-details.html?goodsId=" + id;//此处拼接内容
                     window.location.href = url;
+                },
+                AddToWishList() {
+                    console.log("AddToWishList")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/shop/wish',
+                        method: 'post',
+                        params: {
+                            'id': this.goodsId
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                AddToCart() {
+                    console.log("AddToCart")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/update',
+                        method: 'post',
+                        params: {
+                            'goodsId': this.goodsId
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            hd.GetCart()
+                            swal("添加成功")
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                 }
+                ,
+                AddToCompareList() {
+                    console.log("AddToCompareList")
+                    let list = window.sessionStorage.getItem("compareList")
+                    if (list == null) {
+                        let compareList = new Array()
+                        compareList.push(this.goodsId)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    } else if (!list.includes(this.goodsId)) {
+
+                        let compareList = list.split(",")
+                        compareList.push(this.goodsId)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    }
+                    console.log(window.sessionStorage.getItem("compareList"))
+                }
+
             }
 
         })
@@ -1177,6 +1293,66 @@
                             console.log(error);
                         });
                 },
+
+
+                AddToWishList() {
+                    console.log("AddToWishList")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/shop/wish',
+                        method: 'post',
+                        params: {
+                            'id': this.goodsId
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                AddToCart() {
+                    console.log("AddToCart")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/update',
+                        method: 'post',
+                        params: {
+                            'goodsId': this.goodsId
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            hd.GetCart()
+                            swal("添加成功")
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+                ,
+                AddToCompareList() {
+                    console.log("AddToCompareList")
+                    let list = window.sessionStorage.getItem("compareList")
+                    if (list == null) {
+                        let compareList = new Array()
+                        compareList.push(this.goodsId)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    } else if (!list.includes(this.goodsId)) {
+
+                        let compareList = list.split(",")
+                        compareList.push(this.goodsId)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    }
+                    console.log(window.sessionStorage.getItem("compareList"))
+                }
+
             }
 
         })
