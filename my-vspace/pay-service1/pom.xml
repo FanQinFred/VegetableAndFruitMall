@@ -100,7 +100,7 @@
 
         <dependency>
             <groupId>cn.cqu</groupId>
-            <artifactId>pay-mapper</artifactId>
+            <artifactId>order-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
