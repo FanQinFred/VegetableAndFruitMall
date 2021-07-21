@@ -83,6 +83,7 @@ public class PayServiceImp implements PayService {
     public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, UnsupportedEncodingException {
         //获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
+
         Map<String, String[]> requestParams = request.getParameterMap();
         for (String name : requestParams.keySet()) {
             String[] values = (String[]) requestParams.get(name);
