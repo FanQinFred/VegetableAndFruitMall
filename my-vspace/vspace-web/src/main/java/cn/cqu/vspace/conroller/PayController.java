@@ -19,8 +19,8 @@ public class PayController {
 
     @RequestMapping(value = "/pay",method = RequestMethod.GET)
     public String aliPay(@RequestParam("id")String id,
-                         @RequestParam("type")String type,@RequestParam("money")String money) throws IOException {
-        return payService.aliPay(id,type,money);
+                         @RequestParam("money")String money) throws IOException {
+        return payService.aliPay(id,money);
     }
 
 

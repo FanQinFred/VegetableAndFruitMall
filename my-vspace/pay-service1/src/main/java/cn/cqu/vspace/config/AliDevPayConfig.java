@@ -9,10 +9,10 @@ import java.io.Serializable;
 public class AliDevPayConfig implements Serializable {
 
     // 这个是支付完成后的跳转路径 可以是一个页面地址等
-    public static String returnUrl = "https://www.baidu.com";
+    public static String returnUrl = "http://127.0.0.1:5500/my-account.html";
     //服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
     // 这个是支付成功失败以后的通知接口会返回相应的参数
-    public static String notifyUrl = "http://3111h4q179.zicp.vip/cms/alipay/notify";
+    public static String notifyUrl = "http://fanqin.vaiwan.com/alipay/notify";
 
     /**支付宝分配给开发者的应用ID*/
     public static String aliPayAppId = "2021000117688743";

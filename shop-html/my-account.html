@@ -319,9 +319,10 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
-                                    <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
+                                    <a href="#orders" data-toggle="tab" class="active"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                    <a href="#dashboad"  data-toggle="tab"><i class="fa fa-dashboard"></i>
                                         Dashboard</a>
-                                    <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                    
                                     <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a>
                                     <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>
                                         Payment
@@ -338,48 +339,49 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h3>Dashboard</h3>
-                                            <div class="welcome">
-                                                <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni
-                                                    !</strong><a href="login-register.html" class="logout"> Logout</a>)
-                                                </p>
-                                            </div>
-                                            <p class="mb-0">From your account dashboard. you can easily check & view
-                                                your recent orders, manage your shipping and billing addresses and edit
-                                                your password and account details.</p>
+                                    <div class="myaccount-content">
+                                        <h3>Orders</h3>
+                                        <div class="myaccount-table table-responsive text-center" >
+                                            <table class="table table-bordered" id = "order">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th>Order</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Total</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr v-for="(item,index) in orderList">
+                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.date}}</td>
+                                                    <td>{{item.status}}</td>
+                                                    <td>${{item.total}}</td>
+                                                    <td><a href="javascript:void(0);" class="btn btn__bg btn__sqr" @click="DeleteOrders(item)">cancellation</a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
+                                    
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="orders" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h3>Orders</h3>
-                                            <div class="myaccount-table table-responsive text-center" >
-                                                <table class="table table-bordered" id = "order">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th>Order</th>
-                                                        <th>Date</th>
-                                                        <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr v-for="(item,index) in orderList">
-                                                        <td>{{item.id}}</td>
-                                                        <td>{{item.date}}</td>
-                                                        <td>{{item.status}}</td>
-                                                        <td>${{item.total}}</td>
-                                                        <td><a href="javascript:void(0);" class="btn btn__bg btn__sqr" @click="DeleteOrders(item)">cancellation</a>
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                    </tbody>
-                                                </table>
+                                        <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                            <div class="myaccount-content">
+                                                <h3>Dashboard</h3>
+                                                <div class="welcome">
+                                                    <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni
+                                                        !</strong><a href="login-register.html" class="logout"> Logout</a>)
+                                                    </p>
+                                                </div>
+                                                <p class="mb-0">From your account dashboard. you can easily check & view
+                                                    your recent orders, manage your shipping and billing addresses and edit
+                                                    your password and account details.</p>
                                             </div>
                                         </div>
                                     </div>

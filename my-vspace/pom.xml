@@ -41,6 +41,7 @@
         <module>order-api</module>
         <module>order-service</module>
         <module>order-mapper</module>
+        <module>pay-mapper</module>
     </modules>
 
     <parent>

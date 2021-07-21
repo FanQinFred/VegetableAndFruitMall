@@ -1,6 +1,7 @@
 package cn.cqu.vspace.service.impl;
 
 import cn.cqu.vspace.config.AliDevPayConfig;
+import cn.cqu.vspace.pojo.Order;
 import cn.cqu.vspace.service.PayService;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -10,7 +11,10 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.internal.util.StringUtils;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradePagePayResponse;
+import mapper.OrderMapper;
+import mapper.UserMapper;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,10 +26,17 @@ import java.util.UUID;
 
 @Service
 public class PayServiceImp implements PayService {
+
+    @Autowired
+    OrderMapper orderMapper;
+
+    @Autowired
+    UserMapper userMapper;
+
     @Override
-    public String aliPay(String id, String type, String money) {
+    public String aliPay(String id,String money) {
         //非法参数 抛出异常
-        if (StringUtils.isEmpty(id) || StringUtils.isEmpty(type) || StringUtils.isEmpty(money)) {
+        if (StringUtils.isEmpty(id) || StringUtils.isEmpty(money)) {
             return null;
         }
         //实例化客户端（参数：网关地址、商户appid、商户私钥、格式、编码、支付宝公钥、加密类型），为了取得预付订单信息
@@ -45,7 +56,7 @@ public class PayServiceImp implements PayService {
         //对一笔交易的具体描述信息。这里存储用户id
         payModel.setBody(id);
         //商品名称
-        payModel.setSubject(type);
+        payModel.setSubject("水果蔬菜");
         //交易超时时间 这里的30m就是30分钟
         payModel.setTimeoutExpress("30m");
         //支付金额 后面保留2位小数点..不能超过2位
@@ -98,6 +109,12 @@ public class PayServiceImp implements PayService {
             /*
 　　　　　　　　　这里编写业务逻辑　
 　　　　　　　　*/
+            Order order = new Order();
+            order.setUserId(Integer.parseInt(userId));
+            order.setUserId(Integer.parseInt(userId));
+            order.setOrderStatus("待发货");
+            order.setOrderTotal(Double.parseDouble(money));
+            orderMapper.insert(order);
         }
     }
 }
