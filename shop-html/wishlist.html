@@ -350,8 +350,8 @@
                                         <td class="pro-title"><a href="#">{{item.name}}</a></td>
                                         <td class="pro-price"><span>{{item.currentPrice}}</span></td>
                                         <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                        <td class="pro-remove" @click="add2cart(index)"><i
-                                                    class="fa fa-trash-o"></i></a></td>
+                                        <td class="pro-remove" @click="deleteWishList(item.goodId)"><i
+                                                class="fa fa-trash-o"></i></a></td>
                                     </tr>
                                     <!-- </li> -->
 
@@ -601,13 +601,15 @@
         <i class="fa fa-angle-up"></i>
     </div>
     <!-- Scroll to Top End -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="module">
-        import { wishlist, getInfoById, AddWish } from "./assets/js/wishlist.js"
+        import { wishlist, getInfoById, AddWish, deleteGoodsInWishList } from "./assets/js/wishlist.js"
         new Vue({
             el: '#test',
             data: {
-                token:'',
+                token: '',
+
                 wishlist_ids: {},
                 wish_goods_info: [{
                     goodsId: '1',
@@ -630,7 +632,8 @@
             },
             created() {
                 var that = this;
-                that.token=window.localStorage.getItem("token");
+                that.token = window.localStorage.getItem("token");
+
                 let request_data = {
 
                 };
@@ -640,10 +643,9 @@
                 wishlist(request_data).then((response) => {
                     let res_data = response.data;
                     console.log(res_data);
-                    for (let i = 0; i < response.data.length; i++) {
-                        if (res_data.cartOrWishList == '1' | res_data.cartOrWishList == '2') {
-                            that.wishlist_ids.append(res_data[i].goodId);
-                        }
+                    var list_data = res_data.list;
+                    for (let i = 0; i < list_data.length; i++) {
+                        that.wishlist_ids.append(list_data[i].goodId);
                     }
                 }).catch((error) => {
                     console.log(error);
@@ -662,6 +664,22 @@
 
             },
             methods: {
+                deleteWishList(goodsId) {
+                    console.log(goodsId);
+                    let request_data = {
+                        'id': goodsId
+                    };
+                    deleteGoodsInWishList(request_data).then((response) => {
+                        if (response.data.status == '200') {
+                            swal("删除成功");
+                        } else {
+                            swal("删除失败");
+                        }
+                    }).catch((error) => {
+                        swal("删除失败");
+                        console.log(error);
+                    });
+                },
                 add2cart(goodsId) {
 
                     console.log(goodsId);
@@ -669,13 +687,13 @@
                         'id': goodsId
                     };
                     AddWish(request_data).then((response) => {
-                        if(response.data.status=='200'){
-                            alert("添加成功");
-                        }else{
-                            alert("添加失败");
+                        if (response.data.status == '200') {
+                            swal("添加成功");
+                        } else {
+                            swal("添加失败");
                         }
                     }).catch((error) => {
-                        alert("添加失败");
+                        swal("添加失败");
                         console.log(error);
                     });
                 }
