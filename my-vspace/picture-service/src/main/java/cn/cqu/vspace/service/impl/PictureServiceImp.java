@@ -37,8 +37,8 @@ public class PictureServiceImp implements PictureService {
             return null;
         }
 //将上传获取到的storePath转换成String类型的url并返回给调用者
-        String fullFilePath = storePath.getFullPath();
-        fullFilePath = "http://" + nginxInfo.getIp() + ":" + nginxInfo.getPort() + "/" + fullFilePath;
+        String fullFilePath = storePath.getFullPath();  //+ ":" + nginxInfo.getPort()
+        fullFilePath = "http://" + nginxInfo.getIp() + ":" + nginxInfo.getPort()+ "/" + fullFilePath;
         return fullFilePath;
     }
 
@@ -60,7 +60,7 @@ public class PictureServiceImp implements PictureService {
         }
 //将上传获取到的storePath转换成String类型的url并返回给调用者
         String fullFilePath = storePath.getFullPath();
-        fullFilePath = "http://" + nginxInfo.getIp() + ":" + nginxInfo.getPort() + "/" + fullFilePath;
+        fullFilePath = "http://" + nginxInfo.getIp() + ":" + nginxInfo.getPort()+  "/" + fullFilePath;
         return fullFilePath;
     }
 
