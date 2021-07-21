@@ -36,7 +36,7 @@ public class WishListServiceImpl implements WishListService {
                     if(goods.getCartorwishlist()==1){
                         userGoodsMapper.delete(gid, userId, 1);
                     }else{
-                        userGoodsMapper.updateToCart(gid, userId, 2);
+                        userGoodsMapper.updateToCart(gid, userId, 2, 0);
                     }
                 }
 

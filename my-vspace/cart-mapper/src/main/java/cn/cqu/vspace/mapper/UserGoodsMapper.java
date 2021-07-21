@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface UserGoodsMapper {
-    int insert(@Param("goodsId") int goodsId, @Param("userId") int userId);
+    int insert(@Param("goodsId") int goodsId, @Param("userId") int userId, @Param("cartorwishlist") int CartOrWishList, @Param("amount") int amount);
     List<UserGoods> selectByExample(UserGoodsExample record);
     int updateAmount(@Param("goodsId") int goodsId, @Param("userId") int userId, @Param("amount") int amount);
 }

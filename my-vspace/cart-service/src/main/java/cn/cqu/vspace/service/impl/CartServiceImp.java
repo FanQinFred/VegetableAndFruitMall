@@ -40,7 +40,7 @@ public class CartServiceImp implements CartService {
                     UserGoods userGoods = new UserGoods();
                     userGoods.setUserId(userid);
                     userGoods.setGoodsId(id);
-                    userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId());
+                    userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId(), 0, 1);
                 }else{
                     for(UserGoods userGoods : userGoodsList){
                         userGoodsMapper.updateAmount(userGoods.getGoodsId(), userid, userGoods.getAmount()+1);
