@@ -25,7 +25,7 @@ public class ShopController {
 
     @RequestMapping(value = "/getIdByCategoryId", method = RequestMethod.POST)
     public JSONObject GoodsIdByCategoryId (@RequestHeader("token") String token, @Param("category_Id") Integer category_Id){
-        return shopService.GoodsIdByCategoryId(token, category_Id.intValue());
+        return shopService.GoodsIdByCategoryId(token, category_Id);
     }
     @RequestMapping(value = "/getInfoById", method = RequestMethod.POST)
     public JSONObject GoodsInfoById (@RequestHeader("token") String token, @Param("goodsId")String goodsId){
