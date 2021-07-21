@@ -323,11 +323,11 @@
                         <!-- Compare Page Content Start -->
                         <div class="compare-page-content-wrap">
                             <div class="compare-table table-responsive">
+
                                 <table class="table table-bordered mb-0">
                                     <tbody>
-
                                         <tr>
-                                            <td class="first-column">Product</td>
+                                            <td v-if="goods_info.length!=0" class="first-column">Product</td>
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="product-image-title" v-for="(item, index) in goods_info">
                                                 <a href="product-details.html" class="image">
@@ -340,7 +340,7 @@
                                             <!-- </div> -->
                                         </tr>
                                         <tr>
-                                            <td class="first-column">Description</td>
+                                            <td v-if="goods_info.length!=0" class="first-column">Description</td>
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="pro-desc" v-for="(item, index) in goods_info">
                                                 <p>{{item.description}}</p>
@@ -350,7 +350,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td class="first-column">Price</td>
+                                            <td v-if="goods_info.length!=0" class="first-column">Price</td>
 
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="pro-price" v-for="(item, index) in goods_info">
@@ -364,7 +364,7 @@
                                             </div>
                                         </tr> -->
                                         <tr>
-                                            <td class="first-column">Stock</td>
+                                            <td v-if="goods_info.length!=0" class="first-column">Stock</td>
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="pro-stock" v-for="(item, index) in goods_info">In Stock</td>
                                             <!-- </div> -->
@@ -404,7 +404,7 @@
                                             </td>
                                         </tr> -->
                                         <tr>
-                                            <td class="first-column">Remove</td>
+                                            <td v-if="goods_info.length!=0" class="first-column">Remove</td>
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="pro-remove" @click="remove(index)"
                                                 v-for="(item, index) in goods_info">
@@ -684,7 +684,7 @@
         new Vue({
             el: '#app',
             data: {
-                token:'',
+                token: '',
                 comparelist: ['1', '2', '3'],
                 goods_info: [{
                     imgUrl: "https://img1.baidu.com/it/u=1891564562,2603365905&fm=26&fmt=auto&gp=0.jpg",
@@ -706,27 +706,30 @@
             },
             created() {
                 var that = this;
-                that.goods_info=[];
-                that.token=window.localStorage.getItem("token");
+                that.goods_info = [];
+                that.token = window.localStorage.getItem("token");
                 var temp = window.localStorage.getItem("compareList");
-                if (temp != null) {
+                if (temp != null || temp != "") {
                     that.comparelist = temp.split(",");
                 }
                 for (let i = 0; i < that.comparelist.length; i++) {
-                    axios({
-                        url: 'http://fanqin.vaiwan.com/shop/getInfoById',
-                        method: 'post',
-                        params: {
-                            'goodsId': parseInt(that.comparelist[i])
-                        },
-                        headers: {
-                            'token': that.token
-                        }
-                    }).then(res => {
-                        // sessionStorage
-                        var json = res.data;
-                        that.goods_info.push(json);
-                    });
+                    if (that.comparelist[i] != '' || that.comparelist[i] != "") {
+                        axios({
+                            url: 'http://fanqin.vaiwan.com/shop/getInfoById',
+                            method: 'post',
+                            params: {
+                                'goodsId': parseInt(that.comparelist[i])
+                            },
+                            headers: {
+                                'token': that.token
+                            }
+                        }).then(res => {
+                            // sessionStorage
+                            var json = res.data;
+                            that.goods_info.push(json);
+                        });
+
+                    }
                 }
                 console.log(that.goods_info);
             },
