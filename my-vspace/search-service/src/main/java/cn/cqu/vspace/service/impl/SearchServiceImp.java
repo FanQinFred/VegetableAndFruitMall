@@ -3,6 +3,8 @@ package cn.cqu.vspace.service.impl;
 import cn.cqu.vspace.pojo.Condition;
 import cn.cqu.vspace.pojo.Goods;
 import cn.cqu.vspace.service.SearchService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -10,7 +12,6 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocumentList;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -33,17 +34,9 @@ public class SearchServiceImp implements SearchService {
     @Autowired
     private SolrClient solrClient;
     @Override
-    public JSONObject searchPage(Condition condition) {
+    public JSONObject searchPage(String keyWord, int pageNo, int pageSize) {
         SolrQuery query = new SolrQuery();
-        query.set("q","goodsName:" + condition.getSearchWord() + "~");
-//        //添加商品价格过滤
-//        query.addFilterQuery("goods_price:[" + condition.getMinPrice() + " TO " + condition.getMaxPrice() + "]");
-//        //设置分页相关参数
-//        //①: 设置偏移量
-//        query.setStart((condition.getPageNo() - 1) * condition.getPageSize());
-//        //②: 设置每页显示条数
-//        query.setRows(condition.getPageSize());
-        //设置回显的字段(也就是查询哪些字段进行前端展示)
+        query.set("q","goodsName:" + keyWord + "~");
         query.setFields("goodsName","goodsRate","goodsImgUrl",
         "goodsOriginalPrice","goodsCurrentPrice",
         "goodsSeason","goodsDescription",
@@ -59,48 +52,33 @@ public class SearchServiceImp implements SearchService {
             //获取数据总记录数
             SolrDocumentList results = queryResponse.getResults();
             totalItems = results.getNumFound();
-            /*特别注意: 查询数据结果和高亮结果是分开的*/
-            //判断如果查询关键字不是*号,则查询高亮显示
-            if (!condition.getSearchWord().equals("*"))
-            {
-                //获取高亮结果(该结果为所有高亮信息的集合)
-                Map<String, Map<String, List<String>>>
-                highlighting = queryResponse.getHighlighting();
-                if (highlighting != null) {
-                    for (Goods goods :goodsList) {
-                        Map<String, List<String>> highMap = highlighting.get(goods.getGoodsId() + "");
-                        if (highMap != null) {
-                            if (highMap.get("goods_title") != null) {
-                                goods.setGoodsTitle(highMap.get("goods_title").get(0));
-                            }
-                            if (highMap.get("goods_description") != null) {
-                                goods.setDescription(highMap.get("goods_description").get(0));
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (SolrServerException e) {
-        e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SolrServerException | IOException e) {
         e.printStackTrace();
         }
-        return null
-    }
-    @Override
-    public void addSolrDoc(List list) {
-        try {
-            UpdateResponse updateResponse = solrClient.addBeans(list);
-            //如果没有异常则提交事务
-            solrClient.commit();
-        } catch (SolrServerException e) {
-        e.printStackTrace();
-        } catch (IOException e) {
-        e.printStackTrace();
+        if (totalItems % pageSize == 0) {
+            pages = (int)(totalItems / pageSize);
+        }else{
+            pages = (int)(totalItems / pageSize) + 1;
         }
-    }
-    @Override
-    public void deleteSolrDoc(Condition condition) {
-
+        JSONObject result = new JSONObject();
+        result.put("pages", pages);
+        result.put("totalItems", totalItems);
+        JSONArray array = new JSONArray();
+        assert goodsList != null;
+        for(Goods goods : goodsList){
+            JSONObject item = new JSONObject();
+            item.put("id",goods.getGoodsId());
+            item.put("currentPrice",goods.getGoodsCurrentPrice());
+            item.put("imgUrl",goods.getGoodsImgUrl());
+            item.put("amount",goods.getGoodsAmount());
+            item.put("name",goods.getGoodsName());
+            item.put("originalPrice",goods.getGoodsOriginalPrice());
+            item.put("description",goods.getGoodsDescription());
+            item.put("rate",goods.getGoodsRate());
+            item.put("season",goods.getGoodsSeason());
+            array.add(item);
+        }
+        result.put("list", array);
+        return result;
     }
 }

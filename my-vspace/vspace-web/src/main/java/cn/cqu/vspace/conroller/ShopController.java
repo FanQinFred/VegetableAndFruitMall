@@ -1,6 +1,8 @@
 package cn.cqu.vspace.conroller;
 
+import cn.cqu.vspace.service.CacheService;
 import cn.cqu.vspace.service.ShopService;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.repository.query.Param;
@@ -18,14 +20,36 @@ public class ShopController {
     @Reference
     ShopService shopService;
 
+    @Reference
+    CacheService cacheService;
+
     @RequestMapping(value = "/getIdByCategoryId", method = RequestMethod.POST)
     public JSONObject GoodsIdByCategoryId (@RequestHeader("token") String token, @Param("category_Id") Integer category_Id){
         return shopService.GoodsIdByCategoryId(token, category_Id.intValue());
     }
     @RequestMapping(value = "/getInfoById", method = RequestMethod.POST)
     public JSONObject GoodsInfoById (@RequestHeader("token") String token, @Param("goodsId")String goodsId){
-        System.out.println("goodsId: "+goodsId);
-        return shopService.GoodsInfoById(token, Integer.parseInt(goodsId));
+        String[] list = goodsId.split("-");
+        List<Integer> goodsList = new ArrayList<>(list.length);
+        for(String item : list){
+            goodsList.add(Integer.parseInt(item));
+        }
+        JSONObject result = new JSONObject();
+        JSONArray array = new JSONArray();
+        for(int num : goodsList){
+            String data = cacheService.getDataByKey(String.valueOf(num));
+            if(data == null){
+                JSONObject info = shopService.GoodsInfoById(token, num);
+                array.add(info);
+                cacheService.insertCache(String.valueOf(num), info.toJSONString());
+            }else{
+                JSONObject info = JSONObject.parseObject(data);
+                array.add(info);
+            }
+        }
+        result.put("list", array);
+        result.put("status", "200");
+        return result;
     }
     @RequestMapping(value = "/compare", method = RequestMethod.POST)
     public JSONObject addCompareList (@RequestHeader("token") String token, @Param("id") String id){
