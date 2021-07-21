@@ -374,7 +374,7 @@
                                                         <td>{{item.date}}</td>
                                                         <td>{{item.status}}</td>
                                                         <td>${{item.total}}</td>
-                                                        <td><a href="cart.html" class="btn btn__bg btn__sqr">cancellation</a>
+                                                        <td><a href="javascript:void(0);" class="btn btn__bg btn__sqr" @click="DeleteOrders(item)">cancellation</a>
                                                         </td>
                                                     </tr>
                                                     
@@ -798,24 +798,53 @@
             this.ShowOrders()
         },
         methods: {
+            DeleteOrders(item){
+                console.log("DeleteOrders")
+                let token = window.localStorage.getItem("token")
+                axios({
+                    url: 'http://fanqin.vaiwan.com/order/delete',
+                    method: 'post',
+                    params:{
+                        'orderId':item.id
+                    },
+                    headers: {
+                        'token': token
+                    }
+                })
+                    .then((response) => {
+                        this.ShowOrders()
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
             ShowOrders(item) {
-                    console.log("ShowOrders")
-                    let token = window.localStorage.getItem("token")
-                    axios({
-                        url: 'http://fanqin.vaiwan.com/order/show',
-                        method: 'post',
-                        
-                        headers: {
-                            'token': token
+                console.log("ShowOrders")
+                let token = window.localStorage.getItem("token")
+                axios({
+                    url: 'http://fanqin.vaiwan.com/order/show',
+                    method: 'post',
+                    
+                    headers: {
+                        'token': '55555'
+                    }
+                })
+                    .then((response) => {
+                        this.orderList = []
+                        for(let i = 0;i<response.data.list.length;i++){
+                            let l = {
+                                id:response.data.list[i].id,
+                                date:response.data.list[i].date,
+                                status:response.data.list[i].status,
+                                total:response.data.list[i].total
+                            }
+                            this.orderList.push(l)
                         }
                     })
-                        .then((response) => {
-                            
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                }
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         }
 
     })

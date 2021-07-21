@@ -14,17 +14,19 @@ import org.mockito.internal.matchers.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
     UserMapper userMapper;
     @Autowired
     OrderMapper orderMapper;
+
     @Override
     public JSONObject addOrder(String token, String orderId, String goodsId, String status, String total) {
         List<User> list;
         list = userMapper.selectByToken(token);
-        if(!list.isEmpty()){
+        if (!list.isEmpty()) {
             Order order = new Order();
             order.setOrderStatus(status);
             order.setUserId(list.get(0).getUserId());
@@ -37,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
 
         }
         JSONObject error = new JSONObject();
-        error.put("status","500");
+        error.put("status", "500");
         return error;
     }
 
@@ -45,51 +47,71 @@ public class OrderServiceImpl implements OrderService {
     public JSONObject deleteOrder(String token, String orderId) {
         List<User> list;
         list = userMapper.selectByToken(token);
-        if(!list.isEmpty()){
+        if (!list.isEmpty()) {
             OrderExample example = new OrderExample();
             OrderExample.Criteria criteria = example.createCriteria();
             criteria.andOrderIdEqualTo(Integer.parseInt(orderId));
             List<Order> orderList = orderMapper.selectByExample(example);
-            if(!orderList.isEmpty()){
+            if (!orderList.isEmpty()) {
                 orderMapper.deleteByExample(example);
                 JSONObject result = new JSONObject();
                 result.put("status", "200");
                 return result;
             }
+            else {
+                JSONObject result = new JSONObject();
+                JSONArray array = new JSONArray();
+                result.put("list", array);
+                result.put("status","200");
+                return result;
+            }
         }
         JSONObject error = new JSONObject();
-        error.put("status","500");
+        error.put("status", "500");
         return error;
     }
 
     @Override
     public JSONObject showOrders(String token) {
         List<User> list;
-        list = userMapper.selectByToken(token);
-        if(!list.isEmpty()){
-            OrderExample example = new OrderExample();
-            OrderExample.Criteria criteria = example.createCriteria();
-            criteria.andUserIdEqualTo(list.get(0).getUserId());
-            List<Order> orderList = orderMapper.selectByExample(example);
-            if(!orderList.isEmpty()){
-                JSONObject result = new JSONObject();
-                JSONArray array = new JSONArray();
-                for(Order order : orderList){
-                    JSONObject item = new JSONObject();
-                    item.put("id",order.getOrderId());
-                    item.put("uid",order.getOrderId());
-                    item.put("gid",order.getGoodsId());
-                    item.put("date",order.getOrderDate());
-                    item.put("total",order.getOrderTotal());
-                    item.put("orderStatus",order.getOrderStatus());
-                    array.add(item);
-                }
-                result.put("list", array);
-                return result;
-            }
-        }
         JSONObject error = new JSONObject();
-        error.put("status","500");
+        list = userMapper.selectByToken(token);
+        try {
+
+
+            if (!list.isEmpty()) {
+                OrderExample example = new OrderExample();
+                OrderExample.Criteria criteria = example.createCriteria();
+                criteria.andUserIdEqualTo(list.get(0).getUserId());
+                List<Order> orderList = orderMapper.selectByExample(example);
+                if (!orderList.isEmpty()) {
+                    JSONObject result = new JSONObject();
+                    JSONArray array = new JSONArray();
+                    for (Order order : orderList) {
+                        JSONObject item = new JSONObject();
+                        item.put("id", order.getOrderId());
+                        item.put("uid", order.getOrderId());
+                        item.put("gid", order.getGoodsId());
+                        item.put("date", order.getOrderDate());
+                        item.put("total", order.getOrderTotal());
+                        item.put("orderStatus", order.getOrderStatus());
+                        array.add(item);
+                    }
+                    result.put("list", array);
+                    result.put("status","200");
+                    return result;
+                }else {
+                    JSONObject result = new JSONObject();
+                    JSONArray array = new JSONArray();
+                    result.put("list", array);
+                    result.put("status","200");
+                    return result;
+                }
+            }
+        } catch (Exception e) {
+            error = new JSONObject();
+            error.put("status", "500");
+        }
         return error;
     }
 
@@ -97,12 +119,12 @@ public class OrderServiceImpl implements OrderService {
     public JSONObject updateOrder(String token, String orderId, String goodsId, String status, String total) {
         List<User> list;
         list = userMapper.selectByToken(token);
-        if(!list.isEmpty()){
+        if (!list.isEmpty()) {
             OrderExample example = new OrderExample();
             OrderExample.Criteria criteria = example.createCriteria();
             criteria.andOrderIdEqualTo(Integer.parseInt(orderId));
             List<Order> orderList = orderMapper.selectByExample(example);
-            if(!orderList.isEmpty()){
+            if (!orderList.isEmpty()) {
                 Order order = new Order();
                 order.setOrderStatus(status);
                 order.setUserId(list.get(0).getUserId());
@@ -115,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         JSONObject error = new JSONObject();
-        error.put("status","500");
+        error.put("status", "500");
         return error;
     }
 }

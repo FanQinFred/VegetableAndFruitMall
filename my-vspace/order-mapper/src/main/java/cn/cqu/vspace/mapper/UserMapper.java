@@ -24,5 +24,5 @@ public interface UserMapper {
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    List<User> selectByToken(@Param("token") String token);
+    List<User> selectByToken( String token);
 }
