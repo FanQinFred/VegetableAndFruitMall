@@ -98,5 +98,35 @@ public class CartServiceImp implements CartService {
         return errorInfo;
     }
 
-
+    @Override
+    public JSONObject addCart(String token, int goodsId, int count) {
+        List<User> list;
+        list = userMapper.selectByToken(token);
+        if(!list.isEmpty()){
+            User user = list.get(0);
+            Integer userid = user.getUserId();
+            UserGoodsExample userGoodsExample = new UserGoodsExample();
+            UserGoodsExample.Criteria criteria = userGoodsExample.createCriteria();
+            criteria.andGoodsIdEqualTo(goodsId);
+            criteria.andUserIdEqualTo(userid);
+            criteria.andCartorwishlistNotEqualTo(1);
+            List<UserGoods> userGoodsList = userGoodsMapper.selectByExample(userGoodsExample);
+            if(userGoodsList.isEmpty()){
+                UserGoods userGoods = new UserGoods();
+                userGoods.setUserId(userid);
+                userGoods.setGoodsId(goodsId);
+                userGoodsMapper.insert(userGoods.getGoodsId(), userGoods.getUserId(), 0, 1);
+            }else{
+                for(UserGoods userGoods : userGoodsList){
+                    userGoodsMapper.updateAmount(userGoods.getGoodsId(), userid, userGoods.getAmount()+count);
+                }
+            }
+            JSONObject correctInfo = new JSONObject();
+            correctInfo.put("status", 200);
+            return correctInfo;
+        }
+        JSONObject errorInfo = new JSONObject();
+        errorInfo.put("status", 500);
+        return errorInfo;
+    }
 }

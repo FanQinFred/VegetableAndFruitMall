@@ -37,4 +37,8 @@ public class CartController {
         return cartService.getCart(token);
     }
 
+    @RequestMapping(value = "/addcart", method = RequestMethod.POST)
+    public JSONObject updateCart(@RequestHeader("token") String token, @Param("goodsId") int goodsId, @Param("count") int count){
+        return cartService.addCart(token, goodsId, count);
+    }
 }

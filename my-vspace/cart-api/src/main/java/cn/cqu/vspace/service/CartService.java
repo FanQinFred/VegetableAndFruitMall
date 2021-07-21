@@ -7,4 +7,5 @@ import java.util.List;
 public interface CartService {
     JSONObject updateCart(String token, List<Integer> goodsId);
     JSONObject getCart(String token);
+    JSONObject addCart(String token, int goodsId, int count);
 }
