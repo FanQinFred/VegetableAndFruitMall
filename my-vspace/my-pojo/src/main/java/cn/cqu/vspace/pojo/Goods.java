@@ -6,31 +6,30 @@ import java.io.Serializable;
 
 
 public class Goods implements Serializable {
-    @Field("goodsId")
     private Integer goodsId;
 
-    @Field("goodsName")
+    @Field("GOODS_NAME")
     private String goodsName;
 
-    @Field("goodsRate")
+    @Field("GOODS_RATE")
     private String goodsRate;
 
-    @Field("goodsImgUrl")
+    @Field("GOODS_IMG_URL")
     private String goodsImgUrl;
 
-    @Field("goodsOriginalPrice")
+    @Field("GOODS_ORIGINAL_PRICE")
     private String goodsOriginalPrice;
 
-    @Field("goodsCurrentPrice")
+    @Field("GOODS_CURRENT_PRICE")
     private String goodsCurrentPrice;
 
-    @Field("goodsSeason")
+    @Field("GOODS_SEASON")
     private String goodsSeason;
 
-    @Field("goodsDescription;")
+    @Field("GOODS_DESCRIPTION;")
     private String goodsDescription;
 
-    @Field("goodsAmount")
+    @Field("GOODS_AMOUNT")
     private String goodsAmount;
 
     public Integer getGoodsId() {
