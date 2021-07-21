@@ -679,23 +679,6 @@
                         swal("删除失败");
                         console.log(error);
                     });
-                },
-                add2cart(goodsId) {
-
-                    console.log(goodsId);
-                    let request_data = {
-                        'id': goodsId
-                    };
-                    AddWish(request_data).then((response) => {
-                        if (response.data.status == '200') {
-                            swal("添加成功");
-                        } else {
-                            swal("添加失败");
-                        }
-                    }).catch((error) => {
-                        swal("添加失败");
-                        console.log(error);
-                    });
                 }
             }
         })

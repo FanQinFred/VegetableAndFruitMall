@@ -23,7 +23,7 @@ public class ShopController {
         return shopService.GoodsIdByCategoryId(token, category_Id.intValue());
     }
     @RequestMapping(value = "/getInfoById", method = RequestMethod.POST)
-    public JSONObject GoodsInfoById (@RequestHeader("token") String token, @RequestParam("goodsId")String goodsId){
+    public JSONObject GoodsInfoById (@RequestHeader("token") String token, @Param("goodsId")String goodsId){
         System.out.println("goodsId: "+goodsId);
         return shopService.GoodsInfoById(token, Integer.parseInt(goodsId));
     }
