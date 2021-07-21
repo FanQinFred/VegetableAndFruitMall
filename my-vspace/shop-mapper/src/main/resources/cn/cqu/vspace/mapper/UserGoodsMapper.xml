@@ -161,7 +161,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateAmount">
+  <update id="updateAmount" parameterType="java.lang.Integer">
     update "SHOPPING"."USER_GOODS"
     set AMOUNT = #{amount, jdbcType=INTEGER}
     where GOODS_ID = #{goodsId, jdbcType=INTEGER} and USER_ID = #{userId, jdbcType=INTEGER}
@@ -169,6 +169,6 @@
   <update id="updateCartOrWishList">
     update "SHOPPING"."USER_GOODS"
     set CartOrWishList = 2
-    where CartOrWishList = 0 and GOODS_ID = #{goodsId, jdbcType=INTEGERs and USER_ID = #{userId, jdbcType=INTEGER}
+    where CartOrWishList = 0 and GOODS_ID = #{goodsId, jdbcType=INTEGER} and USER_ID = #{userId, jdbcType=INTEGER}
   </update>
 </mapper>

@@ -185,7 +185,7 @@
 <select id="selectTopThree" resultMap="BaseResultMap">
   SELECT TOP 3 *
   FROM "SHOPPING"."REVIEW"
-  ORDER BY REVIEW_RATE DESC
+  ORDER BY REVIEW_DATE DESC
 </select>
 
 

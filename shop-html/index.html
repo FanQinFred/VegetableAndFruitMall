@@ -1004,7 +1004,7 @@
                                             <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist"
                                                 @click="AddToWishList(quick_view_item)"><i
                                                     class="ion-android-favorite-outline"></i></a>
-                                            <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart"
+                                            <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart" data-dismiss="modal"
                                                 @click="AddToCart(quick_view_item)"><i class="ion-bag"></i></a>
 
 
@@ -1277,6 +1277,8 @@
     <script src="assets/js/active.js"></script>
     <!--=== Axios JS ===-->
     <script src="assets/js/axios.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="module">
         import { popularCategories, ourProducts, whatPeopleSay, bestSellers, fromTheBlog, newArrivals, topRated, addToCart, addToWishList } from "./assets/js/index.js"
@@ -1836,6 +1838,7 @@
                     })
                         .then((response) => {
                             hd.GetCart()
+                            swal("添加成功")
                         })
                         .catch((error) => {
                             console.log(error);
@@ -1929,6 +1932,7 @@
                     })
                         .then((response) => {
                             hd.GetCart()
+                            swal("添加成功")
                         })
                         .catch((error) => {
                             console.log(error);
@@ -2011,7 +2015,7 @@
                             this.subtotal = 0
                             this.amount = 0
                             for (let i = 0; i < this.cartList.length; i++) {
-                                this.subtotal += parseFloat(this.cartList[i].price)
+                                this.subtotal += parseFloat(this.cartList[i].price) * this.cartList[i].qty
                                 this.amount += parseInt(this.cartList[i].amount)
                             }
                         })
