@@ -21,8 +21,11 @@
     <!-- Modernizer JS -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
 
-    <script src="assets/js/vue.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/jquery.params.js"></script>
 
+    <!-- Modernizer JS -->
+    <script src="assets/js/vue.js"></script>
 
     <!--[if lt IE 9]>
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -31,7 +34,7 @@
 
 </head>
 
-<body>
+<body >
 
     <!-- Start Header Area -->
     <header class="header-area">
@@ -70,11 +73,11 @@
                                 </nav>
                             </div>
                             <div class="header-top-right">
-                                <div class="header-search-box">
-                                    <form>
-                                        <input type="text" placeholder="Search Here">
-                                        <button><i class="ion-ios-search-strong"></i></button>
-                                    </form>
+                                <div class="header-search-box" id=hsb>
+                                    
+                                        <input type="text" placeholder="Search Here" v-model="keyword">
+                                        <a href="javascript:void(0);" @click="Search">搜索</a>
+                                    
                                 </div>
                                 <div class="mini-cart-wrap">
                                     <button><i class="ion-bag"></i>
@@ -115,35 +118,15 @@
         </div>
         <!-- header top end -->
 
-        <!-- main menu start -->
-        <div class="main-menu-area sticky">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="main-menu">
-                            <div class="sticky-logo">
-                                <a href="index.html">
-                                    <img src="assets/img/logo/logo_sticky.png" alt="brand logo">
-                                </a>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="col-12 d-block d-lg-none">
-                        <div class="mobile-menu"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- main menu end -->
 
     </header>
     <!-- end Header Area -->
 
     <!-- main wrapper start -->
-    <main id="one">
+    <main >
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area">
+        <div class="breadcrumb-area" >
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -163,151 +146,62 @@
         <!-- breadcrumb area end -->
 
         <!-- page main wrapper start -->
-        <div class="shop-main-wrapper pt-60 pb-60">
+        <div class="shop-main-wrapper pt-60 pb-60" id="one">
             <div class="container">
                 <div class="row">
                     <!-- sidebar area start -->
-                    <div class="col-lg-3 order-2 order-lg-1">
-                        <div class="sidebar-wrapper mt-md-60 mt-sm-60">
-                            <!-- single sidebar start -->
-                            <div class="sidebar-single">
-                                <div class="sidebar-title">
-                                    <h3>categories</h3>
-                                </div>
-                                <div class="sidebar-body">
-                                    <ul class="sidebar-category">
-                                        <li><a @click="Select(0)">accessories</a></li>
-                                        <li><a @click="Select(1)">fruits</a></li>
-                                        <li><a @click="Select(2)">juice</a></li>
-                                        <li><a @click="Select(3)">meats</a></li>
-                                        <li><a @click="Select(4)">vegetables</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single sidebar end -->
-                            <!-- single sidebar start -->
 
-                            <!-- single sidebar end -->
-                            <!-- single sidebar start -->
-                            <div class="sidebar-single">
-                                <div class="sidebar-banner">
-                                    <a href="#">
-                                        <img src="assets/img/banner/banner_left.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- single sidebar end -->
-                        </div>
-                    </div>
                     <!-- sidebar area end -->
                     <!-- shop main wrapper start -->
-                    <div class="col-lg-9 order-1 order-lg-2">
-                        <div class="shop-product-wrapper">
-                            <!-- shop product top wrap start -->
-                            <div class="shop-top-bar">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-8 col-md-9 order-1 order-md-2">
-                                        <div class="top-bar-right">
-                                            <div class="product-short">
-
-                                            </div>
-                                            <div class="product-amount">
-                                                <p>Showing 1–{{shopdata.length}} of {{total_data}} results</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- shop product top wrap start -->
-
+                    <div class="col-lg-9 order-1 order-lg-2" style="margin: auto;">
+                        <div class="shop-product-wrapper" >
                             <!-- product item list start -->
-                            <div v-for='value in shopdata'>
-                                <div class="shop-product-wrap grid-view row">
-                                    <div class="col-lg-4 col-md-4 col-sm-6" v-for='datavalue in value'>
-                                        <!-- product grid item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-4.jpg" alt="">
-                                                </a>
-                                                <div class="quick-view-link">
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                            data-toggle="tooltip" title="Quick view"><i
-                                                                class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content text-center">
-                                                <div class="ratings">
-                                                    <span v-for='count in datavalue.rank'><i
-                                                            class="ion-android-star"></i></span>
-                                                </div>
-                                                <div class="product-name">
-                                                    <h4 class="h5">
-                                                        <a href="product-details.html">{{datavalue.name}}</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">${{datavalue.price}}</span>
-                                                    <span class="old-price"><del></del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                                            class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"><i
-                                                            class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                            class="ion-ios-shuffle"></i></a>
-                                                </div>
+                            <div class="shop-product-wrap grid-view row">
+                                <div class="col-lg-4 col-md-4 col-sm-6" v-for="item in goodsList">
+                                    <!-- product grid item start -->
+                                    <div class="product-item mb-50">
+                                        <div class="product-thumb">
+                                            <a href="javascript:void(0);" @click="ShowProductDetail(item)">
+                                                <img v-bind:src="item.src" alt="">
+                                            </a>
+                                            <div class="quick-view-link">
+                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#quick_view"> <span
+                                                        data-toggle="tooltip" title="Quick view" @click="ShowQuickView(item)"><i
+                                                            class="ion-ios-eye-outline"></i></span> </a>
                                             </div>
                                         </div>
-                                        <!-- product grid item end -->
-                                        <!-- product list item start -->
-                                        <div class="product-list-item mb-30">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="assets/img/product/product-4.jpg" alt="">
-                                                </a>
-                                                <div class="quick-view-link">
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                            data-toggle="tooltip" title="Quick view"><i
-                                                                class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
+                                        <div class="product-content text-center">
+                                            <div class="ratings">
+                                                <span><i class="ion-android-star"
+                                                    v-for="count in item.rate"></i></span>
+                                                
                                             </div>
-                                            <div class="product-content-list">
-                                                <div class="ratings">
-                                                    <span><i class="ion-android-star"></i></span>
-                                                    <span><i class="ion-android-star"></i></span>
-                                                    <span><i class="ion-android-star"></i></span>
-                                                    <span><i class="ion-android-star"></i></span>
-                                                    <span><i class="ion-android-star"></i></span>
-                                                </div>
-                                                <div class="product-name">
-                                                    <h4><a href="product-details.html">Condimentum organic
-                                                            vegetables</a></h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price">$160.00</span>
-                                                    <span class="old-price"><del>$130.00</del></span>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                                                    posuere metus
-                                                    vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet sem
-                                                    vitae
-                                                    urna fringilla tempus.</p>
-                                                <div class="action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Add to cart"
-                                                        class="add-to-cart">add
-                                                        to cart</a>
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                                            class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                            class="ion-ios-shuffle"></i></a>
-                                                </div>
+                                            <div class="product-name">
+                                                <h4 class="h5">
+                                                    <a href="javascript:void(0);" @click="ShowProductDetail(item)">{{goodsList[0].name}}</a>
+                                                </h4>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="regular-price">${{item.price}}</span>
+                                                
+                                            </div>
+                                            <div class="product-action-link">
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Wishlist"><i
+                                                        class="ion-android-favorite-outline" @click="AddToWishList(item)"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Add to cart"><i
+                                                        class="ion-bag" @click="AddToCart(item)"></i></a>
+                                                <a href="javascript:void(0);" data-toggle="tooltip" title="Compare"><i
+                                                        class="ion-ios-shuffle" @click="AddToCompareList(item)"></i></a>
                                             </div>
                                         </div>
-                                        <!-- product list item start -->
                                     </div>
+                                    <!-- product grid item end -->
+
                                 </div>
+                                
+                                
+                                
+                                
                             </div>
                             <!-- product item list end -->
 
@@ -316,7 +210,8 @@
                                 <ul class="pagination-box">
                                     <li><a class="Previous" href="#"><i class="ion-ios-arrow-left"></i></a></li>
                                     <li class="active"><a href="#">1</a></li>
-                                    <!--                                <li v-for='count in (total_data/(3*shopdata.length))'><a href="#">2</a></li> -->
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
                                     <li><a class="Next" href="#"><i class="ion-ios-arrow-right"></i></a></li>
                                 </ul>
                             </div>
@@ -654,81 +549,276 @@
     <!--=== Active Js ===-->
     <script src="assets/js/active.js"></script>
 
+    <!--=== Axios JS ===-->
     <script src="assets/js/axios.js"></script>
 
 
-    <script>
-        var hd = new Vue({
-            el: '#hd',
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="module">
+        new Vue({
+            el: '#one',
             data: {
-                cartList: [
+                keyword:'',
+                goodsList: [
                     {
                         id: 4,
-                        name: '真好吃',
-                        qty: 6,
-                        price: '6',
-                        src: 'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
                     },
                     {
                         id: 4,
-                        name: '真好吃',
-                        qty: 6,
-                        price: '6',
-                        src: 'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
-                    }
-                ],
-                subtotal: 6,
-                amount: 1
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    {
+                        id: 4,
+                        rate: 4,
+                        name: 'goods4',
+                        price: '100.00',
+                        src: 'https://img0.baidu.com/it/u=3504820500,3612643477&fm=26&fmt=auto&gp=0.jpg',
+                        description: '真不错',
+                        stock: '2'
+                    },
+                    
+                ]
+
+
             },
             created() {
-                this.GetCart()
+
             },
-
             methods: {
-                GetCart() {
-                    let token = window.localStorage.getItem("token")
-                    console.log("GetCart")
-                    axios({
-                        url: 'http://fanqin.vaiwan.com/cart/cart',
-                        method: 'post',
+                
+                ShowQuickView(item) {
 
-                        headers: {
-                            'token': token
-                        }
-                    })
-                        .then((response) => {
-                            this.cartList = []
-                            for (let i = 0; i < response.data.list.length; i++) {
-                                let l = {
-                                    id: response.data.list[i].id,
-                                    name: response.data.list[i].name,
-                                    qty: parseInt(response.data.list[i].count),
-                                    price: response.data.list[i].currentPrice,
-                                    src: response.data.list[i].imgUrl
-                                }
-                                this.cartList.push(l)
-                            }
-
-                            this.subtotal = 0
-                            this.amount = 0
-                            for (let i = 0; i < this.cartList.length; i++) {
-                                this.subtotal += Math.floor(parseFloat(this.cartList[i].price) * this.cartList[i].qty * 100) / 100
-                                this.amount += parseInt(this.cartList[i].amount)
-                            }
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
+                    console.log("ShowQuickView")
+                    console.log(item)
+                    qv.quick_view_item = item
+                    console.log(qv.quick_view_item)
                 },
                 ShowProductDetail(item) {
                     console.log("ShowProductDetail")
                     let id = item.id
                     let url = "product-details.html?goodsId=" + id;//此处拼接内容
                     window.location.href = url;
+                },
+                AddToWishList(item) {
+                    console.log("AddToWishList")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/shop/wish',
+                        method: 'post',
+                        params: {
+                            'id': item.id
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                AddToCart(item) {
+                    console.log("AddToCart")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/addcart',
+                        method: 'post',
+                        params: {
+                            'goodsId': item.id,
+                            'count':1
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            hd.GetCart()
+                            swal("添加成功")
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+                ,
+                AddToCompareList(item) {
+                    console.log("AddToCompareList")
+                    let list = window.sessionStorage.getItem("compareList")
+                    if (list == null) {
+                        let compareList = new Array()
+                        compareList.push(item.id)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    } else if (!list.includes(item.id)) {
+
+                        let compareList = list.split(",")
+                        compareList.push(item.id)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    }
+                    console.log(window.sessionStorage.getItem("compareList"))
                 }
             }
 
         })
+    </script>
+    <script>
+
+        let qv = new Vue({
+            el: '#quick_view',
+            data: {
+                quick_view_item: {
+                    id: 4,
+                    rate: 3,
+                    name: 'goods3',
+                    price: '100.00',
+                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
+                    description: '真不错',
+                    stock: '2'
+
+                },
+                amount: '1',
+                
+            },
+            created() {
+
+            },
+            methods: {
+                ShowProductDetail(item) {
+                    console.log("ShowProductDetail")
+                    let id = item.id
+                    let url = "product-details.html?goodsId=" + id;//此处拼接内容
+                    window.location.href = url;
+                },
+                AddToWishList(item) {
+                    console.log("AddToWishList")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/shop/wish',
+                        method: 'post',
+                        params: {
+                            'id': item.id
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                AddToCart(item) {
+                    console.log("AddToCart")
+                    let token = window.localStorage.getItem("token")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/addcart',
+                        method: 'post',
+                        params: {
+                            'goodsId': item.id,
+                            'count':1
+
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            hd.GetCart()
+                            swal("添加成功")
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+                ,
+                AddToCompareList(item) {
+                    console.log("AddToCompareList")
+                    let list = window.sessionStorage.getItem("compareList")
+                    if (list == null) {
+                        let compareList = new Array()
+                        compareList.push(item.id)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    } else if (!list.includes(item.id)) {
+
+                        let compareList = list.split(",")
+                        compareList.push(item.id)
+                        window.sessionStorage.setItem("compareList", compareList.toString())
+                    }
+                    console.log(window.sessionStorage.getItem("compareList"))
+                }
+            }
+
+        })
+
+
     </script>
     <script type="module">
         import { newArrivals, topRated } from "./assets/js/index.js"
@@ -854,135 +944,121 @@
         })
 
     </script>
-
     <script>
-        new Vue({
-            el: '#one',
+        var hd = new Vue({
+            el: '#hd',
             data: {
-                shopdata: [
-                    [{ name: 'data1', price: 1, num: 2, rank: 8, picture: "assets/img/product/product-1.jpg" },
-                    { name: 'data2', price: 2, num: 2, rank: 8, picture: "assets/img/product/product-1.jpg" },
-                    { name: 'data2', price: 2, num: 2, rank: 8, picture: "assets/img/product/product-1.jpg" }
-                    ],
-                    [{ name: 'data1', price: 1, num: 2, rank: 8, picture: "assets/img/product/product-1.jpg" },
-                    { name: 'data2', price: 2, num: 2, rank: 8, picture: "assets/img/product/product-1.jpg" },
-                    { name: 'data2', price: 2, num: 2, rank: 8, picture: "assets/img/product/product-1.jpg" }
-                    ]
+                cartList: [
+                    {
+                        id: 4,
+                        name: '真好吃',
+                        qty: 6,
+                        price: '6',
+                        src: 'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+                    },
+                    {
+                        id: 4,
+                        name: '真好吃',
+                        qty: 6,
+                        price: '6',
+                        src: 'https://img2.baidu.com/it/u=2854065357,1526765253&fm=26&fmt=auto&gp=0.jpg'
+                    }
                 ],
-
-                sub_total: 6,
-                total_data: 100,
-                mindata: 0,
-                maxdata: 0,
-
+                subtotal: 6,
+                amount: 1
             },
             created() {
-
+                this.GetCart()
             },
+
             methods: {
+                GetCart() {
+                    let token = window.localStorage.getItem("token")
+                    console.log("GetCart")
+                    axios({
+                        url: 'http://fanqin.vaiwan.com/cart/cart',
+                        method: 'post',
 
-                ShowQuickView(item) {
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            this.cartList = []
+                            for (let i = 0; i < response.data.list.length; i++) {
+                                let l = {
+                                    id: response.data.list[i].id,
+                                    name: response.data.list[i].name,
+                                    qty: parseInt(response.data.list[i].count),
+                                    price: response.data.list[i].currentPrice,
+                                    src: response.data.list[i].imgUrl
+                                }
+                                this.cartList.push(l)
+                            }
 
-                    console.log("ShowQuickView")
-                    console.log(item)
-                    qv.quick_view_item = item
-                    console.log(qv.quick_view_item)
+                            this.subtotal = 0
+                            this.amount = 0
+                            for (let i = 0; i < this.cartList.length; i++) {
+                                this.subtotal += Math.floor(parseFloat(this.cartList[i].price) * this.cartList[i].qty*100) / 100
+                                this.amount += parseInt(this.cartList[i].amount)
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                 },
-
-            }
-
-        })
-    </script>
-    <script>
-
-        let qv = new Vue({
-            el: '#quick_view',
-            data: {
-                quick_view_item: {
-                    id: 4,
-                    rate: 3,
-                    name: 'goods3',
-                    price: '100.00',
-                    src: 'https://img0.baidu.com/it/u=3384913163,1256852657&fm=26&fmt=auto&gp=0.jpg',
-                    description: '真不错',
-                    stock: '2'
-
-                },
-                amount: '1',
-            },
-            created() {
-
-            },
-            methods: {
                 ShowProductDetail(item) {
                     console.log("ShowProductDetail")
                     let id = item.id
                     let url = "product-details.html?goodsId=" + id;//此处拼接内容
                     window.location.href = url;
-                },
-                AddToWishList(item) {
-                    console.log("AddToWishList")
+                }
+            }
+
+        })
+    </script>
+    <script>
+
+        new Vue({
+            el: '#hsb',
+            data: {
+                keyword:""
+                
+            },
+            created() {
+
+            },
+            methods: {
+                Search(){
+                    console.log("Search")
                     let token = window.localStorage.getItem("token")
                     axios({
-                        url: 'http://fanqin.vaiwan.com/shop/wish',
+                        url: 'http://fanqin.vaiwan.com/search/searchInfoByKeyWord',
                         method: 'post',
                         params: {
-                            'id': item.id
+                            'keyWord': String(this.keyword),
+                            'pageNo':1,
+                            'pageSize':12
+
                         },
                         headers: {
                             'token': token
                         }
                     })
                         .then((response) => {
-
+                            
                         })
                         .catch((error) => {
                             console.log(error);
                         });
                 },
-                AddToCart(item) {
-                    console.log("AddToCart")
-                    let token = window.localStorage.getItem("token")
-                    axios({
-                        url: 'http://fanqin.vaiwan.com/cart/update',
-                        method: 'post',
-                        params: {
-                            'goodsId': item.id
-                        },
-                        headers: {
-                            'token': token
-                        }
-                    })
-                        .then((response) => {
-                            hd.GetCart()
-                            swal("添加成功")
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                }
-                ,
-                AddToCompareList(item) {
-                    console.log("AddToCompareList")
-                    let list = window.sessionStorage.getItem("compareList")
-                    if (list == null) {
-                        let compareList = new Array()
-                        compareList.push(item.id)
-                        window.sessionStorage.setItem("compareList", compareList.toString())
-                    } else if (!list.includes(item.id)) {
-
-                        let compareList = list.split(",")
-                        compareList.push(item.id)
-                        window.sessionStorage.setItem("compareList", compareList.toString())
-                    }
-                    console.log(window.sessionStorage.getItem("compareList"))
-                }
             }
 
         })
 
 
     </script>
+
 </body>
 
 </html>

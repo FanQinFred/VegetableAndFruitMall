@@ -1687,7 +1687,7 @@
 
                         .then((response) => {
                             this.reviewList = []
-                            for (let i = 0; i < 3; i++) {
+                            for (let i = 0; i < response.data.list.length; i++) {
                                 let j = 0
                                 if (response.data.list[i].reviewRate != null) {
                                     j = parseFloat(response.data.list[i].reviewRate)
@@ -1922,10 +1922,11 @@
                     console.log("AddToCart")
                     let token = window.localStorage.getItem("token")
                     axios({
-                        url: 'http://fanqin.vaiwan.com/cart/update',
+                        url: 'http://fanqin.vaiwan.com/cart/addcart',
                         method: 'post',
                         params: {
-                            'goodsId': item.id
+                            'goodsId': item.id,
+                            'count':1
                         },
                         headers: {
                             'token': token
