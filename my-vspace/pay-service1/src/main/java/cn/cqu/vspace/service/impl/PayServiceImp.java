@@ -83,8 +83,9 @@ public class PayServiceImp implements PayService {
     public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, UnsupportedEncodingException {
         //获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
-
+        System.out.println("1");
         Map<String, String[]> requestParams = request.getParameterMap();
+        System.out.println("1");
         for (String name : requestParams.keySet()) {
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
@@ -96,11 +97,14 @@ public class PayServiceImp implements PayService {
             //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
             params.put(name, valueStr);
         }
+        System.out.println("1");
         //调用SDK签名验证
         //切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
         //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
         boolean signVerified = AlipaySignature.rsaCheckV1(params, AliDevPayConfig.aliPayPublicKey, AliDevPayConfig.CHARSET, AliDevPayConfig.SIGN_TYPE);
+        System.out.println("1");
         if (signVerified) {
+            System.out.println("1");
             //商户订单号
             String uid = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
             //用户id
@@ -114,10 +118,11 @@ public class PayServiceImp implements PayService {
 　　　　　　　　*/
             Order order = new Order();
             order.setUserId(Integer.parseInt(userId));
-            order.setUserId(Integer.parseInt(userId));
+
             order.setOrderStatus("待发货");
             order.setOrderTotal(Double.parseDouble(money));
             orderMapper.insert(order);
+            System.out.println("1");
         }
     }
 }

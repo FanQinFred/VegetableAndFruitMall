@@ -91,10 +91,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.cqu.vspace.pojo.Order">
-    insert into ORDER (ORDER_ID, USER_ID,
+    insert into "SHOPPING"."ORDER" (USER_ID,
       ORDER_STATUS, ORDER_TOTAL, GOODS_ID
       )
-    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+    values (#{userId,jdbcType=INTEGER},
       #{orderStatus,jdbcType=VARCHAR}, #{orderTotal,jdbcType=FLOAT}, #{goodsId,jdbcType=INTEGER}
       )
   </insert>
