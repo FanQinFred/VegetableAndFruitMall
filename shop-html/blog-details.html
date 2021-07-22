@@ -82,7 +82,7 @@
                                     </button>
                                     <ul class="cart-list" id="hd">
 
-                                        <li v-for="(item, index) in cartList">
+                                        <li v-for="(item, index) in cartList" v-show="item.qty != 0">
                                             <div class="cart-img">
                                                 <a href="#" @click="ShowProductDetail(item)"><img v-bind:src="item.src"
                                                         alt=""></a>
