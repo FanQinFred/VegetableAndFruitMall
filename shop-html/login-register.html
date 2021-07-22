@@ -410,9 +410,16 @@
                                         <input v-model="r_pwd2" type="password" placeholder="请再次输入密码..." required />
                                     </div>
                                     <div class="single-input-item">
+                                        <!-- <input type="file" id="fileId" ref="addPicFile" name="file"
+                                            accept="image/jpg,image/jpeg,image/png,image/bmp" style="display:none;"
+                                            @change="addPic(file)" /> -->
+                                        <input class="file" type="file" @change="uploadFile" multiple="multiple" />
+                                    </div>
+                                    <div class="single-input-item">
                                         <button type="button" @click="register" class="btn
                                                 btn__bg btn__sqr">Register</button>
                                     </div>
+
                                 </form>
 
                             </div>
@@ -695,6 +702,7 @@
         new Vue({
             el: '#test',
             data: {
+                lmodel: '',
                 message: 'Hello Vue!',
                 email: '',
                 pwd: '',
@@ -702,7 +710,9 @@
                 r_email: '',
                 r_pwd1: '',
                 r_pwd2: '',
-                r_name: ''
+                r_name: '',
+
+                file_img: []
             },
             methods: {
                 login() {
@@ -736,36 +746,41 @@
                     if (that.r_pwd1 != that.r_pwd2) {
                         swal("两次密码不一样哦 亲");
                     } else {
-                        axios({
-                            url: 'http://fanqin.vaiwan.com/login/register',
-                            method: 'post',
-                            params: {
-                                'email': that.r_email,
-                                'pwd': that.r_pwd1
-                            }
-                        }).then(res => {
-                            var json = eval('(' + res.data + ')');
-                            console.log(json);
-                            if (json.code == '100') {
-                                swal({
-                                    title: "注册成功 亲!",
-                                    text: "将自动为你登陆...",
-                                    icon: "success",
-                                });
-                                that.email = that.r_email;
-                                that.pwd = that.r_pwd1;
-                                that.login();
-                            } else {
-                                swal("出错啦！");
-                            }
-                        })
+                        let param = new FormData()  // 创建form对象
+                        param.append('email', that.r_email)  // 通过append向form对象添加数据
+                        param.append('pwd', that.r_pwd1) // 添加form表单中其他数据
+                        param.append('uploadFile', that.file_img) // 添加form表单中其他数据
+                        console.log(param.get('uploadFile')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+                        let config = {
+                            headers: { 'Content-Type': 'multipart/form-data' }
+                        }
+                        // 添加请求头
+                        axios.post('http://fanqin.vaiwan.com/login/register', param, config)
+                            .then(res => {
+                                var json = eval('(' + res.data + ')');
+                                console.log(json);
+                                if (json.code == '100') {
+                                    swal({
+                                        title: "注册成功 亲!",
+                                        text: "将自动为你登陆...",
+                                        icon: "success",
+                                    });
+                                    that.email = that.r_email;
+                                    that.pwd = that.r_pwd1;
+                                    that.login();
+                                } else {
+                                    swal("出错啦！");
+                                }
+                            })
                     }
                 },
                 logout() {
                     var that = this;
+
                     axios({
                         url: 'http://fanqin.vaiwan.com/login/logout',
                         method: 'post',
+
                         params: {
                             'email': that.email,
                             'pwd': that.pwd
@@ -785,6 +800,11 @@
                             document.location = "/shop-html/index.html";
                         }
                     })
+                },
+                uploadFile(e) {   // 上传照片
+                    var that = this;
+                    let file = e.target.files[0]
+                    that.file_img = file;
                 }
             }
         })

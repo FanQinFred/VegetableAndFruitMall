@@ -502,7 +502,7 @@
 										</td>
 										<td class="pro-price"
 											v-show="value.count!=0">
-											<span>${{value.currentPrice.toFixed(2)}}</span>
+											<span>${{value.currentPrice}}</span>
 										</td>
 										<td class="pro-quantity"
 											v-show="value.count!=0">
@@ -545,10 +545,7 @@
 										Coupon</button>
 								</form>
 							</div>
-							<div class="cart-update mt-sm-16">
-								<a href="#" class="btn btn__bg btn__sqr"
-									@click="Update">Update Cart</a>
-							</div>
+							
 						</div>
 					</div>
 				</div>

@@ -88,13 +88,13 @@ public class UserServiceImp implements UserSerivce {
     }
 
     @Override
-    public String register(String email, String pwd) {
+    public String register(String email, String pwd,String ImgUrl) {
         try {
             User user = new User();
 
             user.setEmail(email);
             user.setPwd(pwd);
-            user.setImgUrl("baidu.com");
+            user.setImgUrl(ImgUrl);
             user.setToken("");
             user.setTokenValid((byte) 0);
             user.setRole("0");
