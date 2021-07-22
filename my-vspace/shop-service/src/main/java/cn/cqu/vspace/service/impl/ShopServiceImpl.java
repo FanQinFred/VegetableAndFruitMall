@@ -58,15 +58,7 @@ public class ShopServiceImpl implements ShopService {
             }
             JSONObject goodJson = new JSONObject();
             Goods good = goodsList.get(0);
-            goodJson.put("id",good.getGoodsId());
-            goodJson.put("currentPrice",good.getGoodsCurrentPrice());
-            goodJson.put("imgUrl",good.getGoodsImgUrl());
-            goodJson.put("amount",good.getGoodsAmount());
-            goodJson.put("name",good.getGoodsName());
-            goodJson.put("originalPrice",good.getGoodsOriginalPrice());
-            goodJson.put("description",good.getGoodsDescription());
-            goodJson.put("rate",good.getGoodsRate());
-            goodJson.put("season",good.getGoodsSeason());
+            goodJson.put("goods",good);
             goodJson.put("status", "200");
             return goodJson;
         }

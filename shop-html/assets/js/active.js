@@ -491,8 +491,8 @@
 
 
     // quantity change js
-    $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
-    $('.pro-qty').append('<span class="inc qtybtn">+</span>');
+    // $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+    // $('.pro-qty').append('<span class="inc qtybtn">+</span>');
     $('.qtybtn').on('click', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
