@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 <head>
@@ -20,6 +20,7 @@
 
     <!-- Modernizer JS -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
+	<script src="assets/js/vue.js"></script>
 
     <!--[if lt IE 9]>
     <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -285,7 +286,7 @@
 <!-- main wrapper start -->
 <main>
     <!-- breadcrumb area start -->
-    <div class="breadcrumb-area">
+    <div class="breadcrumb-area" >
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -305,7 +306,7 @@
     <!-- breadcrumb area end -->
 
     <!-- checkout main wrapper start -->
-    <div class="checkout-page-wrapper pt-60 pb-54">
+    <div class="checkout-page-wrapper pt-60 pb-54" id = "checkout_data">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -584,26 +585,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><a href="single-product.html">Suscipit Vestibulum <strong> × 1</strong></a>
+										
+                                    <tr v-for='value in cartdata'>
+                                        <td><a href="single-product.html">{{value.name}} <strong> × {{value.num}}</strong></a>
                                         </td>
-                                        <td>$165.00</td>
+                                        <td>${{value.num*value.price}}</td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="single-product.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
-                                        </td>
-                                        <td>$165.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="single-product.html">Vestibulum suscipit <strong> × 2</strong></a>
-                                        </td>
-                                        <td>$165.00</td>
-                                    </tr>
+									
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <td>Sub Total</td>
-                                        <td><strong>$400</strong></td>
+                                        <td><strong>${{sub_total}}</strong></td>
                                     </tr>
                                     <tr>
                                         <td>Shipping</td>
@@ -611,17 +604,17 @@
                                             <ul class="shipping-type">
                                                 <li>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" id="flatrate" name="shipping"
+                                                        <input type="radio" id="flatrate" name="shipping" value="1" v-model="ship"
                                                                class="custom-control-input" checked/>
                                                         <label class="custom-control-label" for="flatrate">Flat Rate:
-                                                            $70.00</label>
+                                                            ${{Shipping}}</label>
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="freeshipping" name="shipping"
+                                                    <div class="custom-control custom-radio" >
+                                                        <input type="radio"  id="freeshipping" name="shipping" value="0" v-model="ship"
                                                                class="custom-control-input"/>
-                                                        <label class="custom-control-label" for="freeshipping">Free
+                                                        <label class="custom-control-label" for="freeshipping"  >Free
                                                             Shipping</label>
                                                     </div>
                                                 </li>
@@ -630,7 +623,7 @@
                                     </tr>
                                     <tr>
                                         <td>Total Amount</td>
-                                        <td><strong>$470</strong></td>
+                                        <td><strong>${{ship*Shipping+sub_total}}</strong></td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -640,7 +633,7 @@
                                 <div class="single-payment-method show">
                                     <div class="payment-method-name">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="cashon" name="paymentmethod" value="cash"
+                                            <input type="radio" id="cashon" name="paymentmethod" value="cash" value="0" v-model="payment_method"
                                                    class="custom-control-input" checked/>
                                             <label class="custom-control-label" for="cashon">Cash On Delivery</label>
                                         </div>
@@ -652,7 +645,7 @@
                                 <div class="single-payment-method">
                                     <div class="payment-method-name">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="directbank" name="paymentmethod" value="bank"
+                                            <input type="radio" id="directbank" name="paymentmethod" value="bank" value="1" v-model="payment_method"
                                                    class="custom-control-input"/>
                                             <label class="custom-control-label" for="directbank">Direct Bank
                                                 Transfer</label>
@@ -667,7 +660,7 @@
                                 <div class="single-payment-method">
                                     <div class="payment-method-name">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="checkpayment" name="paymentmethod" value="check"
+                                            <input type="radio" id="checkpayment" name="paymentmethod" value="check" value="2" v-model="payment_method"
                                                    class="custom-control-input"/>
                                             <label class="custom-control-label" for="checkpayment">Pay with
                                                 Check</label>
@@ -681,7 +674,7 @@
                                 <div class="single-payment-method">
                                     <div class="payment-method-name">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="paypalpayment" name="paymentmethod" value="paypal"
+                                            <input type="radio" id="paypalpayment" name="paymentmethod" value="paypal" value="4" v-model="payment_method"
                                                    class="custom-control-input"/>
                                             <label class="custom-control-label" for="paypalpayment">Paypal <img
                                                     src="assets/img/paypal-card.jpg" class="img-fluid paypal-card"
@@ -700,7 +693,7 @@
                                             website <a
                                                     href="index.html">terms and conditions.</a></label>
                                     </div>
-                                    <button type="submit" class="btn btn__bg">Place Order</button>
+                                    <button type="submit" class="btn btn__bg" @click="Sumbit">Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -953,5 +946,35 @@
 <script src="assets/js/plugins.js"></script>
 <!--=== Active Js ===-->
 <script src="assets/js/active.js"></script>
+<script src="assets/js/axios.js"></script>
+<script type ="module">
+	import {sumbit} from "./assets/js/checkout.js"
+	
+    new Vue({
+        el: '#checkout_data',
+        data: {
+			  cartdata:[
+			  {name:'data1',price:1,num:2,picture:"assets/img/product/product-1.jpg"},
+			  {name:'data2',price:2,num:2,picture:"assets/img/product/product-1.jpg"}
+			  ],
+			sub_total:6,
+			Shipping:70,
+			ship:1,
+			payment_method:0,
+		},
+		methods:{
+			Sumbit(){
+				console.log("sumbit");
+				sumbit()
+				.then((response) => {
+				          
+				})
+				.catch((error) => {
+				    console.log(error);
+				});
+			},
+		}
+    }) 
+</script>
 </body>
 </html>
