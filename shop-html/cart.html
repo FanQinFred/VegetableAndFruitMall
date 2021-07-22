@@ -300,7 +300,7 @@
 									</table>
 								</div>
 							</div>
-							<a href="checkout.html" class="btn btn__bg d-block">Proceed To
+							<a @click="checkOut" class="btn btn__bg d-block">Proceed To
 								Checkout</a>
 						</div>
 					</div>
@@ -643,6 +643,8 @@
 		<script src="assets/js/active.js"></script>
 
 		<script src="assets/js/axios.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 		<script type="module">
 			import {
 				apply_Coupon,
@@ -783,6 +785,9 @@
 							});
 
 					},
+					checkOut(){
+						window.location.href="./checkout.html?subTotal="+this.sub_total;
+					}
 				}
 			})
 		</script>

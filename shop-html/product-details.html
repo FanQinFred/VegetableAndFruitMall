@@ -876,27 +876,27 @@
 								console.log(error);
 							});
 					},
-					AddToCart(item) {
-						console.log("AddToCart")
-						let token = window.localStorage.getItem("token")
-						axios({
-								url: 'http://fanqin.vaiwan.com/cart/update',
-								method: 'post',
-								params: {
-									'goodsId': item.id
-								},
-								headers: {
-									'token': token
-								}
-							})
-							.then((response) => {
-								hd.GetCart()
-								swal("添加成功")
-							})
-							.catch((error) => {
-								console.log(error);
-							});
-					},
+					// AddToCart(item) {
+					// 	console.log("AddToCart")
+					// 	let token = window.localStorage.getItem("token")
+					// 	axios({
+					// 			url: 'http://fanqin.vaiwan.com/cart/update',
+					// 			method: 'post',
+					// 			params: {
+					// 				'goodsId': item.id
+					// 			},
+					// 			headers: {
+					// 				'token': token
+					// 			}
+					// 		})
+					// 		.then((response) => {
+					// 			hd.GetCart()
+					// 			swal("添加成功")
+					// 		})
+					// 		.catch((error) => {
+					// 			console.log(error);
+					// 		});
+					// },
 					AddToCompareList(item) {
 						console.log("AddToCompareList")
 						let list = window.sessionStorage.getItem("compareList")
