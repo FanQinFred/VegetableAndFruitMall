@@ -178,7 +178,7 @@
                                             </div>
                                             <div class="product-name">
                                                 <h4 class="h5">
-                                                    <a href="javascript:void(0);" @click="ShowProductDetail(item)">{{goodsList[0].name}}</a>
+                                                    <a href="javascript:void(0);" @click="ShowProductDetail(item)">{{item.name}}</a>
                                                 </h4>
                                             </div>
                                             <div class="price-box">
@@ -207,13 +207,8 @@
 
                             <!-- start pagination area -->
                             <div class="paginatoin-area text-center mt-30">
-                                <ul class="pagination-box">
-                                    <li><a class="Previous" href="#"><i class="ion-ios-arrow-left"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a class="Next" href="#"><i class="ion-ios-arrow-right"></i></a></li>
-                                </ul>
+                                <input type="text" placeholder="输入页数" v-model="page">
+                                        <a href="javascript:void(0);" @click="toPage">跳转</a>
                             </div>
                             <!-- end pagination area -->
                         </div>
@@ -555,11 +550,12 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script type="module">
-        new Vue({
+    <script>
+        var one = new Vue({
             el: '#one',
             data: {
                 keyword:'',
+                page:1,
                 goodsList: [
                     {
                         id: 4,
@@ -648,10 +644,40 @@
 
             },
             created() {
-
+                this.toPage()
             },
             methods: {
-                
+                toPage(){
+                    let token = window.localStorage.getItem("token")
+                    this.goodsList = []
+                    for(let i = (this.page-1) * 9+1;i<this.page * 9+1;i++){
+                        axios({
+                        url: 'http://fanqin.vaiwan.com/shop/getInfoById',
+                        method: 'post',
+                        params: {
+                            'goodsId': i
+                        },
+                        headers: {
+                            'token': token
+                        }
+                    })
+                        .then((response) => {
+                            let k = {
+                                id: response.data.list[0].goods.goodsId,
+                                rate: parseFloat(response.data.list[0].goods.goodsRate),
+                                name: response.data.list[0].goods.goodsName,
+                                price: response.data.list[0].goods.goodsCurrentPrice,
+                                src: response.data.list[0].goods.goodsImgUrl,
+                                description: response.data.list[0].goods.goodsDescription,
+                                stock: response.data.list[0].goods.goodsAmount,
+                            }
+                            this.goodsList.push(k)
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                    }
+                },
                 ShowQuickView(item) {
 
                     console.log("ShowQuickView")
@@ -1046,7 +1072,20 @@
                         }
                     })
                         .then((response) => {
-                            
+                            one.goodsList=[]
+                            for(let i = 0 ; i< response.data.list.length;i++){
+                                let l = {
+                                    id: response.data.list[i].,
+                                    rate: parseFloat(response.data.list[i].rate),
+                                    name: response.data.list[i].name,
+                                    price: response.data.list[i].currentPrice,
+                                    src: response.data.list[i].imgUrl,
+                                    description: response.data.list[i].description,
+                                    stock: response.data.list[i].amount
+                                }
+                                one.goodsList.push(l)
+                            }
+
                         })
                         .catch((error) => {
                             console.log(error);
