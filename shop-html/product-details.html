@@ -318,7 +318,7 @@
 							<div
 								class="product-large-slider img-zoom mb-20 slider-arrow-style slider-arrow-style__style-2">
 								<div class="pro-large-img">
-									<img v-bind:src="goods_info.imgUrl" alt="" />
+									<img v-bind:src="goods_info.goodsImgUrl" alt="" />
 								</div>
 							</div>
 						</div>
@@ -330,13 +330,13 @@
 										<span v-for="(item,index) in rate"><i class="ion-android-star"></i></span>
 									</div>
 									<div class="product-name">
-										<h4><a href="product-details.html">{{goods_info.name}}</a></h4>
+										<h4><a href="product-details.html">{{goods_info.goodsName}}</a></h4>
 									</div>
 									<div class="price-box">
-										<span class="regular-price">${{goods_info.currentPrice}}</span>
-										<span class="old-price"><del>${{goods_info.originalPrice}}</del></span>
+										<span class="regular-price">${{goods_info.goodsCurrentPrice}}</span>
+										<span class="old-price"><del>${{goods_info.goodsOriginalPrice}}</del></span>
 									</div>
-									<p>{{goods_info.description}}</p>
+									<p>{{goods_info.goodsDescription}}</p>
 									<div class="action-link mb-20">
 										<a href="javascript:void(0);" data-toggle="tooltip" @click="AddToCart"
 											title="Add to cart" class="add-to-cart">add to
@@ -351,7 +351,7 @@
 									</div>
 									<div class="availability mb-20">
 										<h5>Availability:</h5>
-										<span>{{goods_info.amount}} in stock</span>
+										<span>{{goods_info.goodsAmount}} in stock</span>
 									</div>
 									<div class="share-icon">
 										<h5>share:</h5>
@@ -385,13 +385,13 @@
 											<div class="tab-content reviews-tab">
 												<div class="tab-pane fade show active" id="tab_one">
 													<div class="tab-one">
-														<p>{{goods_info.description}}</P>
+														<p>{{goods_info.goodsDescription}}</P>
 													</div>
 												</div>
 												<div class="tab-pane fade" id="tab_three">
 													<div class="review-form">
 														<h5>{{userList.length}} review for
-															<span>{{goods_info.name}}</span>
+															<span>{{goods_info.goodsName}}</span>
 														</h5>
 
 
@@ -907,11 +907,11 @@
 					}).then(res => {
 						// sessionStorage
 						var json = res.data;
-						that.goods_info = json.goods
+						that.goods_info = json.list[0].goods
 						
 						console.log(that.goods_info);
 						// handle data
-						that.rate = parseFloat(that.goods_info.rate);
+						that.rate = parseFloat(that.goods_info.goodsRate);
 					});
 					that.getReviewByGoodsId()
 				},
