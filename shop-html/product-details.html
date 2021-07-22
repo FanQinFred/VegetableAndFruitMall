@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 	<head>
@@ -907,7 +907,8 @@
 					}).then(res => {
 						// sessionStorage
 						var json = res.data;
-						that.goods_info = json;
+						that.goods_info = json.list[0]
+						
 						console.log(that.goods_info);
 						// handle data
 						that.rate = parseFloat(that.goods_info.rate);
