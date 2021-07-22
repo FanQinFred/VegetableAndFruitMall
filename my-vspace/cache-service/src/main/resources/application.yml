@@ -40,9 +40,17 @@ spring:
     cache: false #页面不加载缓存,修改及时生效
   redis:
     database: 0
-    host: 121.36.23.219
-    port: 6666
+#    host: 120.46.141.240
+#    port: 6666
     password: Whlredis
+    cluster:
+     #设置key的生存时间，当key过期时，它会被自动删除；
+     expire-seconds: 120
+     #设置命令的执行时间，如果超过这个时间，则报错;
+     command-timeout: 5000
+     #设置redis集群的节点信息，其中namenode为域名解析，通过解析域名来获取相应的地址;
+     nodes: 120.46.141.240:6666,121.36.23.219:6666,121.36.43.74:6666,124.70.111.160:6666,124.70.90.133:6666,139.9.117.196:6666
+#     password: Whlredis
 #配置spring boot的日志: 默认使用slf4j(接口) + logback(实现)
 #  作为日志框架
 logging:
