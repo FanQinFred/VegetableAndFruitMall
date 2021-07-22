@@ -1,16 +1,17 @@
 package cn.cqu.vspace.service.impl;
 
-import cn.cqu.vspace.pojo.Condition;
-import cn.cqu.vspace.pojo.Goods;
+import cn.cqu.vspace.pojo.*;
 import cn.cqu.vspace.service.SearchService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -33,74 +34,55 @@ public class SearchServiceImp implements SearchService {
     @Autowired
     private SolrClient solrClient;
     @Override
-    public JSONObject searchPage(Condition condition) {
+    public JSONObject searchPage(String keyWord, int pageNo, int pageSize) {
         SolrQuery query = new SolrQuery();
-        query.set("q","goodsName:" + condition.getSearchWord() + "~");
-//        //添加商品价格过滤
-//        query.addFilterQuery("goods_price:[" + condition.getMinPrice() + " TO " + condition.getMaxPrice() + "]");
-//        //设置分页相关参数
-//        //①: 设置偏移量
-//        query.setStart((condition.getPageNo() - 1) * condition.getPageSize());
-//        //②: 设置每页显示条数
-//        query.setRows(condition.getPageSize());
-        //设置回显的字段(也就是查询哪些字段进行前端展示)
-        query.setFields("goodsName","goodsRate","goodsImgUrl",
-        "goodsOriginalPrice","goodsCurrentPrice",
-        "goodsSeason","goodsDescription",
-        "goodsAmount");
-        query.addSort("goods_price", SolrQuery.ORDER.asc);
-        query.addSort("goods_id", SolrQuery.ORDER.asc);
+        query.set("q","GOODS_NAME:" + keyWord);
+        query.setFields("GOODS_NAME","GOODS_RATE","GOODS_IMG_URL",
+        "GOODS_ORIGINAL_PRICE","GOODS_CURRENT_PRICE",
+        "GOODS_SEASON","GOODS_DESCRIPTION",
+        "GOODS_AMOUNT");
         List<Goods> goodsList = null;
         long totalItems = 0;
         int pages = 0;
+        SolrDocumentList results = null;
         try {
             QueryResponse queryResponse = solrClient.query(query);
-            goodsList = queryResponse.getBeans(Goods.class);
             //获取数据总记录数
-            SolrDocumentList results = queryResponse.getResults();
+            results = queryResponse.getResults();
             totalItems = results.getNumFound();
-            /*特别注意: 查询数据结果和高亮结果是分开的*/
-            //判断如果查询关键字不是*号,则查询高亮显示
-            if (!condition.getSearchWord().equals("*"))
-            {
-                //获取高亮结果(该结果为所有高亮信息的集合)
-                Map<String, Map<String, List<String>>>
-                highlighting = queryResponse.getHighlighting();
-                if (highlighting != null) {
-                    for (Goods goods :goodsList) {
-                        Map<String, List<String>> highMap = highlighting.get(goods.getGoodsId() + "");
-                        if (highMap != null) {
-                            if (highMap.get("goods_title") != null) {
-                                goods.setGoodsTitle(highMap.get("goods_title").get(0));
-                            }
-                            if (highMap.get("goods_description") != null) {
-                                goods.setDescription(highMap.get("goods_description").get(0));
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (SolrServerException e) {
-        e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SolrServerException | IOException e) {
         e.printStackTrace();
         }
-        return null
-    }
-    @Override
-    public void addSolrDoc(List list) {
-        try {
-            UpdateResponse updateResponse = solrClient.addBeans(list);
-            //如果没有异常则提交事务
-            solrClient.commit();
-        } catch (SolrServerException e) {
-        e.printStackTrace();
-        } catch (IOException e) {
-        e.printStackTrace();
+        if (totalItems % pageSize == 0) {
+            pages = (int)(totalItems / pageSize);
+        }else{
+            pages = (int)(totalItems / pageSize) + 1;
         }
-    }
-    @Override
-    public void deleteSolrDoc(Condition condition) {
 
+        if(results==null ){
+            JSONObject empty = new JSONObject();
+            empty.put("result","empty");
+            return empty;
+        }
+        JSONObject result = new JSONObject();
+        result.put("pages", pages);
+        result.put("totalItems", totalItems);
+        JSONArray array = new JSONArray();
+        for(SolrDocument document : results){
+            Map<String, Object> map = document.getFieldValueMap();
+            JSONObject item = new JSONObject();
+            item.put("currentPrice",map.get("GOODS_CURRENT_PRICE"));
+            item.put("imgUrl",map.get("GOODS_IMG_URL"));
+            item.put("amount",map.get("GOODS_AMOUNT"));
+            item.put("name",map.get("GOODS_NAME"));
+            item.put("originalPrice",map.get("GOODS_ORIGINAL_PRICE"));
+            item.put("description",map.get("GOODS_DESCRIPTION"));
+            item.put("rate",map.get("GOODS_RATE"));
+            item.put("season",map.get("GOODS_SEASON"));
+            array.add(item);
+        }
+
+        result.put("list", array);
+        return result;
     }
 }
