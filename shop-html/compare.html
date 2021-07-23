@@ -331,11 +331,11 @@
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="product-image-title" v-for="(item, index) in goods_info">
                                                 <a href="product-details.html" class="image">
-                                                    <img class="img-fluid" v-bind:src="item.imgUrl"
+                                                    <img class="img-fluid" v-bind:src="item.goodsImgUrl"
                                                         alt="Compare Product">
                                                 </a>
-                                                <a href="#" class="category">Daimond</a>
-                                                <a href="product-details.html" class="title">{{item.name}}</a>
+                                                
+                                                <a href="product-details.html" class="title">{{item.goodsName}}</a>
                                             </td>
                                             <!-- </div> -->
                                         </tr>
@@ -343,7 +343,7 @@
                                             <td v-if="goods_info.length!=0" class="first-column">Description</td>
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="pro-desc" v-for="(item, index) in goods_info">
-                                                <p>{{item.description}}</p>
+                                                <p>{{item.goodsDescription}}</p>
                                             </td>
                                             <!-- </div> -->
 
@@ -354,7 +354,7 @@
 
                                             <!-- <div v-for="(item, index) in goods_info"> -->
                                             <td class="pro-price" v-for="(item, index) in goods_info">
-                                                ${{item.currentPrice}}</td>
+                                                ${{item.goodsCurrentPrice}}</td>
                                             <!-- </div> -->
                                         </tr>
                                         <!-- <tr>
@@ -725,7 +725,7 @@
                             }
                         }).then(res => {
                             // sessionStorage
-                            var json = res.data;
+                            var json = res.data.list[0].goods;
                             that.goods_info.push(json);
                         });
 

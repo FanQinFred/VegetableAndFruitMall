@@ -5,8 +5,6 @@ const service = axios.create({
         "X-Custom-Header": "foobar",
     },
 });
-
-
 // 添加请求拦截器，请求接口前，做一些数据处理
 service.interceptors.request.use(
     function (config) {
@@ -26,7 +24,6 @@ service.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-
 // 添加响应拦截器,请求接口，返回数据进行拦截
 service.interceptors.response.use(
     function (response) {
@@ -39,8 +36,6 @@ service.interceptors.response.use(
         } else { // 对响应数据做点什么
             return response;
         }
-
-
     },
     function (error) {
         // 对响应错误做点什么

@@ -678,6 +678,7 @@
                         });
                     }
                 },
+                
                 ShowQuickView(item) {
 
                     console.log("ShowQuickView")
@@ -732,8 +733,7 @@
                         .catch((error) => {
                             console.log(error);
                         });
-                }
-                ,
+                },
                 AddToCompareList(item) {
                     console.log("AddToCompareList")
                     let list = window.sessionStorage.getItem("compareList")
@@ -1075,7 +1075,7 @@
                             one.goodsList=[]
                             for(let i = 0 ; i< response.data.list.length;i++){
                                 let l = {
-                                    id: response.data.list[i].,
+                                    id: response.data.list[i].id,
                                     rate: parseFloat(response.data.list[i].rate),
                                     name: response.data.list[i].name,
                                     price: response.data.list[i].currentPrice,
