@@ -82,4 +82,9 @@ public class ShopController {
     JSONObject GetWishList (@RequestHeader("token") String token){
         return shopService.GetWishList(token);
     }
+
+    @RequestMapping(value = "/getByPage",method = RequestMethod.POST)
+    public JSONObject getByPage(@Param("page") Integer page){
+        return shopService.GetShhopByPage(page);
+    }
 }

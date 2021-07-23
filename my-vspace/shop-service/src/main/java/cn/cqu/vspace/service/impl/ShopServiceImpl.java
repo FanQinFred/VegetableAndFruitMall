@@ -168,4 +168,17 @@ public class ShopServiceImpl implements ShopService {
         error.put("status","500");
         return error;
     }
+
+    @Override
+    public JSONObject GetShhopByPage(Integer page) {
+        JSONObject jsonObject = new JSONObject();
+        GoodsExample goodsExample = new GoodsExample();
+        GoodsExample.Criteria criteria = goodsExample.createCriteria();
+        criteria.andGoodsIdBetween(page*9 +1,(page-1)*9+1);
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.addAll(goodsMapper.selectByExample(goodsExample));
+        jsonObject.put("list",jsonArray);
+        jsonObject.put("status","200");
+        return jsonObject;
+    }
 }

@@ -12,4 +12,5 @@ public interface ShopService {
     JSONObject AddWish (String token, List<Integer> goodsId);
     JSONObject AllCategories ();
     JSONObject GetWishList (String token);
+    JSONObject GetShhopByPage(Integer page);
 }

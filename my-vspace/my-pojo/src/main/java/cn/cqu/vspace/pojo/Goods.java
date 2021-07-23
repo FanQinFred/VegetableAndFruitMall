@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 
 public class Goods implements Serializable {
+    @Field("GOODS_ID")
     private Integer goodsId;
 
     @Field("GOODS_NAME")

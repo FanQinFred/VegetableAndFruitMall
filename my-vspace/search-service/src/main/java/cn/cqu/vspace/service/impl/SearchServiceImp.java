@@ -40,7 +40,7 @@ public class SearchServiceImp implements SearchService {
         query.setFields("GOODS_NAME","GOODS_RATE","GOODS_IMG_URL",
         "GOODS_ORIGINAL_PRICE","GOODS_CURRENT_PRICE",
         "GOODS_SEASON","GOODS_DESCRIPTION",
-        "GOODS_AMOUNT");
+        "GOODS_AMOUNT","GOODS_ID");
         List<Goods> goodsList = null;
         long totalItems = 0;
         int pages = 0;
@@ -79,6 +79,7 @@ public class SearchServiceImp implements SearchService {
             item.put("description",map.get("GOODS_DESCRIPTION"));
             item.put("rate",map.get("GOODS_RATE"));
             item.put("season",map.get("GOODS_SEASON"));
+            item.put("id",map.get("GOODS_ID"));
             array.add(item);
         }
 
